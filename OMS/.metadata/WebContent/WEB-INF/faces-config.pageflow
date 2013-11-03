@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13831072386990" configfile="/OMS/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="pages/LoginPage.xhtml" id="pf13831077914537" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13831077914538" path="/LoginPage.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/PrincipalPage.xhtml" id="pf13831077914539" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13831077914538" path="/pages/PrincipalPage.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="PrincipalPage.xhtml" id="pf13834977309660" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf13834977309661" path="/PrincipalPage.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/ProductosPage.xhtml" id="pf13834977309662" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf13834977309661" path="/pages/ProductosPage.xhtml"/>
+  <links id="pf13831077914538" target="pf13831077914539" source="pf13831077914537" outcome="exito"/>
+  <links id="pf13834977309661" target="pf13834977309662" source="pf13834977309660" outcome="goToProductos"/>
+</pageflow:Pageflow>

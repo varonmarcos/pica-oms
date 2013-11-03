@@ -1,0 +1,221 @@
+body {		 margin:0px; padding:0px; font-family: verdana, arial, sans-serif; 
+background-image: url(images/fondo.gif); overflow:auto;
+
+scrollbar-face-color: #F0F0F0;
+scrollbar-arrow-color: #000000;
+scrollbar-highlight-color: #ededce;
+scrollbar-3dlight-color: #f0f0f0;
+scrollbar-shadow-color: #000000;
+scrollbar-darkshadow-color: #EDECEC;
+scrollbar-track-color: #cccccc;
+}
+
+
+/* Clases texto */
+
+a:visited {  text-decoration: none; }
+
+.ac {  font-size: 12px; color: #5A86A9;  font-weight: bold; }
+a.ac {  font-size: 12px; color: #5A86A9;  font-weight: bold; }
+a.ac:link { font-size: 12px; color: #5A86A9;  font-weight: bold; text-decoration: none; }
+a.ac:hover { color: #5A86A9;  font-weight: bold; text-decoration: none;}
+
+.txt {  font-size: 10px; color: #767778; }
+a.txt {  font-size: 10px; color: #767778; }
+a.txt:link { font-size: 10px; color: #666666; text-decoration: none}
+a.txt:hover {  color: #767778; text-decoration: none; }
+
+.txtp {  font-size: 9px; color: #767778; }
+a.txtp {  font-size: 9px; color: #767778; }
+a.txtp:link { font-size: 9px; color: #666666; text-decoration: none}
+a.txtp:hover {  color: #767778; text-decoration: none; }
+
+.txtpp {  font-size: 8px; color: #767778; }
+a.txt {  font-size: 8px; color: #767778; }
+a.txt:link { font-size: 8px; color: #666666; text-decoration: none}
+a.txt:hover {  color: #767778; text-decoration: none; }
+
+.txg {  font-size: 11px; color: #767778; }
+a.txg {  font-size: 11px; color: #767778; }
+a.txg:link { font-size: 11px; color: #666666; text-decoration: none}
+a.txg:hover {  color: #767778; text-decoration: none; }
+
+.txtpb {  font-size: 0.6em; color: #767778; font-weight: bold; }
+a.txtpb {  font-size: 0.6em; color: #767778; font-weight: bold; }
+a.txtpb:link { font-size: 0.6em; color: #767778; text-decoration: underline; font-weight: bold;  }
+a.txtpb:hover {  color: #999999; text-decoration: underline; font-weight: bold; }
+
+.txaz {  font-size: 10px; color: #004D8A; font-weight: bold; }
+
+.txMantFest {font-size: 10pt;}
+
+.txspan1{Font-Size : 18pt;}
+.txspan2{Font-Size : 12pt;}
+.txspan3{Font-Size : 11pt;}
+
+/* Colores de texto */
+.consolaMsjeCerrado{
+	color:#00FF00;
+}
+.consolaMsjeEnviado{
+	color:#800000;
+}
+.consolaMsjePendiente{
+	color:#FF0000;
+}
+.consolaMsjeNoPendiente{
+	color:#008000;
+}
+
+.consolaNoticias1{
+	COLOR:purple;
+}
+consolaNoticias2{
+	color:black;
+}
+
+/*  Color de Fondo */
+
+.hm { background-color: #80A4BE; }	
+.bl { background-color: #ffffff;  font-size: 10px; color: #767778; }
+.blr { background-color: #ffffff; font-size: 10px; color: #FF0000; font-weight: bold; }
+.azc { background-color: #A3C0D5; }		
+.az { background-color: #D7E3F6;  }		
+.am { background-color: #F1D9A7; border-left: #ffffff 2px solid; }		
+.mnu { background-color: #F1D9A7 12px solid; }	
+.azlc { background-color: #EEF3FB; font-size: 10px; color: #767778; }	
+.azlcr { background-color: #EEF3FB; font-size: 10px; color: #FF0000; font-weight: bold; }	
+.azlo { background-color: #E5EDF9; font-size: 10px; color: #767778; }	
+.amc { background-color: #F5F3EE;  }	
+.amo { background-color: #F6E8C8; font-size: 10px; color: #004D8A; font-weight: bold; }	
+.pag {bgcolor: #FFFFFF; }
+.pestPag {bgcolor:#3C578E;}
+
+/*  Bullet  */
+
+LI.mn { list-style-image: url(images/bullet.gif); text-align:left; margin-left: -20px; }
+
+
+/*  cuadro    */
+
+DIV.ei {
+width: 20px; height: 21px; background-image: url("images/ei.gif"); background-repeat: no-repeat; 
+background-position: bottom left; 
+}
+	
+/* Separador Dotted*/
+div.sd {
+height: 15px;
+margin-right: 10px;
+margin-left: 0px;
+margin-top: 5px;
+
+background:  url(images/pxg.gif) repeat-x scroll center;
+background-position: top;
+}
+
+div.sd hr {
+  display: none;
+}
+
+ /*pie */
+       
+#pie {
+   width: 100%;  color: Gray; text-align: left;  padding-bottom: 1px; padding-top: 1px; 
+	padding-left: 10px;  padding-right: 10px;   vertical-align: bottom; } 
+    
+.hpie {
+ 	text-align: center; padding-left: 10px;  padding-right: 10px; 
+	color: white; text-decoration: none; font-size: 10px;}
+
+.hpieg {
+ 	text-align: center; padding-left: 12px;  padding-right: 10px; 
+	color: white; text-decoration: none; font-size: 10px;}
+  
+a.hpie {
+ 	text-align: center; BORDER-RIGHT: #ffffff 1px solid; padding-left: 10px;  padding-right: 10px;   
+ 	color: white; text-decoration: underline; } 
+	
+
+/*   formularios  */  
+ 
+FORM { COLOR: #767778;  }
+
+all.inputn { FONT-SIZE: 10px; background-color:#E0E9EF;  COLOR: #767778;}
+INPUT { FONT-SIZE: 10px;  }
+
+all.inputnc { FONT-SIZE: 10px;  COLOR: #767778;}
+
+
+all.selectn { FONT-SIZE: 10px;  COLOR: #767778;  }
+SELECT { FONT-SIZE: 10px; COLOR: #767778;  }
+
+TEXTAREA { FONT-SIZE: 10px; background-color:#E0E9EF;  COLOR: #767778; }
+
+/*Tablas*/
+
+.bordeceldanolineaabajo{
+    border-right: #006699 1px solid;
+    border-left: #006699 1px solid;
+    border-bottom: 0px solid;
+    border-top: #006699 1px solid;
+}
+
+
+.bordeceldaarribaderecha{
+    border-right: #006699 1px solid;
+    border-left: 0px solid;
+    border-bottom: 0px solid;
+    border-top: #006699 1px solid;
+}
+
+.bordeceldaizquierda{
+    border-right: 0px solid;
+    border-left: #006699 1px solid;
+    border-bottom: 0px solid;
+    border-top: 0px solid;
+}
+
+.bordeceldasoloarriba{
+    border-right: 0px solid;
+    border-left: 0px solid;
+    border-bottom: 0px solid;
+    border-top: #006699 1px solid;
+}
+
+.bordeceldasoloabajo{
+    border-right: 0px solid;
+    border-left: 0px solid;
+    border-bottom: #006699 1px solid;
+    border-top: 0px;
+}
+
+.bordeceldanolineaizquierda{
+    border-right: #006699 1px solid;
+    border-left: 0px solid;
+    border-bottom: #006699 1px solid;
+    border-top: #006699 1px solid;
+}
+
+.bordecelda{
+    border-right: #006699 1px solid;
+    border-left: #006699 1px solid;
+    border-bottom: #006699 1px solid;
+    border-top: #006699 1px solid;
+}
+
+.cab_pagtabla{bgcolor: #283B61; }
+.menu{bordercolor:#00CCCC; }
+.noticias{bgcolor:#72A0E7;}
+.noticiasbis{bgcolor:#C9DBF5;}
+.Form{bgcolor:#c0c0c0;}
+
+/* 	COLORES Y TEXTOS */
+
+.txtcolorNot{
+	COLOR:black; 
+	FACE:Arial;
+}
+	
+
+

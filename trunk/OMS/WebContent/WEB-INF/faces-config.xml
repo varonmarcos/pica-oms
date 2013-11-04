@@ -15,7 +15,7 @@
 	</navigation-rule>
 	
 	<navigation-rule>
-		<from-view-id>/PrincipalPage.xhtml</from-view-id>
+		<from-view-id>/pages/PrincipalPage.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>goToProductos</from-outcome>
 			<to-view-id>/pages/ProductosPage.xhtml</to-view-id>

@@ -1,0 +1,17 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:sp="http://mycompany.com/sp/definitions" 
+		   elementFormDefault="qualified" 
+		   targetNamespace="http://mycompany.com/sp/definitions">
+	
+	<xs:complexType name="ProductType">
+	<xs:sequence>
+	  <xs:element type="xs:long" name="prodId" minOccurs="0"/>
+	  <xs:element type="xs:string" name="productName" minOccurs="0"/>
+	  <xs:element type="xs:string" name="partNum" minOccurs="0"/>
+	  <xs:element type="xs:int" name="price" minOccurs="0"/>
+	  <xs:element type="xs:int" name="quantity" minOccurs="0"/>
+	  <xs:element type="xs:string" name="ordId" minOccurs="0"/>
+	</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

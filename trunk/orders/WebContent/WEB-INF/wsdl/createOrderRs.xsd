@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:sp="http://mycompany.com/sp/definitions" 
+		   elementFormDefault="qualified" 
+		   targetNamespace="http://mycompany.com/sp/definitions"
+		   xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
+    
+  <xs:element name="createOrderRs">
+    <xs:complexType>
+      <xs:sequence>
+			<xs:element type="xs:long" name="ack"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+
+</xs:schema>

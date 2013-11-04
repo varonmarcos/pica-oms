@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://mycompany.com/sp/definitions" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://mycompany.com/sp/definitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://mycompany.com/sp/definitions">
+
+			<xsd:include schemaLocation="createOrderRq.xsd"/>
+			<xsd:include schemaLocation="createOrderRs.xsd"/>
+			<xsd:include schemaLocation="getOrderRq.xsd"/>
+			<xsd:include schemaLocation="getOrderRs.xsd"/>
+			
+						
+			<xsd:element name="createOrderRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:createOrderRq"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="createOrderResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:createOrderRs"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="getOrderRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:getOrderRq"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="getOrderResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:getOrderRs"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+		</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="createOrderRs">
+    <wsdl:part name="createOrderRs" element="tns:createOrderResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createOrderRq">
+    <wsdl:part name="createOrderRq" element="tns:createOrderRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getOrderRs">
+    <wsdl:part name="getOrderRs" element="tns:getOrderResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getOrderRq">
+    <wsdl:part name="getOrderRq" element="tns:getOrderRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="OrderBinding">
+    <wsdl:operation name="createOrder">
+      <wsdl:input name="createOrderRq" message="tns:createOrderRq">
+    </wsdl:input>
+      <wsdl:output name="createOrderRs" message="tns:createOrderRs">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrder">
+      <wsdl:input name="getOrderRq" message="tns:getOrderRq">
+    </wsdl:input>
+      <wsdl:output name="getOrderRs" message="tns:getOrderRs">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrderBinding" type="tns:OrderBinding">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createOrder">
+      <soap:operation soapAction="http://mycompany.com/setTop5"/>
+      <wsdl:input name="createOrderRq">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createOrderRs">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrder">
+      <soap:operation soapAction="http://mycompany.com/setTop5"/>
+      <wsdl:input name="getOrderRq">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getOrderRs">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Order">
+    <wsdl:port name="orderServicePort" binding="tns:OrderBinding">
+      <soap:address location="http://localhost:8081/orders/services/orderServicePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

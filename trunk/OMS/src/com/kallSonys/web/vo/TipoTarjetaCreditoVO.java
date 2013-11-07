@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author juanaranda
  *
  */
-public class TipoTarjetaCredito implements Serializable {
+public class TipoTarjetaCreditoVO implements Serializable {
 
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class TipoTarjetaCredito implements Serializable {
 	private String idTipoTarjeta;
 	private String nombreTipoTarjeta;
 	
-	public TipoTarjetaCredito(String idTipoTarjeta,String nombreTipoTarjeta){
+	public TipoTarjetaCreditoVO(String idTipoTarjeta,String nombreTipoTarjeta){
 		this.idTipoTarjeta=idTipoTarjeta;
 		this.nombreTipoTarjeta=nombreTipoTarjeta;
 		

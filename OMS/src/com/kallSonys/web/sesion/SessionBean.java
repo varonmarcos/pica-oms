@@ -14,6 +14,10 @@ public class SessionBean implements Serializable {
 	
 	private boolean showFormCrearProducto;
 	private boolean showFormConsultarProducto;
+	private boolean showFormCrearCliente;
+	private boolean showFormConsultaCliente;
+	private boolean showFormCrearCampana;
+	private boolean showFormConsultaCampana;
 	
 	public SessionBean(){
 		
@@ -33,6 +37,38 @@ public class SessionBean implements Serializable {
 
 	public void setShowFormConsultarProducto(boolean showFormConsultarProducto) {
 		this.showFormConsultarProducto = showFormConsultarProducto;
+	}
+
+	public boolean isShowFormCrearCliente() {
+		return showFormCrearCliente;
+	}
+
+	public void setShowFormCrearCliente(boolean showFormCrearCliente) {
+		this.showFormCrearCliente = showFormCrearCliente;
+	}
+
+	public boolean isShowFormConsultaCliente() {
+		return showFormConsultaCliente;
+	}
+
+	public void setShowFormConsultaCliente(boolean showFormConsultaCliente) {
+		this.showFormConsultaCliente = showFormConsultaCliente;
+	}
+
+	public boolean isShowFormCrearCampana() {
+		return showFormCrearCampana;
+	}
+
+	public void setShowFormCrearCampana(boolean showFormCrearCampana) {
+		this.showFormCrearCampana = showFormCrearCampana;
+	}
+
+	public boolean isShowFormConsultaCampana() {
+		return showFormConsultaCampana;
+	}
+
+	public void setShowFormConsultaCampana(boolean showFormConsultaCampana) {
+		this.showFormConsultaCampana = showFormConsultaCampana;
 	}
 	
 	

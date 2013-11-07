@@ -6,6 +6,7 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
     version="2.0">
     
+    <!-- Regla para nevegar desde la pagina de login a la pagina principal -->
     <navigation-rule>
 		<from-view-id>/LoginPage.xhtml</from-view-id>
 		<navigation-case>
@@ -14,14 +15,31 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<!-- Regla para nevegar desde la pagina pagina principal a la pagina de productos-->
 	<navigation-rule>
 		<from-view-id>/pages/PrincipalPage.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>goToProductos</from-outcome>
-			<to-view-id>/pages/ProductosPage.xhtml</to-view-id>
+			<from-outcome>goToProducto</from-outcome>
+			<to-view-id>/pages/ProductoPage.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
+	<!-- Regla para nevegar desde la pagina principal a la pagina de Clientes-->
+	<navigation-rule>
+		<from-view-id>/pages/PrincipalPage.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goToCliente</from-outcome>
+			<to-view-id>/pages/ClientePage.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	
+	<!-- Regla para nevegar desde la pagina principal a la pagina de Campañas-->
+	<navigation-rule>
+		<from-view-id>/pages/PrincipalPage.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goToCampana</from-outcome>
+			<to-view-id>/pages/CampanaPage.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>

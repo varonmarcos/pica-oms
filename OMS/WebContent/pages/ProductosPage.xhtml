@@ -110,8 +110,16 @@
     				</tr>
     				<tr><td>
     				<table align="center">
+	    				<tr>
+	    					<td>
+	    					</td>
+	    				</tr>
+	    				<tr>
+	    					<td>
+	    					</td>
+	    				</tr>
 	    				<!--formulario Creacion de Usuario  -->
-	    				<ice:panelGroup id="formCreacionUsuario" rendered="true">
+	    				<ice:panelGroup id="formCreacionUsuario" rendered="#{sessionBean.showFormCrearProducto}">
 	    				<tr>
 							<td valign="middle" width="140" class="txt"><B>ID. del Cliente:</B></td>
 							<td width="227">
@@ -161,6 +169,12 @@
 							<td valign="middle" width="140" class="txt"><B>Numero Tarjeta Credito:</B></td>
 							<td width="227">
 							<ice:inputText name="txt_passwrd" maxlength="80" size="40"/></td>
+							<td width="75"></td>
+						</tr>
+						<tr>
+							<td valign="middle" width="140" class="txt"><B>Numero Tarjeta Credito:</B></td>
+							<td width="227">
+							<ice:commandButton value="Agregar Producto"/></td>
 							<td width="75"></td>
 						</tr>
 						<!--fin formulario Creacion de Usuario  -->

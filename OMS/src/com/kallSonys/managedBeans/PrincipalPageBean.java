@@ -8,6 +8,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.ActionEvent;
 
 import com.kallSonys.web.sesion.SessionBean;
 
@@ -33,6 +34,18 @@ public class PrincipalPageBean implements Serializable {
 		return "goToProductos";
 	}
 	
+	@SuppressWarnings("unused")
+	public void formCreaProductoListener(ActionEvent event){
+		
+		String action= (String)event.getComponent().getAttributes().get("actionCreaProductos");
+		if(action.equals("1")){
+			this.sessionBean.setShowFormCrearProducto(Boolean.TRUE);
+		}else{
+			this.sessionBean.setShowFormCrearProducto(Boolean.TRUE);
+		}
+		System.out.println(this.sessionBean.isShowFormCrearProducto());
+	}
+	
 	public String gotoCamapañasPage(){
 		return "goToCapamañas";
 	}
@@ -44,5 +57,15 @@ public class PrincipalPageBean implements Serializable {
 	public String gotoClientesPage(){
 		return "goToClientes";
 	}
+
+	public SessionBean getSessionBean() {
+		return sessionBean;
+	}
+
+	public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
+	}
+	
+	
 
 }

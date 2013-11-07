@@ -30,8 +30,8 @@ public class PrincipalPageBean implements Serializable {
 		
 	}
 	
-	public String gotoProductosPage(){
-		return "goToProductos";
+	public String gotoProductoPage(){
+		return "goToProducto";
 	}
 	
 	@SuppressWarnings("unused")
@@ -40,22 +40,52 @@ public class PrincipalPageBean implements Serializable {
 		String action= (String)event.getComponent().getAttributes().get("actionCreaProductos");
 		if(action.equals("1")){
 			this.sessionBean.setShowFormCrearProducto(Boolean.TRUE);
+			this.sessionBean.setShowFormConsultarProducto(Boolean.FALSE);
 		}else{
-			this.sessionBean.setShowFormCrearProducto(Boolean.TRUE);
+			this.sessionBean.setShowFormConsultarProducto(Boolean.TRUE);
+			this.sessionBean.setShowFormCrearProducto(Boolean.FALSE);
 		}
-		System.out.println(this.sessionBean.isShowFormCrearProducto());
+		
 	}
 	
-	public String gotoCamapañasPage(){
-		return "goToCapamañas";
+	@SuppressWarnings("unused")
+	public void formCreaClienteListener(ActionEvent event){
+		
+		String action= (String)event.getComponent().getAttributes().get("actionCreaCliente");
+		if(action.equals("1")){
+			this.sessionBean.setShowFormCrearCliente(Boolean.TRUE);
+			this.sessionBean.setShowFormConsultarProducto(Boolean.FALSE);
+		}else{
+			this.sessionBean.setShowFormCrearCliente(Boolean.FALSE);
+			this.sessionBean.setShowFormConsultaCliente(Boolean.TRUE);
+		}
+		
 	}
 	
-	public String gotoOrdenesPage(){
-		return "goToOrdenes";
+	@SuppressWarnings("unused")
+	public void formCreaCampanaListener(ActionEvent event){
+		
+		String action= (String)event.getComponent().getAttributes().get("actionCreaCampaña");
+		if(action.equals("1")){
+			this.sessionBean.setShowFormCrearCampana(Boolean.TRUE);
+			this.sessionBean.setShowFormConsultaCampana(Boolean.FALSE);
+		}else{
+			this.sessionBean.setShowFormCrearCampana(Boolean.FALSE);
+			this.sessionBean.setShowFormConsultaCampana(Boolean.TRUE);
+		}
+		
 	}
 	
-	public String gotoClientesPage(){
-		return "goToClientes";
+	public String gotoCamapanaPage(){
+		return "goToCampana";
+	}
+	
+	public String gotoOrdenePage(){
+		return "goToOrdene";
+	}
+	
+	public String gotoClientePage(){
+		return "goToCliente";
 	}
 
 	public SessionBean getSessionBean() {

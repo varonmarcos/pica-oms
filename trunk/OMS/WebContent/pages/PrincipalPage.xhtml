@@ -59,12 +59,10 @@
 						 <!-- Menu de Productos -->
             			 <ice:menuItem id="adminProductos" value="Administracion de Productos" >
                  			<ice:menuItem id="consulProductos"  value="Consultar Productos"/>
-                 			<ice:menuItem id="crearProductos"  action="#{principalPageBean.gotoProductosPage}" value="Crear Producto">
-                 				
+                 			<ice:menuItem id="crearProductos"  action="#{principalPageBean.gotoProductosPage}" actionListener="#{principalPageBean.formCreaProductoListener}" value="Crear Producto">
+                 				<f:attribute name="actionCreaProductos" value="1"/>
                  			</ice:menuItem>
-                 			
-             			</ice:menuItem>
-             			
+              			</ice:menuItem>
              			<!-- Menu de Campañas -->
              			<ice:menuItem id="adminCampanas" value="Administracion de Campañas" >
                  			<ice:menuItem id="consulCampanas"  value="Consultar Campañas"/>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:sp="http://mycompany.com/sp/schemas" 
+		   xmlns:tns="http://mycompany.com/sp/definitions"
+		   xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+		   elementFormDefault="qualified" 
+		   targetNamespace="http://mycompany.com/sp/definitions">
+    
+  <xs:element name="RegisterCustomerRes">
+    <xs:complexType>
+      <xs:sequence>
+			<xs:element name="codigo" type="xs:string"/>
+			<xs:element name="descripcion" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

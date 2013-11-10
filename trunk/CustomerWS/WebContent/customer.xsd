@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+		   xmlns:sp="http://mycompany.com/sp/schemas" 
+		   elementFormDefault="qualified" 
+		   targetNamespace="http://mycompany.com/sp/definitions">
+	
+	<xs:complexType name="CustomerType">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="custId" type="xs:string"/>
+		  <xs:element minOccurs="0" name="fName" type="xs:string"/>
+		  <xs:element minOccurs="0" name="lName" type="xs:string"/>
+		  <xs:element minOccurs="0" name="phoneNumber" type="xs:long"/>
+		  <xs:element minOccurs="0" name="email" type="xs:string"/>
+		  <xs:element minOccurs="0" name="password" type="xs:string"/>
+		  <xs:element minOccurs="0" name="status" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

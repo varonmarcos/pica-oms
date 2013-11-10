@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+
+<project name="OMS.web" default="package-ear" basedir=".">
+
+	<!--
+		Ubicacion contenido WEB
+	-->
+	<property name="WebContent" value="WebContent" />
+
+	<!--
+		Localizacion de la carpeta autodeploy del dominio bea
+	-->
+	<property name="auto-deploy" value="../deploy/omsWeb/autodeploy" />
+
+	<!--
+		Directorio con la ubicacion de los fuentes
+	-->
+	<property name="src" value="src" />
+
+	<!--
+		Directorio donde se generaran las classes compiladas
+	-->
+	<property name="classes" value="classes" />
+
+	<!--
+		Nombre del war a generar
+	-->
+	<property name="library.api.filename" value="oms.web.war" />
+
+	<!--
+		Nombre de la libreria que contiene las clases y fuentes de las clases POJO de SOI
+	
+	<property name="library.api.src.filename" value="gestion.empresa.zip" />
+	-->
+	
+	<!--
+			Localizacion final para la libreria generada
+		-->
+	<property name="deploy" value="../deploy/omsWeb" />
+
+	<property name="deploy.front" value="../deploy/omsejb" />
+
+	<!--
+		Directorio donde se dejan librerías de negocio compartidas
+	-->
+	<property name="app-inf-lib" value="${deploy}/APP-INF/lib" />
+
+	<!--
+		Directorio donde se dejan clases de negocio compartidas
+	-->
+	<property name="app-inf-classes" value="${deploy}/APP-INF/classes" />
+
+	<!--
+		Localizacion clases del war
+	-->
+	<property name="web-inf-classes" value="WebContent/WEB-INF/classes" />
+
+	<!--
+		Localizacion clases del war
+	-->
+	<property name="web-inf-lib" value="WebContent/WEB-INF/lib" />
+
+	<!--
+		Localizacion del WEB-INF
+	-->
+	<property name="web-inf" value="WebContent/WEB-INF" />
+
+	<!--
+		Localizacion final para la libreria generada
+	-->
+	<property name="oms.ear" value="${deploy}/oms-web-test.ear" />
+
+	<!--
+    	Target: Eliminar el directorio de byteCode
+    -->
+	<target name="clean" description="Eliminar el directorio de byteCode y despliegue del jar o libreria">
+		<delete dir="${classes}" />
+		<delete file="${deploy}/${library.api.filename}" />
+		<delete file="${deploy}/${oms.ear}" />
+		<delete dir="${deploy}/META-INF" />
+		<delete dir="${web-inf-classes}" />
+		<!--<delete dir="${auto-deploy}" />-->
+		<delete dir="${app-inf-lib}" />
+	</target>
+
+
+	<!--
+    	Target: Compila el directorio de fuentes
+    -->
+	<target name="compile" depends="clean" description="Compila el directorio de fuentes">
+
+		<mkdir dir="${web-inf-classes}" />
+		<mkdir dir="${web-inf-lib}" />
+
+		<!--
+			Librerias obligatorias en el classpath para realizar una compilacion exitosa del proyecto
+		-->
+		<path id="classpath">
+			<pathelement location="${classes}" />
+
+			<fileset file="../libraries/JSF 2.0 (Apache Myfaces JSF Core-2.0 API 2.0.2)/myfaces-core-2.0.2-bin/lib">
+				<include name="**/*" />
+			</fileset>
+
+			<fileset dir="../libraries/oracleWeblogic/">
+				<include name="**/*" />
+			</fileset>
+
+			<!-- incluir en el ear
+			<fileset dir="../deploy/omslibN">
+				<include name="**/*.jar" />
+			</fileset>
+			-->
+		</path>
+
+		<javac destdir="${web-inf-classes}" includeantruntime="false" encoding="Cp1252" listfiles="false" debug="on" srcdir="${src}" fork="true" memoryinitialsize="512m" memorymaximumsize="512m">
+			<classpath refid="classpath" />
+		</javac>
+
+		<copy todir="${web-inf-classes}">
+			<fileset dir="${src}">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+
+	</target>
+
+	<target name="package-war" depends="compile">
+
+		<copy todir="${web-inf-lib}">
+
+			<fileset file="../libraries/JSF 2.0 (Apache Myfaces JSF Core-2.0 API 2.0.2)/myfaces-core-2.0.2-bin/lib">
+				<include name="**/*" />
+			</fileset>
+
+			<fileset dir="../libraries/oracleWeblogic/">
+				<include name="**/*" />
+			</fileset>
+
+			<!-- incluir en el ear
+			<fileset dir="../deploy/omslibN">
+				<include name="**/*.jar" />
+			</fileset>
+			-->
+
+		</copy>
+
+		<jar destfile="${deploy}/${library.api.filename}" basedir="WebContent" includes="**" excludes="**.cdi **/CVS/ **/*.cdi **/*~ **/*.contrib **/*.keep **/*.rvi **/*.svn">
+		</jar>
+
+		<delete dir="${web-inf-classes}" />
+		<delete dir="${web-inf-lib}" />
+
+	</target>
+
+	<target name="deploy" depends="package-war">
+		<mkdir dir="${deploy}/META-INF" />
+		<copy todir="${deploy}/APP-INF/classes/">
+			<fileset dir=".">
+				<include name="log4j.properties" />
+			</fileset>
+		</copy>
+		<copy todir="${deploy}">
+			<fileset dir="${deploy.front}">
+				<include name="common.ejb.dal.jar" />
+				<include name="sec.ejb.biz.jar" />				
+			</fileset>
+		</copy>
+		<jar destfile="${oms.ear}" basedir="${deploy}" includes="**.ejb.biz.jar gestion.empresa.war int.web.war APP-INF/** META-INF/**">
+		</jar>
+
+		<delete dir="${deploy}/META-INF" />
+		<delete file="${deploy}/APP-INF/classes/log4j.properties" />
+		<!--
+		<delete file="${deploy}/aud.ejb.biz.jar" />
+		<delete file="${deploy}/arc.pla.ejb.biz.jar" />
+		<delete file="${deploy}/cesantias.pla.ejb.biz.jar" />
+		<delete file="${deploy}/cesantias.sop.ejb.biz.jar" />
+		<delete file="${deploy}/common.ejb.biz.jar" />
+		<delete file="${deploy}/common.pla.ejb.biz.jar" />
+		<delete file="${deploy}/online.pla.ejb.biz.jar" />
+		<delete file="${deploy}/pse.ejb.biz.jar" />
+		<delete file="${deploy}/sec.ejb.biz.jar" />
+		<delete file="${deploy}/sop.ejb.biz.jar" />
+		<delete file="${deploy}/voluntarias.sop.ejb.biz.jar" />
+		-->
+	</target>
+
+
+	<target name="package-ear" depends="clean, copy-to-APPINF, deploy">
+
+       
+		<copy todir="${auto-deploy}">
+			<fileset dir="${deploy}">
+				<include name="oms-web-test.ear" />
+			</fileset>
+		</copy>
+		
+	</target>
+
+
+	<target name="copy-to-APPINF">
+
+		<mkdir dir="${app-inf-lib}" />
+
+		<copy todir="${app-inf-lib}">
+			<fileset dir="${deploy}">
+				<include name="*.jar" />
+				<exclude name="*ejb.*.jar" />
+			</fileset>
+
+			<fileset file="../libraries/JSF 2.0 (Apache Myfaces JSF Core-2.0 API 2.0.2)/myfaces-core-2.0.2-bin/lib">
+				<include name="**/*" />
+			</fileset>
+
+			<fileset dir="../libraries/oracleWeblogic/">
+				<include name="**/*" />
+			</fileset>
+
+			<!-- incluir en el ear
+			<fileset dir="../deploy/omslibN">
+				<include name="**/*.jar" />
+			</fileset>
+				-->
+		</copy>
+	</target>
+
+</project>

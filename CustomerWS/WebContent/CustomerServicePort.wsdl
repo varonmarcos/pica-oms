@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://mycompany.com/sp/definitions" xmlns:schema="http://mycompany.com/sp/service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://mycompany.com/sp/definitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://mycompany.com/sp/definitions">
+    	<xsd:include schemaLocation="RegisterCustomerReq.xsd"/>
+		<xsd:include schemaLocation="RegisterCustomerRes.xsd"/>
+				
+		<!-- Customer Elements -->
+		<xsd:element name="RegisterCustomerRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:RegisterCustomerReq"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="RegisterCustomerResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:RegisterCustomerRes"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="RegisterCustomerRes">
+    <wsdl:part name="RegisterCustomerRes" element="tns:RegisterCustomerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RegisterCustomerReq">
+    <wsdl:part name="RegisterCustomerReq" element="tns:RegisterCustomerRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CustomerBinding">
+    <wsdl:operation name="RegisterCustomer">
+      <wsdl:input name="RegisterCustomerReq" message="tns:RegisterCustomerReq">
+    </wsdl:input>
+      <wsdl:output name="RegisterCustomerRes" message="tns:RegisterCustomerRes">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomerBinding" type="tns:CustomerBinding">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="RegisterCustomer">
+      <soap:operation soapAction="http://mycompany.com/RegisterCustomer"/>
+      <wsdl:input name="RegisterCustomerReq">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RegisterCustomerRes">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Customer">
+    <wsdl:port name="customerServicePort" binding="tns:CustomerBinding">
+      <soap:address location="http://localhost:8080/CustomerWS/services/customerServicePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

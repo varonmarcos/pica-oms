@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="ORDERS")
-public class Order implements Serializable {
+public class Orders implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -32,14 +32,14 @@ public class Order implements Serializable {
 
 	//bi-directional many-to-one association to Item
 	@OneToMany(mappedBy="order")
-	private List<Item> items;
+	private List<Items> items;
 
 	//bi-directional many-to-one association to Customer
     @ManyToOne
 	@JoinColumn(name="CUSTID")
 	private Customer customer;
 
-    public Order() {
+    public Orders() {
     }
 
 	public String getOrdid() {
@@ -82,11 +82,11 @@ public class Order implements Serializable {
 		this.status = status;
 	}
 
-	public List<Item> getItems() {
+	public List<Items> getItems() {
 		return this.items;
 	}
 
-	public void setItems(List<Item> items) {
+	public void setItems(List<Items> items) {
 		this.items = items;
 	}
 	

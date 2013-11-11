@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="ITEMS")
-public class Item implements Serializable {
+public class Items implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -31,9 +31,9 @@ public class Item implements Serializable {
 	//bi-directional many-to-one association to Order
     @ManyToOne
 	@JoinColumn(name="ORDERID")
-	private Order order;
+	private Orders order;
 
-    public Item() {
+    public Items() {
     }
 
 	public String getItemid() {
@@ -84,11 +84,11 @@ public class Item implements Serializable {
 		this.quantity = quantity;
 	}
 
-	public Order getOrder() {
+	public Orders getOrder() {
 		return this.order;
 	}
 
-	public void setOrder(Order order) {
+	public void setOrder(Orders order) {
 		this.order = order;
 	}
 	

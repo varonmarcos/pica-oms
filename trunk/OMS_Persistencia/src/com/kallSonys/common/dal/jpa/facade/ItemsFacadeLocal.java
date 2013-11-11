@@ -4,9 +4,11 @@
  */
 package com.kallSonys.common.dal.jpa.facade;
 
-import com.kallSonys.common.dal.jpa.entitys.Items;
+
 import java.util.List;
 import javax.ejb.Remote;
+
+import com.kallSonys.common.dal.jpa.entitys.Items;
 
 /**
  *

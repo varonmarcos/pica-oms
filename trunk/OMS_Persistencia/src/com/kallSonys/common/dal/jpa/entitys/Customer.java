@@ -44,7 +44,7 @@ public class Customer implements Serializable {
 
 	//bi-directional many-to-one association to Order
 	@OneToMany(mappedBy="customer")
-	private Set<Order> orders;
+	private Set<Orders> orders;
 
     public Customer() {
     }
@@ -137,11 +137,11 @@ public class Customer implements Serializable {
 		this.customerAddresses = customerAddresses;
 	}
 	
-	public Set<Order> getOrders() {
+	public Set<Orders> getOrders() {
 		return this.orders;
 	}
 
-	public void setOrders(Set<Order> orders) {
+	public void setOrders(Set<Orders> orders) {
 		this.orders = orders;
 	}
 	

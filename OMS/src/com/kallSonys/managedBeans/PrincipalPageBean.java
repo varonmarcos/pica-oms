@@ -18,7 +18,7 @@ import com.kallSonys.web.sesion.SessionBean;
  */
 @ManagedBean(name="principalPageBean")
 @RequestScoped
-public class PrincipalPageBean implements Serializable {
+public class PrincipalPageBean{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -54,7 +54,7 @@ public class PrincipalPageBean implements Serializable {
 		String action= (String)event.getComponent().getAttributes().get("actionCreaCliente");
 		if(action.equals("1")){
 			this.sessionBean.setShowFormCrearCliente(Boolean.TRUE);
-			this.sessionBean.setShowFormConsultarProducto(Boolean.FALSE);
+			this.sessionBean.setShowFormConsultaCliente(Boolean.FALSE);
 		}else{
 			this.sessionBean.setShowFormCrearCliente(Boolean.FALSE);
 			this.sessionBean.setShowFormConsultaCliente(Boolean.TRUE);

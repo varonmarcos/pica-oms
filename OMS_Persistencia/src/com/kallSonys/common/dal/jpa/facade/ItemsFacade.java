@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless(name="ItemsFacadeBean", mappedName = "ItemsFacadeBean")
 @Remote(ItemsFacadeLocal.class)
 public class ItemsFacade extends AbstractFacade<Items> implements ItemsFacadeLocal {
-    @PersistenceContext(unitName = "common.dalPU")
+	@PersistenceContext(unitName = "OMS_Persistencia")
     private EntityManager em;
 
     @Override

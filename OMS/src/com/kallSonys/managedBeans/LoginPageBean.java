@@ -6,18 +6,21 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import com.kallSonys.common.dal.jpa.facade.AddressFacade;
 import com.kallSonys.common.dal.jpa.facade.AddressFacadeLocal;
-import com.kallSonys.common.dal.ldap.mnr.LdapManager;
-import com.kallSonys.seg.biz.transfer.UsersDTO;
+import com.kallSonys.seg.biz.ldap.facade.LdapFacade;
+import com.kallSonys.seg.biz.transfer.user.UsersDTO;
 
 @ManagedBean(name="loginPageBean")
 @RequestScoped
 public class LoginPageBean implements Serializable {
-
-	@EJB(mappedName="AddressBean")
-    private AddressFacadeLocal addressFacadeLocal;	
+	   
 	private static final long serialVersionUID = 1L;
-	 
+	@EJB (mappedName="LdapBean")
+	LdapFacade ldapFacadeBean;
+	
+	@EJB (mappedName="AddressBean")
+	AddressFacadeLocal AddressFacadeLocalBean;
      
 	private String user;
 	private String password;
@@ -26,39 +29,31 @@ public class LoginPageBean implements Serializable {
 	
 	public LoginPageBean(){}
 	
+	
 	/**
 	 * Este metodo iniciar la logica 
 	 * para autenticar el usuario
+	 * el login se hace frente al OpenLdap
 	 */
 	public String loginAction()
 	{
-			 
-		LdapManager mnr = new LdapManager();		
+			 			
 		UsersDTO user = new UsersDTO();		
 		user.setUser(this.getUser());		
-		user.setPass(this.getPassword());		
-		user = mnr.connect(user);
+		user.setPass(this.getPassword());	
+		
+		System.out.println("El ben es: "+AddressFacadeLocalBean);
+		if(AddressFacadeLocalBean!=null)
+		{
+			System.out.println("Cantidad de registros en tabla address: "+AddressFacadeLocalBean.count());
+		}
+		user = ldapFacadeBean.connect(user);
 		if(user.isAutenticado())		
-		{			
-			System.out.println("Usuario logeado, redirigir a la pagina de inicio");
-			pruebaBeanJPA();
-			System.out.println("Ejecutó llamado Bean JPA");
+		{								
 			return "exito";
 		}
-		
-		System.out.println("No se logró logear el usuario.");
-	
+					
 		return "";
-	}
-	
-	private void pruebaBeanJPA()
-	{
-		
-		//addressFacadeLocal = new  AddressFacadeLocal();
-		//addressBean = new  AddressFacadeLocal();
-		System.out.println("prueba bean 1: ");
-		System.out.println("llamado bean: "+addressFacadeLocal.count());
-		System.out.println("prueba bean 2: ");
 	}
 	
 		

@@ -1,4 +1,4 @@
-package com.kallSonys.entities;
+package com.kallSonys.common.dal.jpa.entitys;
 
 import java.io.Serializable;
 import javax.persistence.*;

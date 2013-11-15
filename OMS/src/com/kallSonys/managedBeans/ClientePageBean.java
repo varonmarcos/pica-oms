@@ -10,7 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 
-import com.kallSonys.business.Interfaces.CustomerServiceLocal;
+import com.kallSonys.business.Serv.CustomerServiceLocal;
 import com.kallSonys.web.util.SelectItemUtils;
 import com.kallSonys.business.dto.CustomerDTO;
 import com.kallSonys.business.dto.TipoTarjetaCreditoDTO;

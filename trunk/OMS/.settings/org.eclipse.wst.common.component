@@ -2,7 +2,7 @@
     <wb-module deploy-name="OMS">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="OMS"/>
         <property name="java-output-path" value="/OMS/build/classes"/>
+        <property name="context-root" value="OMS"/>
     </wb-module>
 </project-modules>

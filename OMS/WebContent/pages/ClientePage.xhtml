@@ -9,6 +9,7 @@
 	xmlns:ice="http://www.icesoft.com/icefaces/component">
     <h:head>
         <title>OMS</title>
+        <f:loadBundle basename="com.kallSonys.messages.messages" var="msg"/>
         <link rel="stylesheet" type="text/css" href="./xmlhttp/css/rime/rime.css"/>
       	<link rel="stylesheet" type="text/css" href="estilos.css" />
     </h:head>
@@ -52,48 +53,7 @@
 		</tr>
 		<tr>
 			<td class="az">
-			
-				<table width="70%" border="0" align="right" cellpadding="0" cellspacing="0">
-					<tr>
-						
-						<td>
-						 <ice:menuBar id="menuBar" >
-						 <!-- Menu de Productos -->
-            			 <ice:menuItem id="adminProductos" value="Administracion de Productos" >
-                 			<ice:menuItem id="consulProductos"  value="Consultar Productos"/>
-                 			<ice:menuItem id="crearProductos" action="#{principalPageBean.gotoProductosPage}" value="Crear Producto"/>
-             			</ice:menuItem>
-             			
-             			<!-- Menu de Campañas -->
-             			<ice:menuItem id="adminCampanas" value="Administracion de Campañas" >
-                 			<ice:menuItem id="consulCampanas"  value="Consultar Campañas"/>
-                 			<ice:menuItem id="crearCampanas"  value="Crear Campañas"/>
-             			</ice:menuItem>
-             			
-             			<!-- Menu de Clientes -->
-             			<ice:menuItem id="adminClientes" value="Administracion de Clientes" >
-                 			<ice:menuItem id="consulCampanas"  value="Consultar Clientes"/>
-                 			<ice:menuItem id="crearCampanas"  value="Crear Cliente"/>
-             			</ice:menuItem>
-             			
-             			</ice:menuBar>
-							<img name="Image3" src="images/imageDafault.gif" width="117" height="24" border="0" id="Image3"/>
-					    </td>
-						<td>
-							<img src="images/imageDafault.gif" name="Image4" width="109" height="24" border="0" id="Image4"/>
-						</td>
-						<td>
-						<img src="images/imageDafault.gif" name="Image5" width="109" height="24" border="0" id="Image5"/>
-						</td>
-						<td>
-							
-						</td>
-						<td>
-							
-						</td>
-					</tr>
-				</table>
-				
+				<ui:include src="/menuHeader.xhtml"></ui:include>				
 			</td>
 		</tr>
 	</table>
@@ -115,7 +75,8 @@
 	    					</td>
 	    				</tr>
 	    				<tr>
-	    					<td>
+	    					<td width="140">
+	    					 <h:messages  globalOnly="true" style="color:blue;margin:12px;" />
 	    					</td>
 	    				</tr>
 	    				<!--formulario Creacion de Usuario  -->
@@ -123,58 +84,57 @@
 	    				<tr>
 							<td valign="middle" width="140" class="txt"><B>ID. del Cliente:</B></td>
 							<td width="227">
-							<ice:inputText  maxlength="80" size="40"/></td>
+							<ice:inputText  maxlength="80" size="40" value="#{clientePageBean.clienteVO.idCliente}"/></td>
 							<td width="75"></td>
 						</tr>
 						<tr>
 							<td valign="middle" width="140" class="txt"><b>Nombre del Cliente:</b></td>
 							<td width="227">
-							<ice:inputText name="txt_nombre" maxlength="80" size="40"/></td>
+							<ice:inputText name="txt_nombre" maxlength="80" size="40" value="#{clientePageBean.clienteVO.nombreCliente}"/></td>
 							<td width="75"></td>
 						</tr>
 						<tr>
 							<td valign="middle" width="140" class="txt"><B>Apellido del Cliente:</B></td>
 							<td width="227">
-							<ice:inputText name="txt_apellido" maxlength="80" size="40"/></td>
+							<ice:inputText name="txt_apellido" maxlength="80" size="40" value="#{clientePageBean.clienteVO.apellidoCliente}"/></td>
 							<td width="75"></td>
 						</tr>
 						<tr>
 							<td valign="middle" width="140" class="txt"><B>Numero Telefonico:</B></td>
 							<td width="227">
-							<ice:inputText name="txt_numeroTel" maxlength="80" size="40"/></td>
+							<ice:inputText name="txt_numeroTel" maxlength="80" size="40" value="#{clientePageBean.clienteVO.numeroTelefonico}"/></td>
 							<td width="75"></td>
 						</tr>
 						<tr>
 							<td valign="middle" width="140" class="txt"><B>E-mail:</B></td>
 							<td width="227">
-							<ice:inputText name="txt_email" maxlength="80" size="40"/></td>
+							<ice:inputText name="txt_email" maxlength="80" size="40" value="#{clientePageBean.clienteVO.email}"/></td>
 							<td width="75"></td>
 						</tr>
 						<tr>
 							<td valign="middle" width="140" class="txt"><B>Password:</B></td>
 							<td width="227">
-							<ice:inputText name="txt_passwrd" maxlength="80" size="40"/></td>
+							<ice:inputText name="txt_passwrd" maxlength="80" size="40" value="#{clientePageBean.clienteVO.password}"/></td>
 							<td width="75"></td>
 						</tr>
 						<tr>
 							<td valign="middle" width="140" class="txt"><B>Tipo Tarjeta Credito:</B></td>
 							<td width="227">
-							<ice:selectOneMenu value="#{productoPageBean.tipoTarjetaCredito}">
-								<f:selectItem itemLabel="Seleccione" itemValue="-1"/> 
-								<f:selectItems value="#{productoPageBean.listTipoTarjetas}"/>
+							<ice:selectOneMenu value="#{clientePageBean.tipoTarjetaCreditoSelected}">
+								<f:selectItems value="#{clientePageBean.listTipoTarjetas}"/>
 							</ice:selectOneMenu> </td>
 							<td width="75"></td>
 						</tr>
 						<tr>
 							<td valign="middle" width="140" class="txt"><B>Numero Tarjeta Credito:</B></td>
 							<td width="227">
-							<ice:inputText name="txt_passwrd" maxlength="80" size="40"/></td>
+							<ice:inputText name="txt_passwrd" maxlength="80" size="40" value="#{clientePageBean.clienteVO.numeroTarjetaCredito}"/></td>
 							<td width="75"></td>
 						</tr>
 						<tr>
-							<td valign="middle" width="140" class="txt"><B>Numero Tarjeta Credito:</B></td>
+							<td valign="middle" width="140" class="txt"></td>
 							<td width="227">
-							<ice:commandButton value="Agregar Producto"/></td>
+							<ice:commandButton value="Agregar cliente" action="#{clientePageBean.doAgregarCliente}"/></td>
 							<td width="75"></td>
 						</tr>
 						<!--fin formulario Creacion de Usuario  -->

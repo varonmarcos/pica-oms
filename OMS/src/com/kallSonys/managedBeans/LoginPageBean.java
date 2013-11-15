@@ -6,22 +6,17 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import com.kallSonys.common.dal.jpa.facade.AddressFacade;
-import com.kallSonys.common.dal.jpa.facade.AddressFacadeLocal;
-import com.kallSonys.seg.biz.ldap.facade.LdapFacade;
-import com.kallSonys.seg.biz.transfer.user.UsersDTO;
+import com.kallSonys.business.Interfaces.LoginServiceLocal;
+import com.kallSonys.business.dto.UserDTO;
 
 @ManagedBean(name="loginPageBean")
 @RequestScoped
 public class LoginPageBean implements Serializable {
 	   
 	private static final long serialVersionUID = 1L;
-	@EJB (mappedName="LdapBean")
-	LdapFacade ldapFacadeBean;
 	
-	@EJB (mappedName="AddressBean")
-	AddressFacadeLocal AddressFacadeLocalBean;
-     
+	@EJB (mappedName="LoginServiceBean")
+	LoginServiceLocal loginService;
 	private String user;
 	private String password;
 	
@@ -38,17 +33,14 @@ public class LoginPageBean implements Serializable {
 	public String loginAction()
 	{
 			 			
-		UsersDTO user = new UsersDTO();		
+		UserDTO user = new UserDTO();		
 		user.setUser(this.getUser());		
-		user.setPass(this.getPassword());	
+		user.setPassword(this.getPassword());	
 		
-		System.out.println("El ben es: "+AddressFacadeLocalBean);
-		if(AddressFacadeLocalBean!=null)
-		{
-			System.out.println("Cantidad de registros en tabla address: "+AddressFacadeLocalBean.count());
-		}
-		user = ldapFacadeBean.connect(user);
-		if(user.isAutenticado())		
+		System.out.println("El ben es: "+loginService);
+		
+		loginService.login(user);
+		if(loginService.login(user))		
 		{								
 			return "exito";
 		}
@@ -69,5 +61,16 @@ public class LoginPageBean implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
+	public LoginServiceLocal getLoginService() {
+		return loginService;
+	}
+
+
+	public void setLoginService(LoginServiceLocal loginService) {
+		this.loginService = loginService;
+	}
+	
 
 }

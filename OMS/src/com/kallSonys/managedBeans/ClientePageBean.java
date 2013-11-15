@@ -1,6 +1,8 @@
 package com.kallSonys.managedBeans;
 
 import java.util.List;
+
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -8,9 +10,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 
+import com.kallSonys.business.Interfaces.CustomerServiceLocal;
 import com.kallSonys.web.util.SelectItemUtils;
-import com.kallSonys.web.vo.ClienteVO;
-import com.kallSonys.web.vo.TipoTarjetaCreditoVO;
+import com.kallSonys.business.dto.CustomerDTO;
+import com.kallSonys.business.dto.TipoTarjetaCreditoDTO;
 
 /**
  * 
@@ -21,11 +24,14 @@ import com.kallSonys.web.vo.TipoTarjetaCreditoVO;
 @RequestScoped
 public class ClientePageBean{
 
+	@EJB(mappedName="CustomerServiceBean")
+	private CustomerServiceLocal customerServiceFacade;
+	
 	FacesContext context = FacesContext.getCurrentInstance();
 	private boolean loaded=Boolean.FALSE;
 	private List<SelectItem> listTipoTarjetas;
 	private String tipoTarjetaCreditoSelected;
-	private ClienteVO clienteVO=new ClienteVO();
+	private CustomerDTO customerDTO=new CustomerDTO();
 		
 	
 	public ClientePageBean(){
@@ -39,7 +45,7 @@ public class ClientePageBean{
 	}
 	
 	private void loadSelectItemTipoTarjeta(){
-		List<TipoTarjetaCreditoVO> tiposTarjetas=TipoTarjetaCreditoVO.preloadData();
+		List<TipoTarjetaCreditoDTO> tiposTarjetas=TipoTarjetaCreditoDTO.preloadData();
 		try {
 			this.listTipoTarjetas=SelectItemUtils.buildSelectItems(tiposTarjetas, "idTipoTarjeta", "nombreTipoTarjeta", true);
 		} catch (Exception e) {
@@ -49,9 +55,10 @@ public class ClientePageBean{
 		
 	}
 	public void doAgregarCliente(){
-		System.out.println(this.clienteVO);
-		String message = "El Usuario fue creado Correctamente"; 
-	    context.addMessage(null, new FacesMessage(message));
+		
+		if(customerServiceFacade.createCustomer(this.customerDTO)){
+			System.out.println("El usuario se creo con exito");
+		}
 		
 	}
 	
@@ -76,12 +83,12 @@ public class ClientePageBean{
 		this.tipoTarjetaCreditoSelected = tipoTarjetaCreditoSelected;
 	}
 
-	public ClienteVO getClienteVO() {
-		return clienteVO;
+	public CustomerDTO getCustomerDTO() {
+		return customerDTO;
 	}
 
-	public void setClienteVO(ClienteVO clienteVO) {
-		this.clienteVO = clienteVO;
+	public void setClienteVO(CustomerDTO customerDTO) {
+		this.customerDTO = customerDTO;
 	}
 
 
@@ -94,7 +101,15 @@ public class ClientePageBean{
 		this.loaded = loaded;
 	}
 
-	
-	
+
+	public CustomerServiceLocal getCustomerServiceFacade() {
+		return customerServiceFacade;
+	}
+
+
+	public void setCustomerServiceFacade(CustomerServiceLocal customerServiceFacade) {
+		this.customerServiceFacade = customerServiceFacade;
+	}
+
 
 }

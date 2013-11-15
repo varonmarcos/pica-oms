@@ -8,8 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.SelectItem;
 
-import com.kallSonys.web.vo.ProductoVO;
-import com.kallSonys.web.vo.TipoTarjetaCreditoVO;
+import com.kallSonys.business.dto.ProductoDTO;
+import com.kallSonys.business.dto.TipoTarjetaCreditoDTO;
 
 /**
  * 
@@ -23,7 +23,7 @@ public class ProductoPageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private boolean mostrarCrearProducto;
-	private ProductoVO productoVO;
+	private ProductoDTO productoDTO;
 	
 	public ProductoPageBean(){
 		
@@ -40,6 +40,14 @@ public class ProductoPageBean implements Serializable {
 
 	public void setMostrarCrearProducto(boolean mostrarCrearProducto) {
 		this.mostrarCrearProducto = mostrarCrearProducto;
+	}
+
+	public ProductoDTO getProductoDTO() {
+		return productoDTO;
+	}
+
+	public void setProductoDTO(ProductoDTO productoDTO) {
+		this.productoDTO = productoDTO;
 	}
 	
 	

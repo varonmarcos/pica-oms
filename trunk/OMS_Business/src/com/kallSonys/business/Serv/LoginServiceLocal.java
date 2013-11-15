@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.kallSonys.business.Interfaces;
+package com.kallSonys.business.Serv;
 
 import javax.ejb.Local;
 

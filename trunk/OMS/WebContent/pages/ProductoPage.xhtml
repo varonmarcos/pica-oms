@@ -52,48 +52,7 @@
 		</tr>
 		<tr>
 			<td class="az">
-			
-				<table width="70%" border="0" align="right" cellpadding="0" cellspacing="0">
-					<tr>
-						
-						<td>
-						 <ice:menuBar id="menuBar" >
-						 <!-- Menu de Productos -->
-            			 <ice:menuItem id="adminProductos" value="Administracion de Productos" >
-                 			<ice:menuItem id="consulProductos"  value="Consultar Productos"/>
-                 			<ice:menuItem id="crearProductos" action="#{principalPageBean.gotoProductosPage}" value="Crear Producto"/>
-             			</ice:menuItem>
-             			
-             			<!-- Menu de Campañas -->
-             			<ice:menuItem id="adminCampanas" value="Administracion de Campañas" >
-                 			<ice:menuItem id="consulCampanas"  value="Consultar Campañas"/>
-                 			<ice:menuItem id="crearCampanas"  value="Crear Campañas"/>
-             			</ice:menuItem>
-             			
-             			<!-- Menu de Clientes -->
-             			<ice:menuItem id="adminClientes" value="Administracion de Clientes" >
-                 			<ice:menuItem id="consulCampanas"  value="Consultar Clientes"/>
-                 			<ice:menuItem id="crearCampanas"  value="Crear Cliente"/>
-             			</ice:menuItem>
-             			
-             			</ice:menuBar>
-							<img name="Image3" src="images/imageDafault.gif" width="117" height="24" border="0" id="Image3"/>
-					    </td>
-						<td>
-							<img src="images/imageDafault.gif" name="Image4" width="109" height="24" border="0" id="Image4"/>
-						</td>
-						<td>
-						<img src="images/imageDafault.gif" name="Image5" width="109" height="24" border="0" id="Image5"/>
-						</td>
-						<td>
-							
-						</td>
-						<td>
-							
-						</td>
-					</tr>
-				</table>
-				
+				<ui:include src="/menuHeader.xhtml"></ui:include>
 			</td>
 		</tr>
 	</table>
@@ -119,62 +78,66 @@
 	    					</td>
 	    				</tr>
 	    				<!--formulario Creacion de Usuario  -->
-	    				<ice:panelGroup id="formCreacionUsuario" rendered="#{sessionBean.showFormCrearProducto}">
+	    				<ice:panelGroup id="formCreacionProducto" rendered="#{sessionBean.showFormCrearProducto}">
 	    				<tr>
-							<td valign="middle" width="140" class="txt"><B>ID. del Cliente:</B></td>
+							<td valign="middle" width="140" class="txt"><B>Identificador:</B></td>
 							<td width="227">
 							<ice:inputText  maxlength="80" size="40"/></td>
 							<td width="75"></td>
 						</tr>
 						<tr>
-							<td valign="middle" width="140" class="txt"><b>Nombre del Cliente:</b></td>
+							<td valign="middle" width="140" class="txt"><b>Nombre:</b></td>
 							<td width="227">
 							<ice:inputText name="txt_nombre" maxlength="80" size="40"/></td>
 							<td width="75"></td>
 						</tr>
 						<tr>
-							<td valign="middle" width="140" class="txt"><B>Apellido del Cliente:</B></td>
+							<td valign="middle" width="140" class="txt"><B>Descripcion:</B></td>
 							<td width="227">
-							<ice:inputText name="txt_apellido" maxlength="80" size="40"/></td>
+							<ice:inputTextarea name="txt_apellido" maxlength="80" size="40"/></td>
 							<td width="75"></td>
 						</tr>
 						<tr>
-							<td valign="middle" width="140" class="txt"><B>Numero Telefonico:</B></td>
+							<td valign="middle" width="140" class="txt"><B>Categoria:</B></td>
 							<td width="227">
-							<ice:inputText name="txt_numeroTel" maxlength="80" size="40"/></td>
+							<ice:selectOneMenu>
+								<f:selectItem itemLabel="Selecciona.." itemValue="1"/>
+							</ice:selectOneMenu>
+							</td>
 							<td width="75"></td>
 						</tr>
 						<tr>
-							<td valign="middle" width="140" class="txt"><B>E-mail:</B></td>
+							<td valign="middle" width="140" class="txt"><B>Precio:</B></td>
 							<td width="227">
 							<ice:inputText name="txt_email" maxlength="80" size="40"/></td>
 							<td width="75"></td>
 						</tr>
 						<tr>
-							<td valign="middle" width="140" class="txt"><B>Password:</B></td>
+							<td valign="middle" width="140" class="txt"><B>Productor:</B></td>
+							<td width="227">
+							<ice:selectOneMenu>
+								<f:selectItem itemLabel="Sony" itemValue="1"/>
+								<f:selectItem itemLabel="Rapid Service" itemValue="2"/>
+							</ice:selectOneMenu></td>
+							<td width="75"></td>
+						</tr>
+						<tr>
+							<td valign="middle" width="140" class="txt"><B>Imagen:</B></td>
+							<td width="227">
+								<ice:inputText></ice:inputText>
+							</td>
+							<td width="75"></td>
+						</tr>
+						<tr>
+							<td valign="middle" width="140" class="txt"><B>Imagen URL:</B></td>
 							<td width="227">
 							<ice:inputText name="txt_passwrd" maxlength="80" size="40"/></td>
 							<td width="75"></td>
 						</tr>
 						<tr>
-							<td valign="middle" width="140" class="txt"><B>Tipo Tarjeta Credito:</B></td>
+							<td valign="middle" width="140" class="txt"></td>
 							<td width="227">
-							<ice:selectOneMenu value="#{productoPageBean.tipoTarjetaCredito}">
-								<f:selectItem itemLabel="Seleccione" itemValue="0"/> 
-								<f:selectItems value="#{productoPageBean.listTipoTarjetas}"/>
-							</ice:selectOneMenu> </td>
-							<td width="75"></td>
-						</tr>
-						<tr>
-							<td valign="middle" width="140" class="txt"><B>Numero Tarjeta Credito:</B></td>
-							<td width="227">
-							<ice:inputText name="txt_passwrd" maxlength="80" size="40"/></td>
-							<td width="75"></td>
-						</tr>
-						<tr>
-							<td valign="middle" width="140" class="txt"><B>Numero Tarjeta Credito:</B></td>
-							<td width="227">
-							<ice:commandButton value="Agregar Producto"/></td>
+							<ice:commandButton name="btnCrearProducto" value="Agregar Producto"/></td>
 							<td width="75"></td>
 						</tr>
 						<!--fin formulario Creacion de Usuario  -->

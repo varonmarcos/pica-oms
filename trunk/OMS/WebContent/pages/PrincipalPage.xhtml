@@ -52,49 +52,8 @@
 		<tr>
 			<td class="az">
 			<h:form>
-				<table width="70%" border="0" align="right" cellpadding="0" cellspacing="0">
-					<tr>
-						<td>
-						 <ice:menuBar id="menuBar" >
-						 <!-- Menu de Productos -->
-            			 <ice:menuItem id="adminProductos" value="Administracion de Productos" >
-                 			<ice:menuItem id="consulProductos"  value="Consultar Productos"/>
-                 			<ice:menuItem id="crearProductos"  action="#{principalPageBean.gotoProductoPage}" actionListener="#{principalPageBean.formCreaProductoListener}" value="Crear Producto">
-                 				<f:attribute name="actionCreaProductos" value="1"/>
-                 			</ice:menuItem>
-              			</ice:menuItem>
-             			<!-- Menu de Campañas -->
-             			<ice:menuItem id="adminCampanas" value="Administracion de Campañas" >
-                 			<ice:menuItem id="consulCampanas"  value="Consultar Campañas"/>
-                 			<ice:menuItem id="crearCampanas"  value="Crear Campañas"/>
-             			</ice:menuItem>
-             			
-             			<!-- Menu de Clientes -->
-             			<ice:menuItem id="adminClientes" value="Administracion de Clientes" >
-                 			<ice:menuItem id="consulCampanas"  value="Consultar Clientes"/>
-                 			<ice:menuItem id="crearCampanas"  value="Crear Cliente" action="#{principalPageBean.gotoClientePage}" actionListener="#{principalPageBean.formCreaClienteListener}">
-                 				<f:attribute name="actionCreaCliente" value="1"/>
-                 			</ice:menuItem>
-             			</ice:menuItem>
-             			
-             			</ice:menuBar>
-							<img name="Image3" src="images/imageDafault.gif" width="117" height="24" border="0" id="Image3"/>
-					    </td>
-						<td>
-							<img src="images/imageDafault.gif" name="Image4" width="109" height="24" border="0" id="Image4"/>
-						</td>
-						<td>
-						<img src="images/imageDafault.gif" name="Image5" width="109" height="24" border="0" id="Image5"/>
-						</td>
-						<td>
-							
-						</td>
-						<td>
-							
-						</td>
-					</tr>
-				</table>
-				</h:form>
+				<ui:include src="/menuHeader.xhtml"></ui:include>
+			</h:form>
 			</td>
 		</tr>
 	</table>

@@ -6,7 +6,8 @@ package com.kallSonys.business.Imple;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
-import com.kallSonys.business.Interfaces.LoginServiceLocal;
+
+import com.kallSonys.business.Serv.LoginServiceLocal;
 import com.kallSonys.business.dto.UserDTO;
 import com.kallSonys.seg.biz.ldap.facade.LdapFacade;
 import com.kallSonys.seg.biz.transfer.user.UsersDTO;

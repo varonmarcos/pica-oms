@@ -6,7 +6,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import com.kallSonys.business.Interfaces.LoginServiceLocal;
+import com.kallSonys.business.Serv.LoginServiceLocal;
 import com.kallSonys.business.dto.UserDTO;
 
 @ManagedBean(name="loginPageBean")

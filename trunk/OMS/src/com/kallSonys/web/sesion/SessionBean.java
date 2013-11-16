@@ -8,7 +8,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name="sessionBean")
 @SessionScoped
-public class SessionBean implements Serializable {
+public class SessionBean {
 
 	private static final long serialVersionUID = 2356312790334503309L;
 	

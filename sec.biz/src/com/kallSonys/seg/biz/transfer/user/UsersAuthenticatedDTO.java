@@ -1,6 +1,9 @@
 package com.kallSonys.seg.biz.transfer.user;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.kallSonys.seg.biz.transfer.app.AppRecursosDto;
 
 
 public class UsersAuthenticatedDTO implements Serializable {
@@ -15,6 +18,7 @@ public class UsersAuthenticatedDTO implements Serializable {
     private String nombre;
     private String apellido;
     private String email;
+    private List<AppRecursosDto> listadoRecursos;
     private boolean autenticado=false;
 
     /**
@@ -79,6 +83,14 @@ public class UsersAuthenticatedDTO implements Serializable {
 
 	public void setAutenticado(boolean autenticado) {
 		this.autenticado = autenticado;
+	}
+
+	public List<AppRecursosDto> getListadoRecursos() {
+		return listadoRecursos;
+	}
+
+	public void setListadoRecursos(List<AppRecursosDto> listadoRecursos) {
+		this.listadoRecursos = listadoRecursos;
 	}
 	
 	

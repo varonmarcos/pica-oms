@@ -8,7 +8,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="oracle.eclipse.tools.weblogic.lib.system"/>
 	<classpathentry kind="src" path="/OMS_Persistencia"/>
-	<classpathentry kind="var" path="OMS_LIB/oms-seguridad.jar"/>
 	<classpathentry kind="var" path="OMS_LIB/oms-persistencia.jar"/>
+	<classpathentry kind="var" path="OMS_LIB/oms-seguridad.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

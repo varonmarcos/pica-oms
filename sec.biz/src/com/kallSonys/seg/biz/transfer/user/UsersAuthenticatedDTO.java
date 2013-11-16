@@ -12,9 +12,10 @@ public class UsersAuthenticatedDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String identificacion;
-        private String nombre;
-        private String apellido;
-        private String email;;
+    private String nombre;
+    private String apellido;
+    private String email;
+    private boolean autenticado=false;
 
     /**
      * @return the identificacion
@@ -71,6 +72,14 @@ public class UsersAuthenticatedDTO implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+	public boolean isAutenticado() {
+		return autenticado;
+	}
+
+	public void setAutenticado(boolean autenticado) {
+		this.autenticado = autenticado;
+	}
 	
 	
 }

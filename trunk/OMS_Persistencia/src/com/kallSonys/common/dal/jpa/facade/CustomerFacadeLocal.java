@@ -17,6 +17,8 @@ public interface CustomerFacadeLocal {
 
     void create(Customer customer);
 
+    boolean createAndConfirm(Customer customer);
+    
     void edit(Customer customer);
 
     void remove(Customer customer);

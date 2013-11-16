@@ -3,15 +3,19 @@
 	<persistence-unit name="OMS_Persistencia" transaction-type="JTA">
 		   
 		<jta-data-source>JNDI_OMS_PICA</jta-data-source>
-	    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-	    <properties/>
-		<!-- 
 		<class>com.kallSonys.common.dal.jpa.entitys.Address</class>
+		<class>com.kallSonys.common.dal.jpa.entitys.AppRecurso</class>
+		<class>com.kallSonys.common.dal.jpa.entitys.AppRequerimiento</class>
+		<class>com.kallSonys.common.dal.jpa.entitys.AppRol</class>
+		<class>com.kallSonys.common.dal.jpa.entitys.AppUsuariosxrol</class>
+		<class>com.kallSonys.common.dal.jpa.entitys.AppUsuariosxrolPK</class>
 		<class>com.kallSonys.common.dal.jpa.entitys.Customer</class>
 		<class>com.kallSonys.common.dal.jpa.entitys.Customertype</class>
 		<class>com.kallSonys.common.dal.jpa.entitys.CustomerAddress</class>
-		<class>com.kallSonys.common.dal.jpa.entitys.Items</class>
+		<class>com.kallSonys.common.dal.jpa.entitys.Item</class>
 		<class>com.kallSonys.common.dal.jpa.entitys.Orders</class>
-		 -->		
+	    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+	    <properties/>
+		
 	</persistence-unit>
 </persistence>

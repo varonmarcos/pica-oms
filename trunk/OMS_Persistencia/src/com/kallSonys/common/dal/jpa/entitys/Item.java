@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="ITEMS")
-public class Items implements Serializable {
+public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -33,7 +33,7 @@ public class Items implements Serializable {
 	@JoinColumn(name="ORDERID")
 	private Orders order;
 
-    public Items() {
+    public Item() {
     }
 
 	public String getItemid() {

@@ -8,7 +8,7 @@ package com.kallSonys.common.dal.jpa.facade;
 import java.util.List;
 import javax.ejb.Remote;
 
-import com.kallSonys.common.dal.jpa.entitys.Items;
+import com.kallSonys.common.dal.jpa.entitys.Item;
 
 /**
  *
@@ -17,17 +17,17 @@ import com.kallSonys.common.dal.jpa.entitys.Items;
 @Remote
 public interface ItemsFacadeLocal {
 
-    void create(Items items);
+    void create(Item items);
 
-    void edit(Items items);
+    void edit(Item items);
 
-    void remove(Items items);
+    void remove(Item items);
 
-    Items find(Object id);
+    Item find(Object id);
 
-    List<Items> findAll();
+    List<Item> findAll();
 
-    List<Items> findRange(int[] range);
+    List<Item> findRange(int[] range);
 
     int count();
     

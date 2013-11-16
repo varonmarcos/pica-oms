@@ -1,6 +1,8 @@
 package com.kallSonys.business.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -17,7 +19,16 @@ public class CategoriaProductoDTO implements Serializable {
 	private String idCategoria;
 	private String nameCategoria;
 	
+	/**
+	 * Minimal constructor
+	 */
 	public CategoriaProductoDTO(){
+		
+	}
+	
+	public CategoriaProductoDTO(String idCategoria,String nameCategoria){
+		this.idCategoria=idCategoria;
+		this.nameCategoria=nameCategoria;
 		
 	}
 
@@ -37,6 +48,15 @@ public class CategoriaProductoDTO implements Serializable {
 		this.nameCategoria = nameCategoria;
 	}
 	
+	public static List<CategoriaProductoDTO> preloadData(){
+		List<CategoriaProductoDTO> listadoTarjetas=new ArrayList<CategoriaProductoDTO>();
+		CategoriaProductoDTO tv=new CategoriaProductoDTO("1","Televisores");
+		CategoriaProductoDTO pc=new CategoriaProductoDTO("2","Computadores");
+		listadoTarjetas.add(tv);
+		listadoTarjetas.add(pc);		
+		return listadoTarjetas;
+		
+	}
 	
 
 }

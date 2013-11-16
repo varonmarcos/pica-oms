@@ -5,6 +5,7 @@ package com.kallSonys.business.Imple;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import com.kallSonys.business.Serv.CustomerServiceLocal;
@@ -20,7 +21,7 @@ import com.kallSonys.common.dal.jpa.facade.CustomertypeFacadeLocal;
  *
  */
 @Stateless(name="CustomerServiceBean", mappedName = "CustomerServiceBean")
-@Local(CustomerServiceLocal.class)
+@Remote(CustomerServiceLocal.class)
 public class CustomerServiceBean implements CustomerServiceLocal {
 
 	@EJB

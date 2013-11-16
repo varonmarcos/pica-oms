@@ -3,18 +3,19 @@
  */
 package com.kallSonys.business.Serv;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
 import com.kallSonys.business.dto.UserDTO;
+import com.kallSonys.seg.biz.transfer.user.UsersAuthenticatedDTO;
 
 
 /**
  * @author Juan Pablo Aranda Galvis
  *
  */
-@Local
+@Remote
 public interface LoginServiceLocal {
 	
-	public Boolean login(UserDTO user);
+	public UsersAuthenticatedDTO login(UserDTO user);
 
 }

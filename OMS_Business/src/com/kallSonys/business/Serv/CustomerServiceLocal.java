@@ -3,7 +3,7 @@
  */
 package com.kallSonys.business.Serv;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
 import com.kallSonys.business.dto.CustomerDTO;
 
@@ -12,7 +12,7 @@ import com.kallSonys.business.dto.CustomerDTO;
  *
  */
 
-@Local
+@Remote
 public interface CustomerServiceLocal {
 	
 	public Boolean createCustomer(CustomerDTO customer);

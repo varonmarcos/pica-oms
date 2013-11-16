@@ -38,17 +38,17 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="OMS_LIB/sec.biz.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="var" path="OMS_LIB/ojdbc6.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="OMS_LIB/common.dal.jar">
+	<classpathentry kind="var" path="OMS_LIB/oms-persistencia.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="OMS_LIB/oms-seguridad.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>

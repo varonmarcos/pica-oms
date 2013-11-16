@@ -4,7 +4,7 @@
  */
 package com.kallSonys.common.dal.jpa.facade;
 
-import com.kallSonys.common.dal.jpa.entitys.Items;
+import com.kallSonys.common.dal.jpa.entitys.Item;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless(name="ItemsFacadeBean", mappedName = "ItemsFacadeBean")
 @Remote(ItemsFacadeLocal.class)
-public class ItemsFacade extends AbstractFacade<Items> implements ItemsFacadeLocal {
+public class ItemsFacade extends AbstractFacade<Item> implements ItemsFacadeLocal {
 	@PersistenceContext(unitName = "OMS_Persistencia")
     private EntityManager em;
 
@@ -26,11 +26,11 @@ public class ItemsFacade extends AbstractFacade<Items> implements ItemsFacadeLoc
     }
 
     public ItemsFacade() {
-        super(Items.class);
+        super(Item.class);
     }
 
     @Override
-    public boolean createAndConfirm(Items entity) 
+    public boolean createAndConfirm(Item entity) 
     {
         try
         {

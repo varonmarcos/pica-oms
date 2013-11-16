@@ -63,7 +63,7 @@ public abstract class AbstractFacade<T> implements  IAbstractFacade<T>{
     {
         try
         {
-            getEntityManager().persist(entity);            
+            getEntityManager().persist(entity);           
         }catch(Exception e){return false;}
         
         return true;

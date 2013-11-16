@@ -1,10 +1,8 @@
 package com.kallSonys.common.dal.jpa.entitys;
 
 import java.io.Serializable;
-import java.util.List;
-
 import javax.persistence.*;
-
+import java.util.Set;
 
 
 /**
@@ -23,7 +21,7 @@ public class Customertype implements Serializable {
 
 	//bi-directional many-to-one association to Customer
 	@OneToMany(mappedBy="customertype")
-	private List<Customer> customers;
+	private Set<Customer> customers;
 
     public Customertype() {
     }
@@ -44,11 +42,11 @@ public class Customertype implements Serializable {
 		this.description = description;
 	}
 
-	public List<Customer> getCustomers() {
+	public Set<Customer> getCustomers() {
 		return this.customers;
 	}
 
-	public void setCustomers(List<Customer> customers) {
+	public void setCustomers(Set<Customer> customers) {
 		this.customers = customers;
 	}
 	

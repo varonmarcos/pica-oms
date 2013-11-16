@@ -4,8 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
-
+import java.util.Set;
 
 
 /**
@@ -19,7 +18,7 @@ public class Orders implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String ordid;
+	private String orderid;
 
 	private String comments;
 
@@ -32,7 +31,7 @@ public class Orders implements Serializable {
 
 	//bi-directional many-to-one association to Item
 	@OneToMany(mappedBy="order")
-	private List<Items> items;
+	private Set<Item> items;
 
 	//bi-directional many-to-one association to Customer
     @ManyToOne
@@ -42,12 +41,12 @@ public class Orders implements Serializable {
     public Orders() {
     }
 
-	public String getOrdid() {
-		return this.ordid;
+	public String getOrderid() {
+		return this.orderid;
 	}
 
-	public void setOrdid(String ordid) {
-		this.ordid = ordid;
+	public void setOrderid(String orderid) {
+		this.orderid = orderid;
 	}
 
 	public String getComments() {
@@ -82,11 +81,11 @@ public class Orders implements Serializable {
 		this.status = status;
 	}
 
-	public List<Items> getItems() {
+	public Set<Item> getItems() {
 		return this.items;
 	}
 
-	public void setItems(List<Items> items) {
+	public void setItems(Set<Item> items) {
 		this.items = items;
 	}
 	

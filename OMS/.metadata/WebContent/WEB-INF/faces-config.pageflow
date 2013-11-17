@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13831072386990" configfile="/OMS/WebContent/WEB-INF/faces-config.xml">
   <nodes xsi:type="pageflow:PFPage" name="pages/LoginPage.xhtml" id="pf13831077914537" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13831077914538" path="/LoginPage.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/PrincipalPage.xhtml" id="pf13831077914539" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf13838060516733 pf13838060603535 pf13839825024149" inlinks="pf13831077914538" path="/pages/PrincipalPage.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/CampanaPage.xhtml" id="pf13838060516734" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf13838060516733" path="/pages/CampanaPage.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/PrincipalPage.xhtml" id="pf13831077914539" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf13838060516733 pf13838060603535 pf13839825024149" inlinks="pf13831077914538" path="/pages/PrincipalPage.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/CampanaPage.xhtml" id="pf13838060516734" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf13838060516733" path="/pages/CampanaPage.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/ProductoPage.xhtml" id="pf13838060603536" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" outlinks="pf13840418774900" inlinks="pf13838060603535 pf13840419052551" path="/pages/ProductoPage.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/ClientePage.xhtml" id="pf138398250241511" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf13840419052551" inlinks="pf13839825024149 pf13840418774900" path="/pages/ClientePage.xhtml"/>
   <links id="pf13831077914538" target="pf13831077914539" source="pf13831077914537" outcome="exito"/>

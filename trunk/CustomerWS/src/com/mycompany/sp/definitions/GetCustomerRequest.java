@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Customer" type="{http://mycompany.com/sp/definitions}CustomerType"/>
+ *         &lt;element ref="{http://mycompany.com/sp/definitions}GetCustomerReq"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,36 +29,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "customer"
+    "getCustomerReq"
 })
-@XmlRootElement(name = "RegisterCustomerReq")
-public class RegisterCustomerReq {
+@XmlRootElement(name = "GetCustomerRequest")
+public class GetCustomerRequest {
 
-    @XmlElement(name = "Customer", required = true)
-    protected CustomerType customer;
+    @XmlElement(name = "GetCustomerReq", required = true)
+    protected GetCustomerReq getCustomerReq;
 
     /**
-     * Obtiene el valor de la propiedad customer.
+     * Obtiene el valor de la propiedad getCustomerReq.
      * 
      * @return
      *     possible object is
-     *     {@link CustomerType }
+     *     {@link GetCustomerReq }
      *     
      */
-    public CustomerType getCustomer() {
-        return customer;
+    public GetCustomerReq getGetCustomerReq() {
+        return getCustomerReq;
     }
 
     /**
-     * Define el valor de la propiedad customer.
+     * Define el valor de la propiedad getCustomerReq.
      * 
      * @param value
      *     allowed object is
-     *     {@link CustomerType }
+     *     {@link GetCustomerReq }
      *     
      */
-    public void setCustomer(CustomerType value) {
-        this.customer = value;
+    public void setGetCustomerReq(GetCustomerReq value) {
+        this.getCustomerReq = value;
     }
 
 }

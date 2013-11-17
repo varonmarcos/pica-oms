@@ -2,11 +2,13 @@
 <wsdl:definitions targetNamespace="http://mycompany.com/sp/definitions" xmlns:schema="http://mycompany.com/sp/service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://mycompany.com/sp/definitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://mycompany.com/sp/definitions">
-    	<xsd:include schemaLocation="RegisterCustomerReq.xsd"/>
-		<xsd:include schemaLocation="RegisterCustomerRes.xsd"/>
-				
-		<!-- Customer Elements -->
-		<xsd:element name="RegisterCustomerRequest">
+			<xsd:include schemaLocation="RegisterCustomerReq.xsd"/>
+			<xsd:include schemaLocation="RegisterCustomerRes.xsd"/>
+			<xsd:include schemaLocation="GetCustomerReq.xsd"/>
+			<xsd:include schemaLocation="GetCustomerRes.xsd"/>
+
+			<!-- Customer Elements -->
+			<xsd:element name="RegisterCustomerRequest">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element ref="tns:RegisterCustomerReq"/>
@@ -21,6 +23,23 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
+
+			<xsd:element name="GetCustomerRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:GetCustomerReq"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="GetCustomerResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="tns:GetCustomerRes"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
 		</xsd:schema>
   </wsdl:types>
   <wsdl:message name="RegisterCustomerRes">
@@ -31,11 +50,25 @@
     <wsdl:part name="RegisterCustomerReq" element="tns:RegisterCustomerRequest">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="GetCustomerRes">
+    <wsdl:part name="GetCustomerRes" element="tns:GetCustomerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetCustomerReq">
+    <wsdl:part name="GetCustomerReq" element="tns:GetCustomerRequest">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="CustomerBinding">
     <wsdl:operation name="RegisterCustomer">
       <wsdl:input name="RegisterCustomerReq" message="tns:RegisterCustomerReq">
     </wsdl:input>
       <wsdl:output name="RegisterCustomerRes" message="tns:RegisterCustomerRes">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomer">
+      <wsdl:input name="GetCustomerReq" message="tns:GetCustomerReq">
+    </wsdl:input>
+      <wsdl:output name="GetCustomerRes" message="tns:GetCustomerRes">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -50,10 +83,19 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetCustomer">
+      <soap:operation soapAction="http://mycompany.com/GetCustomer"/>
+      <wsdl:input name="GetCustomerReq">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetCustomerRes">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Customer">
     <wsdl:port name="customerServicePort" binding="tns:CustomerBinding">
-      <soap:address location="http://localhost:8080/CustomerWS/services/customerServicePort"/>
+      <soap:address location="http://localhost:8081/CustomerWS/services/customerServicePort"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

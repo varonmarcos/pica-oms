@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-		   xmlns:sp="http://mycompany.com/sp/schemas" 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:sp="http://mycompany.com/sp/definitions" 
 		   elementFormDefault="qualified" 
 		   targetNamespace="http://mycompany.com/sp/definitions">
 	
 	<xs:complexType name="CustomerType">
 		<xs:sequence>
-		  <xs:element minOccurs="0" name="custId" type="xs:string"/>
-		  <xs:element minOccurs="0" name="fName" type="xs:string"/>
-		  <xs:element minOccurs="0" name="lName" type="xs:string"/>
-		  <xs:element minOccurs="0" name="phoneNumber" type="xs:long"/>
-		  <xs:element minOccurs="0" name="email" type="xs:string"/>
-		  <xs:element minOccurs="0" name="password" type="xs:string"/>
-		  <xs:element minOccurs="0" name="status" type="xs:string"/>
+		  <xs:element type="xs:string" name="custId" minOccurs="0"/>
+		  <xs:element type="xs:string" name="fName" minOccurs="0"/>
+		  <xs:element type="xs:string" name="lName" minOccurs="0"/>
+		  <xs:element type="xs:long" name="phoneNumber" minOccurs="0"/>
+		  <xs:element type="xs:string" name="email" minOccurs="0"/>
+		  <xs:element type="xs:string" name="password" minOccurs="0"/>
+		  <xs:element type="xs:string" name="creditCardType" minOccurs="0"/>
+		  <xs:element type="xs:string" name="creditCardNumber" minOccurs="0"/>
+		  <xs:element type="xs:string" name="status" />
 		</xs:sequence>
 	</xs:complexType>
 

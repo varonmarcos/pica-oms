@@ -30,11 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RegisterCustomerReq }
+     * Create an instance of {@link GetCustomerRequest }
      * 
      */
-    public RegisterCustomerReq createRegisterCustomerReq() {
-        return new RegisterCustomerReq();
+    public GetCustomerRequest createGetCustomerRequest() {
+        return new GetCustomerRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetCustomerReq }
+     * 
+     */
+    public GetCustomerReq createGetCustomerReq() {
+        return new GetCustomerReq();
     }
 
     /**
@@ -43,6 +51,14 @@ public class ObjectFactory {
      */
     public CustomerType createCustomerType() {
         return new CustomerType();
+    }
+
+    /**
+     * Create an instance of {@link RegisterCustomerReq }
+     * 
+     */
+    public RegisterCustomerReq createRegisterCustomerReq() {
+        return new RegisterCustomerReq();
     }
 
     /**
@@ -67,6 +83,22 @@ public class ObjectFactory {
      */
     public RegisterCustomerRequest createRegisterCustomerRequest() {
         return new RegisterCustomerRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetCustomerResponse }
+     * 
+     */
+    public GetCustomerResponse createGetCustomerResponse() {
+        return new GetCustomerResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetCustomerRes }
+     * 
+     */
+    public GetCustomerRes createGetCustomerRes() {
+        return new GetCustomerRes();
     }
 
 }

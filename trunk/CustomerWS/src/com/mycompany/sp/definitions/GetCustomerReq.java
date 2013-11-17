@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "customer"
 })
-@XmlRootElement(name = "RegisterCustomerReq")
-public class RegisterCustomerReq {
+@XmlRootElement(name = "GetCustomerReq")
+public class GetCustomerReq {
 
     @XmlElement(name = "Customer", required = true)
     protected CustomerType customer;

@@ -1,5 +1,8 @@
 package com.kallSonys.web.util;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashSet;
 
 import javax.faces.application.NavigationHandler;
@@ -9,6 +12,8 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.kallSonys.seg.biz.transfer.user.UsersAuthenticatedDTO;
 
 public class AAListener implements PhaseListener {
 	
@@ -36,17 +41,29 @@ public class AAListener implements PhaseListener {
 		session = request.getSession();
 		
 		
-               // UsersAuthenticatedDTO usersAuthenticatedDTO=null;
-                
+		//Verificamos si el usuario ya está logeado
+        UsersAuthenticatedDTO usersAuthenticatedDTO = (UsersAuthenticatedDTO)CommonUtilities.obtenerAtributoSesion("usuarioAutenticadoDTO");
+        //Se carga el listado de URL no restringidas     
 		if ( this.urlsNoRestringidas==null )
         {
-               System.out.println("Se van a cargar listado de URLs no restringuidas");
-		       //this.cargarUrlsNoRestringidas();
+               System.out.println("AALISTENER: Se va cargar listado de URL no restringuidas");
+		       this.cargarUrlsNoRestringidas();
 		}
 		
+		
+		
 		if (  phaseid == PhaseId.RESTORE_VIEW )
-                {
-                        System.out.println("PhaseId.RESTORE_VIEW");
+        {
+			System.out.println("PhaseId.RESTORE_VIEW");
+			navigationHandler = facescontext.getApplication().getNavigationHandler();
+			
+			//verificamos si el usuario está logeado, si nó, lo envía al login
+			if(usersAuthenticatedDTO==null)
+			{
+				//navigationHandler.handleNavigation(facescontext, null, "logout");	
+			}
+			
+			            
                         
 			facescontext = phaseEvent.getFacesContext();
 			request = (HttpServletRequest)facescontext.getExternalContext().getRequest();
@@ -80,33 +97,28 @@ public class AAListener implements PhaseListener {
 	
 	@SuppressWarnings("unused")
 	private void cargarUrlsNoRestringidas ( )
+    {            	
+        InputStream inputStream = AAListener.class.getClassLoader().getResourceAsStream(PATH_PROPERTIES);
+        if (inputStream == null) 
         {
-            
-		/*
-            InputStream inputStream = AAListener.class.getClassLoader().getResourceAsStream(PATH_PROPERTIES);
-
-            if (inputStream == null) 
-            {
-                    System.out.println("No se encontro el archivo de configuracion["+ PATH_PROPERTIES + "]");
-                    return;
+                System.out.println("No se encontro el archivo de configuracion["+ PATH_PROPERTIES + "]");
+                return;
+        }
+        this.urlsNoRestringidas = new HashSet<String>();
+        BufferedReader lector = new BufferedReader(new InputStreamReader(inputStream));
+        String linea = null;
+        try
+        {
+            while ( (linea = lector.readLine())!=null )
+            {                    
+                    this.urlsNoRestringidas.add(linea.trim());
+                    System.out.println("URL NO RESTRINGIDA CARGADA: "+linea.trim());
             }
-            this.urlsNoRestringidas = new HashSet<String>();
-            BufferedReader lector = new BufferedReader(new InputStreamReader(inputStream));
-            String linea = null;
-            try
-            {
-                while ( (linea = lector.readLine())!=null )
-                {                    
-                        this.urlsNoRestringidas.add(linea.trim());
-                        System.out.println("URL NO RESTRINGIDA CARGADA: "+linea.trim());
-                }
-            }catch (Exception e) 
-            {
-                    System.out.println("Error cargarUrlsNoRestringidas: "+e);
-                    return;
-            }
-            */
-		
+        }catch (Exception e) 
+        {
+                System.out.println("Error cargarUrlsNoRestringidas: "+e);
+                return;
+        }
 	}
 
 	@Override

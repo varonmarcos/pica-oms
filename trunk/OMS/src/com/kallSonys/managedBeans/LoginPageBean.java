@@ -1,6 +1,7 @@
 package com.kallSonys.managedBeans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -8,6 +9,9 @@ import javax.faces.bean.RequestScoped;
 
 import com.kallSonys.business.Serv.LoginServiceLocal;
 import com.kallSonys.business.dto.UserDTO;
+import com.kallSonys.common.dal.jpa.entitys.AppRecurso;
+import com.kallSonys.seg.biz.transfer.user.UsersAuthenticatedDTO;
+import com.kallSonys.web.util.CommonUtilities;
 
 @ManagedBean(name="loginPageBean")
 @RequestScoped
@@ -32,16 +36,21 @@ public class LoginPageBean implements Serializable {
 	 */
 	public String loginAction()
 	{
-			 			
-		UserDTO user = new UserDTO();		
+			 		
+		//Informacion usuario en session		
+		UsersAuthenticatedDTO usuarioAutenticado = new  UsersAuthenticatedDTO();
+		UserDTO user = new UserDTO();				
 		user.setUser(this.getUser());		
 		user.setPassword(this.getPassword());	
-		
+				
 		System.out.println("El ben es: "+loginService);
 		
-		loginService.login(user);
-		if(loginService.login(user))		
-		{								
+		usuarioAutenticado = loginService.login(user);
+		if(usuarioAutenticado.isAutenticado())		
+		{			
+			//Se coloca en sesion los recursos a los que tiene acceso el personaje 
+			//logeado contra LDAP y según los roles del mismo
+			CommonUtilities.ponerAtributoSesion("usuarioAutenticadoDTO", usuarioAutenticado);			
 			return "exito";
 		}
 					

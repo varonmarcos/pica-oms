@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="sony" targetNamespace="http://www.sony.com/sony/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.sony.com/sony/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.sony.com/sony/">
+			<xsd:element name="orderQuouteElement">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="orderId" nillable="true" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="orderQuouteResponseElement">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="xsd:boolean"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SonyOrderService_orderQuouteResponse">
+    <wsdl:part name="parameters" element="tns:orderQuouteResponseElement">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SonyOrderService_orderQuoute">
+    <wsdl:part name="parameters" element="tns:orderQuouteElement">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SonyOrderService">
+    <wsdl:operation name="orderQuoute">
+      <wsdl:input message="tns:SonyOrderService_orderQuoute">
+    </wsdl:input>
+      <wsdl:output message="tns:SonyOrderService_orderQuouteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="sonySOAP" type="tns:SonyOrderService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="orderQuoute">
+      <soap:operation soapAction="http://www.sony.com/sony/orderQuoute"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="sony">
+    <wsdl:port name="sonySOAP" binding="tns:sonySOAP">
+      <soap:address location="http://localhost:8081/sony/services/sonySOAP"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

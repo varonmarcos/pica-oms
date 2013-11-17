@@ -35,7 +35,7 @@ public class LoginPageBean implements Serializable {
 	 * el login se hace frente al OpenLdap
 	 */
 	public String loginAction()
-	{
+	{ 
 			 		
 		//Informacion usuario en session		
 		UsersAuthenticatedDTO usuarioAutenticado = new  UsersAuthenticatedDTO();

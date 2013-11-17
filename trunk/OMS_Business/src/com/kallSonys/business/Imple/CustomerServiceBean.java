@@ -1,20 +1,16 @@
-/**
- * 
- */
 package com.kallSonys.business.Imple;
 
 import javax.ejb.EJB;
-import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import com.kallSonys.business.Serv.CustomerServiceLocal;
 import com.kallSonys.business.consts.CustomerConsts;
 import com.kallSonys.business.dto.CustomerDTO;
-import com.kallSonys.common.dal.jpa.entitys.Customer;
 import com.kallSonys.common.dal.jpa.entitys.Customertype;
 import com.kallSonys.common.dal.jpa.facade.CustomerFacadeLocal;
 import com.kallSonys.common.dal.jpa.facade.CustomertypeFacadeLocal;
+import com.kallSonys.common.dal.jpa.entitys.Customer;
 
 /**
  * @author Juan Pablo Aranda Galvis
@@ -36,9 +32,12 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 	public Boolean createCustomer(CustomerDTO customerDTO) {
 		
 		Boolean res=Boolean.FALSE;
+		//comentado temporalmente
+		
 		if(customerFacade.createAndConfirm(this.convertCustomerWebToDB(customerDTO))){
 			return Boolean.TRUE;
 		}
+		/**/
 		return res;
 	}
 
@@ -50,6 +49,8 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	//Comentado temporalmente
 	
 	private Customer convertCustomerWebToDB(CustomerDTO customerDTO){
 		Customer cus=new Customer();
@@ -63,7 +64,7 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 		cus.setCustomertype(this.getDefaultCustomerType());
 		return cus;
 	}
-	
+	/**/
 		private Customertype getDefaultCustomerType(){
 		Customertype customertype=customerTypeFacade.find(CustomerConsts.CUSTOMER_TYPE_DEFAULT);
 		return customertype;

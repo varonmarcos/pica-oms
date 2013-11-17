@@ -23,7 +23,7 @@ import com.kallSonys.seg.biz.transfer.user.UsersDTO;
 /**
  * @author Juan Pablo Aranda
  *
- */
+ */ 
 @Stateless(name="LoginServiceBean", mappedName = "LoginServiceBean")
 @Remote(LoginServiceLocal.class)
 public class LoginServiceBean implements LoginServiceLocal {

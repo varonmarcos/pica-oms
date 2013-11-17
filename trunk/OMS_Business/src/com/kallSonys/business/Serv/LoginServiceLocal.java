@@ -8,7 +8,7 @@ import javax.ejb.Remote;
 import com.kallSonys.business.dto.UserDTO;
 import com.kallSonys.seg.biz.transfer.user.UsersAuthenticatedDTO;
 
-
+ 
 /**
  * @author Juan Pablo Aranda Galvis
  *

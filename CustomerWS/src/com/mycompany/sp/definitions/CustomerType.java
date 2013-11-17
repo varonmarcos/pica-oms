@@ -3,13 +3,14 @@ package com.mycompany.sp.definitions;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for CustomerType complex type.
+ * <p>Clase Java para CustomerType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="CustomerType">
@@ -22,7 +23,9 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="phoneNumber" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="creditCardType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="creditCardNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -39,6 +42,8 @@ import javax.xml.bind.annotation.XmlType;
     "phoneNumber",
     "email",
     "password",
+    "creditCardType",
+    "creditCardNumber",
     "status"
 })
 public class CustomerType {
@@ -49,10 +54,13 @@ public class CustomerType {
     protected Long phoneNumber;
     protected String email;
     protected String password;
+    protected String creditCardType;
+    protected String creditCardNumber;
+    @XmlElement(required = true)
     protected String status;
 
     /**
-     * Gets the value of the custId property.
+     * Obtiene el valor de la propiedad custId.
      * 
      * @return
      *     possible object is
@@ -64,7 +72,7 @@ public class CustomerType {
     }
 
     /**
-     * Sets the value of the custId property.
+     * Define el valor de la propiedad custId.
      * 
      * @param value
      *     allowed object is
@@ -76,7 +84,7 @@ public class CustomerType {
     }
 
     /**
-     * Gets the value of the fName property.
+     * Obtiene el valor de la propiedad fName.
      * 
      * @return
      *     possible object is
@@ -88,7 +96,7 @@ public class CustomerType {
     }
 
     /**
-     * Sets the value of the fName property.
+     * Define el valor de la propiedad fName.
      * 
      * @param value
      *     allowed object is
@@ -100,7 +108,7 @@ public class CustomerType {
     }
 
     /**
-     * Gets the value of the lName property.
+     * Obtiene el valor de la propiedad lName.
      * 
      * @return
      *     possible object is
@@ -112,7 +120,7 @@ public class CustomerType {
     }
 
     /**
-     * Sets the value of the lName property.
+     * Define el valor de la propiedad lName.
      * 
      * @param value
      *     allowed object is
@@ -124,7 +132,7 @@ public class CustomerType {
     }
 
     /**
-     * Gets the value of the phoneNumber property.
+     * Obtiene el valor de la propiedad phoneNumber.
      * 
      * @return
      *     possible object is
@@ -136,7 +144,7 @@ public class CustomerType {
     }
 
     /**
-     * Sets the value of the phoneNumber property.
+     * Define el valor de la propiedad phoneNumber.
      * 
      * @param value
      *     allowed object is
@@ -148,7 +156,7 @@ public class CustomerType {
     }
 
     /**
-     * Gets the value of the email property.
+     * Obtiene el valor de la propiedad email.
      * 
      * @return
      *     possible object is
@@ -160,7 +168,7 @@ public class CustomerType {
     }
 
     /**
-     * Sets the value of the email property.
+     * Define el valor de la propiedad email.
      * 
      * @param value
      *     allowed object is
@@ -172,7 +180,7 @@ public class CustomerType {
     }
 
     /**
-     * Gets the value of the password property.
+     * Obtiene el valor de la propiedad password.
      * 
      * @return
      *     possible object is
@@ -184,7 +192,7 @@ public class CustomerType {
     }
 
     /**
-     * Sets the value of the password property.
+     * Define el valor de la propiedad password.
      * 
      * @param value
      *     allowed object is
@@ -196,7 +204,55 @@ public class CustomerType {
     }
 
     /**
-     * Gets the value of the status property.
+     * Obtiene el valor de la propiedad creditCardType.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCreditCardType() {
+        return creditCardType;
+    }
+
+    /**
+     * Define el valor de la propiedad creditCardType.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCreditCardType(String value) {
+        this.creditCardType = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad creditCardNumber.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCreditCardNumber() {
+        return creditCardNumber;
+    }
+
+    /**
+     * Define el valor de la propiedad creditCardNumber.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCreditCardNumber(String value) {
+        this.creditCardNumber = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad status.
      * 
      * @return
      *     possible object is
@@ -208,7 +264,7 @@ public class CustomerType {
     }
 
     /**
-     * Sets the value of the status property.
+     * Define el valor de la propiedad status.
      * 
      * @param value
      *     allowed object is

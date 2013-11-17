@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+		   xmlns:sp="http://mycompany.com/sp/schemas"
+		   xmlns:tns="http://mycompany.com/sp/definitions"  
+		   xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+		   elementFormDefault="qualified" 
+		   targetNamespace="http://mycompany.com/sp/definitions">
+
+	<xsd:include schemaLocation="customer.xsd"/>
+	
+	<xs:element name="GetCustomerReq">
+    <xs:complexType>
+      <xs:sequence>
+			<xs:element name="Customer" type="tns:CustomerType" minOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

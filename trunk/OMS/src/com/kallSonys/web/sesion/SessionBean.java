@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.kallSonys.business.dto.UserDTO;
+
 
 @ManagedBean(name="sessionBean")
 @SessionScoped
@@ -18,6 +20,7 @@ public class SessionBean {
 	private boolean showFormConsultaCliente;
 	private boolean showFormCrearCampana;
 	private boolean showFormConsultaCampana;
+	private UserDTO userInSession;
 	
 	public SessionBean(){
 		
@@ -69,6 +72,14 @@ public class SessionBean {
 
 	public void setShowFormConsultaCampana(boolean showFormConsultaCampana) {
 		this.showFormConsultaCampana = showFormConsultaCampana;
+	}
+
+	public UserDTO getUserInSession() {
+		return userInSession;
+	}
+
+	public void setUserInSession(UserDTO userInSession) {
+		this.userInSession = userInSession;
 	}
 	
 	

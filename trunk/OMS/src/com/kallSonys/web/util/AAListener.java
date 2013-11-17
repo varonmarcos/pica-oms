@@ -13,7 +13,7 @@ import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.kallSonys.seg.biz.transfer.user.UsersAuthenticatedDTO;
+//import com.kallSonys.seg.biz.transfer.user.UsersAuthenticatedDTO;
 
 public class AAListener implements PhaseListener {
 	
@@ -42,7 +42,7 @@ public class AAListener implements PhaseListener {
 		
 		
 		//Verificamos si el usuario ya está logeado
-        UsersAuthenticatedDTO usersAuthenticatedDTO = (UsersAuthenticatedDTO)CommonUtilities.obtenerAtributoSesion("usuarioAutenticadoDTO");
+        //UsersAuthenticatedDTO usersAuthenticatedDTO = (UsersAuthenticatedDTO)CommonUtilities.obtenerAtributoSesion("usuarioAutenticadoDTO");
         //Se carga el listado de URL no restringidas     
 		if ( this.urlsNoRestringidas==null )
         {
@@ -58,11 +58,12 @@ public class AAListener implements PhaseListener {
 			navigationHandler = facescontext.getApplication().getNavigationHandler();
 			
 			//verificamos si el usuario está logeado, si nó, lo envía al login
+			/*
 			if(usersAuthenticatedDTO==null)
 			{
 				//navigationHandler.handleNavigation(facescontext, null, "logout");	
 			}
-			
+			*/
 			            
                         
 			facescontext = phaseEvent.getFacesContext();

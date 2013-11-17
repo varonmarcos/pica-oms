@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="rapidserviceQuote" targetNamespace="http://www.rapidservice.com/rapidserviceQuote/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns0="http://www.rapidservice.com/rapidserviceQuote/">
+  <wsdl:types>
+    <schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.rapidservice.com/rapidserviceQuote/" xmlns="http://www.w3.org/2001/XMLSchema">
+			<complexType name="Item">
+				<sequence>
+					<element name="itemId" nillable="true" type="string"/>
+					<element name="quantity" type="long"/>
+				</sequence>
+			</complexType>
+			<element name="orderQuouteElement">
+				<complexType>
+					<sequence>
+						<element name="orderId" nillable="true" type="string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="orderQuouteResponseElement">
+				<complexType>
+					<sequence>
+						<element name="result" type="boolean"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="processQuoteElement">
+				<complexType>
+					<sequence>
+						<element name="orderId" nillable="true" type="string"/>
+						<element maxOccurs="unbounded" minOccurs="0" name="items" nillable="true" type="tns0:Item"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="processQuoteResponseElement">
+				<complexType>
+					<sequence>
+						<element name="result" nillable="true" type="tns0:Quote"/>
+					</sequence>
+				</complexType>
+			</element>
+			<complexType name="Quote">
+				<sequence>
+					<element name="supplierPrice" nillable="true" type="string"/>
+				</sequence>
+			</complexType>
+		</schema>
+  </wsdl:types>
+  <wsdl:message name="RapidService_processQuote">
+    <wsdl:part name="parameters" element="tns0:processQuoteElement">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RapidService_orderQuoute">
+    <wsdl:part name="parameters" element="tns0:orderQuouteElement">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RapidService_processQuoteResponse">
+    <wsdl:part name="parameters" element="tns0:processQuoteResponseElement">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RapidService_orderQuouteResponse">
+    <wsdl:part name="parameters" element="tns0:orderQuouteResponseElement">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="RapidService">
+    <wsdl:operation name="orderQuoute">
+      <wsdl:input message="tns0:RapidService_orderQuoute">
+    </wsdl:input>
+      <wsdl:output message="tns0:RapidService_orderQuouteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processQuote">
+      <wsdl:input message="tns0:RapidService_processQuote">
+    </wsdl:input>
+      <wsdl:output message="tns0:RapidService_processQuoteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RapidService" type="tns0:RapidService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="orderQuoute">
+      <soap:operation soapAction="http://www.rapidservice.com/rapidserviceQuote/rapidserviceQuoteService"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="processQuote">
+      <soap:operation soapAction="http://www.rapidservice.com/rapidserviceQuote/rapidserviceQuoteService"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RapidService">
+    <wsdl:port name="RapidService" binding="tns0:RapidService">
+      <soap:address location="http://localhost:8081/RapidService/services/RapidService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

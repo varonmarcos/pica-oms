@@ -5,12 +5,12 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import com.kallSonys.business.Serv.LoginServiceLocal;
 import com.kallSonys.business.dto.UserDTO;
-import com.kallSonys.common.dal.jpa.entitys.AppRecurso;
-import com.kallSonys.seg.biz.transfer.user.UsersAuthenticatedDTO;
+import com.kallSonys.web.sesion.SessionBean;
 import com.kallSonys.web.util.CommonUtilities;
 
 @ManagedBean(name="loginPageBean")
@@ -21,6 +21,8 @@ public class LoginPageBean implements Serializable {
 	
 	@EJB (mappedName="LoginServiceBean")
 	LoginServiceLocal loginService;
+	@ManagedProperty(value="#{sessionBean}")
+	private SessionBean sessionBean;
 	private String user;
 	private String password;
 	
@@ -38,19 +40,19 @@ public class LoginPageBean implements Serializable {
 	{ 
 			 		
 		//Informacion usuario en session		
-		UsersAuthenticatedDTO usuarioAutenticado = new  UsersAuthenticatedDTO();
 		UserDTO user = new UserDTO();				
 		user.setUser(this.getUser());		
 		user.setPassword(this.getPassword());	
 				
 		System.out.println("El ben es: "+loginService);
 		
-		usuarioAutenticado = loginService.login(user);
-		if(usuarioAutenticado.isAutenticado())		
+		user = loginService.login(user);
+		if(user.isAutenticado())		
 		{			
 			//Se coloca en sesion los recursos a los que tiene acceso el personaje 
 			//logeado contra LDAP y según los roles del mismo
-			CommonUtilities.ponerAtributoSesion("usuarioAutenticadoDTO", usuarioAutenticado);			
+			CommonUtilities.ponerAtributoSesion("usuarioAutenticadoDTO", user);			
+			this.sessionBean.setUserInSession(user);
 			return "exito";
 		}
 					
@@ -79,6 +81,16 @@ public class LoginPageBean implements Serializable {
 
 	public void setLoginService(LoginServiceLocal loginService) {
 		this.loginService = loginService;
+	}
+
+
+	public SessionBean getSessionBean() {
+		return sessionBean;
+	}
+
+
+	public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
 	}
 	
 

@@ -16,6 +16,8 @@ import javax.ejb.Remote;
 public interface CustomertypeFacadeLocal {
 
     void create(Customertype customertype);
+    
+    boolean createAndConfirm(Customertype customertype) ;
 
     void edit(Customertype customertype);
 

@@ -27,5 +27,23 @@ public class AddressFacade extends AbstractFacade<Address> implements AddressFac
 
     public AddressFacade() {
         super(Address.class);
-    }  
+    }
+
+	@Override
+	public String createAndReturnID(Address address) 
+	{		
+	  try
+        {
+            getEntityManager().persist(address);  
+            getEntityManager().flush(); 
+            String id = address.getAddrid();
+            System.out.println("ID DE ADRRESS CREADO: "+id);
+            return id;
+        }
+        catch(Exception e)
+        {
+        	System.out.println("ERROR:AddressFacade:createAndReturnID: "+e.getMessage());
+        	return null;
+        }
+	}  
 }

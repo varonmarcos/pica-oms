@@ -16,6 +16,10 @@ import javax.ejb.Remote;
 public interface CustomerAddressFacadeLocal {
 
     void create(CustomerAddress customerAddress);
+    
+    boolean createAndConfirm(CustomerAddress customerAddress) ;
+    
+    boolean createAndConfirmNative(CustomerAddress customerAddress) ;
 
     void edit(CustomerAddress customerAddress);
 

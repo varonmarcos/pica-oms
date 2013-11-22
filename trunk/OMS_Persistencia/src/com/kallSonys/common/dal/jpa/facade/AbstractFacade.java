@@ -7,6 +7,8 @@ package com.kallSonys.common.dal.jpa.facade;
 import java.util.List;
 import javax.persistence.EntityManager;
 
+import com.kallSonys.common.dal.jpa.entitys.Orders;
+
 /**
  *
  * @author Frank
@@ -22,7 +24,7 @@ public abstract class AbstractFacade<T> implements  IAbstractFacade<T>{
 
     @Override
     public void create(T entity) {
-        getEntityManager().persist(entity);
+        getEntityManager().persist(entity);        
     }
 
     @Override
@@ -63,10 +65,16 @@ public abstract class AbstractFacade<T> implements  IAbstractFacade<T>{
     {
         try
         {
-            getEntityManager().persist(entity);           
-        }catch(Exception e){return false;}
+            getEntityManager().persist(entity);                     
+        }
+        catch(Exception e)
+        {
+        	System.out.println("ERROR:AbstractFacade:createAndConfirm: "+e.getMessage());
+        	return false;
+        }
         
         return true;
     }
-    
+ 
+       
 }

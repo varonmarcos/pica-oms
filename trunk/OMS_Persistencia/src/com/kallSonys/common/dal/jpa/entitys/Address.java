@@ -2,6 +2,7 @@ package com.kallSonys.common.dal.jpa.entitys;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.Set;
 
 
@@ -10,11 +11,13 @@ import java.util.Set;
  * 
  */
 @Entity
+@Table(name="ADDRESS")
+@SequenceGenerator(name = "SEQ_ADDRESS_NAME", sequenceName = "SEQ_ADDRESS")
 public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "SEQ_ADDRESS_NAME")
 	private String addrid;
 
 	private String addresstype;
@@ -31,7 +34,7 @@ public class Address implements Serializable {
 	private String zip;
 
 	//bi-directional many-to-one association to CustomerAddress
-	@OneToMany(mappedBy="address")
+	@OneToMany(mappedBy="address",cascade = CascadeType.ALL,targetEntity = CustomerAddress.class)	
 	private Set<CustomerAddress> customerAddresses;
 
     public Address() {

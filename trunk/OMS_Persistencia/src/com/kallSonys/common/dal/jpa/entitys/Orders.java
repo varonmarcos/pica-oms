@@ -13,11 +13,12 @@ import java.util.Set;
  */
 @Entity
 @Table(name="ORDERS")
+@SequenceGenerator(name = "SEQ_ORDERS_NAME", sequenceName = "SEQ_ORDERS")
 public class Orders implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "SEQ_ORDERS_NAME")
 	private String orderid;
 
 	private String comments;
@@ -30,7 +31,7 @@ public class Orders implements Serializable {
 	private String status;
 
 	//bi-directional many-to-one association to Item
-	@OneToMany(mappedBy="order")
+	@OneToMany(mappedBy="order",cascade = CascadeType.ALL,targetEntity = Item.class)
 	private Set<Item> items;
 
 	//bi-directional many-to-one association to Customer

@@ -4,12 +4,16 @@
  */
 package com.kallSonys.common.dal.jpa.facade;
 
-import com.kallSonys.common.dal.jpa.entitys.Address;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.kallSonys.common.dal.jpa.entitys.AppRecurso;
 import com.kallSonys.common.dal.jpa.entitys.CustomerAddress;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -35,10 +39,41 @@ public class CustomerAddressFacade extends AbstractFacade<CustomerAddress> imple
     {
          try
         {
-            getEntityManager().persist(entity);            
-        }catch(Exception e){return false;}
+            getEntityManager().persist(entity);
+            getEntityManager().flush();
+        }catch(Exception e)
+        {
+        	System.out.println("Error CustomerAddress.createAndConfirm: "+e.getMessage());
+        	return false;
+        }
         
         return true;
+    }
+   
+
+    public boolean createAndConfirmNative(CustomerAddress customerAddress) 
+    {
+        try
+        {        	    
+		   String sqlNativo = "INSERT INTO CUSTOMER_ADDRESS "+
+                              " VALUES (SEQ_CUSTOMER_ADDRESS.NEXTVAL,'"+customerAddress.getCustomer().getCustid()+"','"+customerAddress.getAddress().getAddrid()+"')";	
+		   
+
+		   	System.out.println("sqlNativo: "+sqlNativo);
+		   
+		    Query query = em.createNativeQuery(sqlNativo);
+		    if(query.executeUpdate()>0)
+		    {
+		    	return true;
+		    }
+        	 
+        }catch(Exception e)
+        {
+        	System.out.println("Error CustomerAddress.createAndConfirm: "+e.getMessage());
+        	return false;
+        }
+        
+        return false;
     }
     
         

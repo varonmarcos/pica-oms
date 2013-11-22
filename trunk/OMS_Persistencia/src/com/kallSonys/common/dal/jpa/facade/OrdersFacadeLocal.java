@@ -4,9 +4,11 @@
  */
 package com.kallSonys.common.dal.jpa.facade;
 
-import com.kallSonys.common.dal.jpa.entitys.Orders;
 import java.util.List;
+
 import javax.ejb.Remote;
+
+import com.kallSonys.common.dal.jpa.entitys.Orders;
 
 /**
  *
@@ -16,6 +18,10 @@ import javax.ejb.Remote;
 public interface OrdersFacadeLocal {
 
     void create(Orders orders);
+    
+    boolean createAndConfirm(Orders orders);
+    
+    String createAndReturnID(Orders orders);
 
     void edit(Orders orders);
 

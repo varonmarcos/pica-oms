@@ -2,6 +2,7 @@ package com.kallSonys.common.dal.jpa.entitys;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.Set;
 
 
@@ -13,8 +14,7 @@ import java.util.Set;
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id	
 	private String custid;
 
 	private String creditcardnumer;
@@ -38,8 +38,8 @@ public class Customer implements Serializable {
 	@JoinColumn(name="TYPEID")
 	private Customertype customertype;
 
-	//bi-directional many-to-one association to CustomerAddress
-	@OneToMany(mappedBy="customer")
+	//bi-directional many-to-one association to CustomerAddress	
+	@OneToMany(mappedBy="customer",cascade = CascadeType.ALL,targetEntity = CustomerAddress.class)
 	private Set<CustomerAddress> customerAddresses;
 
 	//bi-directional many-to-one association to Order

@@ -2,6 +2,7 @@ package com.kallSonys.common.dal.jpa.entitys;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 
 
@@ -11,11 +12,12 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="ITEMS")
+@SequenceGenerator(name = "SEQ_ITEMS_NAME", sequenceName = "SEQ_ITEMS")
 public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "SEQ_ITEMS_NAME")
 	private String itemid;
 
 	private String partnum;

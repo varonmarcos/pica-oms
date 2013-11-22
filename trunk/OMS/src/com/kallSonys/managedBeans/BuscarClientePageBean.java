@@ -1,6 +1,9 @@
 package com.kallSonys.managedBeans;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -10,6 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
+import weblogic.jms.extensions.ConsumerInfo;
 import weblogic.xml.xpath.stream.axes.EverythingAxis;
 
 
@@ -35,9 +39,17 @@ public class BuscarClientePageBean{
 	
 	private CustomerDTO customerDTO=new CustomerDTO();
 	private String selectedFilter=Constantes.IDENTIFICACION_FILTER;
+	private String patternDate=Constantes.DATE_FORMAT_PATTERN;
 	private boolean renderIdentificacion=Boolean.FALSE;
 	private boolean renderProducto=Boolean.TRUE;
 	private boolean renderFacturacion=Boolean.TRUE;
+	//Atributos por filters
+	private String identificacion;
+	private String idProducto;
+	private Date fechaInicio;
+	private Date fechaFin;
+	
+	
 		
 	
 	public boolean isRenderIdentificacion() {
@@ -80,9 +92,17 @@ public class BuscarClientePageBean{
 	 * Este metodo realiza la busqueda de clientes
 	 */
 	public void doBuscarCliente(){
-	
-		
-		
+		Map<String,Object> paramters = new HashMap<String, Object>();
+		if(Constantes.IDENTIFICACION_FILTER.equals(this.selectedFilter)){
+			paramters.put(Constantes.IDENTIFICACION_FILTER,this.identificacion);
+		}else if(Constantes.PRODUCTO_FILTER.equals(this.selectedFilter)){
+			paramters.put(Constantes.PRODUCTO_FILTER,this.identificacion);
+		}else{
+			paramters.put(Constantes.FECHA_INICIAL,this.fechaInicio);
+			paramters.put(Constantes.FECHA_FIN,this.fechaFin);
+		}
+		paramters.put(Constantes.FILTER,this.selectedFilter);
+		this.customerServiceFacade.getCustomerByIdentificador(paramters);
 	}
 	
 	/**
@@ -105,8 +125,6 @@ public class BuscarClientePageBean{
 		}
 		
 	}
-	
-
 	
 	
 	public CustomerDTO getCustomerDTO() {
@@ -142,5 +160,56 @@ public class BuscarClientePageBean{
 		this.customerDTO = customerDTO;
 	}
 
+
+	public String getIdentificacion() {
+		return identificacion;
+	}
+
+
+	public void setIdentificacion(String identificacion) {
+		this.identificacion = identificacion;
+	}
+
+
+	public String getIdProducto() {
+		return idProducto;
+	}
+
+
+	public void setIdProducto(String idProducto) {
+		this.idProducto = idProducto;
+	}
+
+
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+
+	public String getPatternDate() {
+		return patternDate;
+	}
+
+
+	public void setPatternDate(String patternDate) {
+		this.patternDate = patternDate;
+	}
+
+	
 
 }

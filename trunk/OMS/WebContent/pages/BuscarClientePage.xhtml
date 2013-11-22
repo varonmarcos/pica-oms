@@ -116,7 +116,7 @@
 																							<tr align="right">
 																								<td align="right" class="txt"><strong>Identificacion:</strong></td>
 																								<td align="left" class="txt"><ice:inputText
-																										name="identificador" id="inputId" value=""
+																										name="identificador" id="inputId" value="#{buscarClientePageBean.identificacion}"
 																										size="20" maxlength="15" disabled="#{buscarClientePageBean.renderIdentificacion}"/></td>
 																							</tr>
 																						</ice:panelGroup>
@@ -125,7 +125,7 @@
 																								<td align="right" class="txt"><strong>Por
 																										producto:</strong></td>
 																								<td align="left" class="txt"><ice:inputText
-																										name="producto" id="inputProd" value=""
+																										name="producto" id="inputProd" value="#{buscarClientePageBean.idProducto}"
 																										size="10" maxlength="5" disabled="#{buscarClientePageBean.renderProducto}"/></td>
 																							</tr>
 																						</ice:panelGroup>
@@ -134,15 +134,34 @@
 																							<tr>
 																								<td align="right" class="txt"><strong>Por
 																										Facturacion:</strong></td>
-																								<td align="left" class="txt"><ice:input
-																										name="facturacion" id="inptFact" value=""
-																										size="10" maxlength="5" disabled="#{buscarClientePageBean.renderFacturacion}"/></td>
+																								<td align="left" class="txt">
+																								 <ice:selectInputDate value="#{buscarClientePageBean.fechaInicio}"
+                                    																				  renderAsPopup="true"
+                                                                                                                      highlightClass="dateHighlightGray"
+                                                                                                                      highlightUnit="DAY_OF_WEEK"
+                                                                                                                      highlightValue="1"
+                                                                                                                      renderMonthAsDropdown="true"
+                                                                                                                      renderYearAsDropdown="true"
+                                                                                                                      disabled="#{buscarClientePageBean.renderFacturacion}">
+                                                                                                  <f:convertDateTime pattern="#{buscarClientePageBean.patternDate}"/>
+                                                                                                  </ice:selectInputDate>
+                                                                                                  <ice:selectInputDate value="#{buscarClientePageBean.fechaFin}"
+                                    																				  renderAsPopup="true"
+                                                                                                                      highlightClass="dateHighlightGray"
+                                                                                                                      highlightUnit="DAY_OF_WEEK"
+                                                                                                                      highlightValue="1"
+                                                                                                                      renderMonthAsDropdown="true"
+                                                                                                                      renderYearAsDropdown="true"
+                                                                                                                      disabled="#{buscarClientePageBean.renderFacturacion}">
+                                                                                                  <f:convertDateTime pattern="#{buscarClientePageBean.patternDate}"/>
+                                                                                                  </ice:selectInputDate>
+																								</td>
 																							</tr>
 																						</ice:panelGroup>
 																						</ice:panelGrid>
 																						<tr>
 																							<td colspan="3" align="center" class="txt">
-																								<ice:commandButton value='Buscar'
+																								<ice:commandButton value='Buscar' action="#{buscarClientePageBean.doBuscarCliente}"
 																									image="/images/buscar.gif"></ice:commandButton>
 																							</td>
 																						</tr>

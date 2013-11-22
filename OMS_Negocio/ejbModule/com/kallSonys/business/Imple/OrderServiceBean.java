@@ -1,37 +1,60 @@
+/**
+ * 
+ */
 package com.kallSonys.business.Imple;
 
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
-import com.kallSonys.business.Serv.OrderServiceRemote;
-import com.kallSonys.business.consts.CustomerConsts;
-import com.kallSonys.business.dto.OrderDTO;
-import com.kallSonys.business.transformation.PersistenceConverter;
-import com.kallSonys.common.dal.jpa.entitys.Orders;
+import com.kallSonys.business.Serv.CustomerServiceLocal;
+import com.kallSonys.business.Serv.OrderServiceLocal;
+import com.kallSonys.business.dto.OrdenDTO;
 import com.kallSonys.common.dal.jpa.facade.OrdersFacadeLocal;
 
 /**
- * @author Frank Arregocés Rodríguez
+ * @author Juan Pablo Aranda Galvis
  *
  */
-@Stateless(name="OrderServiceBean", mappedName = "OrderServiceBean")
-@Remote(OrderServiceRemote.class)
-public class OrderServiceBean implements OrderServiceRemote {
 
-	@EJB(mappedName="OrdersFacadeBean")
-	private OrdersFacadeLocal orderBean;	
+@Stateless(name="OrderServiceBean", mappedName = "OrderServiceBean")
+@Remote(OrderServiceLocal.class)
+public class OrderServiceBean implements OrderServiceLocal {
+
 	
-	
+	@EJB
+	private OrdersFacadeLocal orderFacade;
+	/* (non-Javadoc)
+	 * @see com.kallSonys.business.Serv.OrderServiceLocal#searchOrders()
+	 */
 	@Override
-	public String crearOrden(OrderDTO orderDTO) 
-	{
-		System.out.println("OrderServiceBean crearOrden 1");		
-		orderDTO.setORDERDATE(Calendar.getInstance().getTime());		
-		orderDTO.setSTATUS(CustomerConsts.STATUS_ORDER_INICIADA);						
-		return orderBean.createAndReturnID(PersistenceConverter.order_DtoToEntityBD(orderDTO));	    
-	}
+	public List<OrdenDTO> searchOrders() {
+		List<OrdenDTO> listOrdes=new ArrayList<OrdenDTO>();
+	
 		
+		
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.kallSonys.business.Serv.OrderServiceLocal#deleteOrder(com.kallSonys.business.dto.OrdenDTO)
+	 */
+	@Override
+	public boolean deleteOrder(OrdenDTO order) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.kallSonys.business.Serv.OrderServiceLocal#cancelledOrder(com.kallSonys.business.dto.OrdenDTO)
+	 */
+	@Override
+	public boolean cancelledOrder(OrdenDTO order) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

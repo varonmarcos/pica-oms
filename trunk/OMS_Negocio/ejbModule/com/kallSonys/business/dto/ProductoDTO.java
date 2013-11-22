@@ -1,6 +1,7 @@
 package com.kallSonys.business.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 
@@ -19,7 +20,8 @@ public class ProductoDTO implements Serializable {
 	private String name;
 	private String descripcion;
 	private CategoriaProductoDTO categoria;
-	private double listaPrecio;
+	private BigDecimal listaPrecio;
+	private String partnum;
 	private String productor;//Sony-RapidService
 	private byte[] imagen;
 	private String imagenUrl;
@@ -68,11 +70,11 @@ public class ProductoDTO implements Serializable {
 		this.categoria = categoria;
 	}
 
-	public double getListaPrecio() {
+	public BigDecimal getListaPrecio() {
 		return listaPrecio;
 	}
 
-	public void setListaPrecio(double listaPrecio) {
+	public void setListaPrecio(BigDecimal listaPrecio) {
 		this.listaPrecio = listaPrecio;
 	}
 
@@ -99,8 +101,15 @@ public class ProductoDTO implements Serializable {
 	public void setImagenUrl(String imagenUrl) {
 		this.imagenUrl = imagenUrl;
 	}
-	
-	
 
+	public String getPartnum() {
+		return partnum;
+	}
+
+	public void setPartnum(String partnum) {
+		this.partnum = partnum;
+	}
+	
+	
 
 }

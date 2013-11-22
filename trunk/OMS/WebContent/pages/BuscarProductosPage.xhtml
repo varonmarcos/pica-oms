@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+<h:head>
+	<title>OMS</title>
+	<f:loadBundle basename="com.kallSonys.messages.messages" var="msg" />
+	<link rel="stylesheet" type="text/css"
+		href="./xmlhttp/css/rime/rime.css" />
+	<link rel="stylesheet" type="text/css" href="estilos.css" />
+	<script language="JavaScript">
+		
+	</script>
+</h:head>
+<h:body>
+	<h:form>
+		<table width="95%" border="0" align="center" cellpadding="0">
+			<tr>
+				<td height="10" colspan="2">&nbsp;</td>
+			</tr>
+			<tr class="bl">
+				<td height="56" colspan="2">
+					<table width="100%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td>
+								<table border="0" align="right" cellpadding="0" cellspacing="0">
+									<tr>
+										<td><a href="Salir"
+											onmouseover="MM_swapImage('cerrar_sesion_off','','images/cerrar_sesion_on.gif',1);window.status='Cerrar Sesión';return true"
+											onmouseout="MM_swapImgRestore();window.status='PortaFlow'"><img
+												src="images/cerrar_sesion_off.gif" alt="Cerrar Sesión"
+												name="cerrar_sesion_off" id="cerrar_sesion_off" width="120"
+												height="21" border="0" /></a></td>
+										<td><img src="images/drcho.gif" width="158" height="21" />
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td><a href="indexJSP"><img src="images/Logo.png"
+												width="120" alt="Portaflow" height="54" border="0" /></a></td>
+										<td align="right" valign="top"><img
+											src="images/sp_foto.gif" width="588" height="54" /></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td class="az"><ui:include src="/menuHeader.xhtml"></ui:include>
+							</td>
+						</tr>
+					</table>
+				</td>	
+			</tr>
+			<!-- Cuerpo de la Pantalla -->
+			<tr class="bl">
+				<td width="100%" valign="top">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td><ice:outputLabel id="pageTitleLbl"
+											style="font-size:12px;font-weight:bold;color:#676767;"
+											value="Administracion de Clientes / " /> <ice:outputLabel
+											id="pageTitleLbl_"
+											style="font-size:12px;font-weight:bold;color:#155ae1;"
+											value="Consultar Clientes /" /></td>
+								</tr>
+								<tr>
+									<td>
+										<table align="center">
+											<ice:panelGroup>
+												<tr class="bl">
+													<td width="100%" valign="top">
+														<table width="100%" border="0" cellspacing="0"
+															cellpadding="0">
+															<tr>
+																<td valign="top" width="2%">&nbsp;</td>
+																<td valign="top" align="center">
+																	<table width="90%" border="0" cellspacing="0"
+																		cellpadding="1">
+																		<tr>
+																			<td width="94" height="25" class="txt"></td>
+																			<td width="570" colspan="3" align="center"
+																				class="txt"><strong>Buscar Cliente</strong></td>
+																		</tr>
+																		<tr>
+																			<td colspan="2" align="center" class="txt">
+																				<form name="theForm">
+																					<table width="40%" border="0" cellspacing="0"
+																						cellpadding="1">
+																						<tr>
+																							<ice:panelGrid cellpadding="0" cellspacing="0">
+																								<ice:selectOneRadio 
+																									value="#{buscarClientePageBean.selectedFilter}"
+																									partialSubmit="true"
+																									valueChangeListener="#{buscarClientePageBean.viewFilterFields}">
+																									<f:selectItem itemValue="ID" 
+																										itemLabel="Identificacion" />
+																									<f:selectItem itemValue="PROD"
+																										itemLabel="Producto" />
+																									<f:selectItem itemValue="FAC"
+																										itemLabel="Facturacion" />
+																								</ice:selectOneRadio>
+																							</ice:panelGrid>
+																						</tr>
+																						<ice:panelGroup>
+																							<tr>
+																								<td align="right" class="txt"><strong>Identificacion:</strong></td>
+																								<td align="left" class="txt"><ice:inputText
+																										name="identificador" id="inputId" value=""
+																										size="20" maxlength="15" disabled="#{buscarClientePageBean.renderIdentificacion}"/></td>
+																							</tr>
+																						</ice:panelGroup>
+																						<ice:panelGroup>
+																							<tr>
+																								<td align="right" class="txt"><strong>Por
+																										producto:</strong></td>
+																								<td align="left" class="txt"><ice:inputText
+																										name="producto" id="inputProd" value=""
+																										size="10" maxlength="5" disabled="#{buscarClientePageBean.renderProducto}"/></td>
+																							</tr>
+																						</ice:panelGroup>
+																						<ice:panelGroup>
+																							
+																							<tr>
+																								<td align="right" class="txt"><strong>Por
+																										Facturacion:</strong></td>
+																								<td align="left" class="txt"><ice:inputText
+																										name="facturacion" id="inptFact" value=""
+																										size="10" maxlength="5" disabled="#{buscarClientePageBean.renderFacturacion}"/></td>
+																							</tr>
+																						</ice:panelGroup>
+																						<tr>
+																							<td colspan="3" align="center" class="txt">
+																								<ice:commandButton value='Buscar'
+																									image="/images/buscar.gif"></ice:commandButton>
+																							</td>
+																						</tr>
+																					</table>
+																				</form>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td align="center">&nbsp;</td>
+																			<td align="center">&nbsp;</td>
+																		</tr>
+																		<tr>
+																			<td colspan="2" align="left" class="txg"><strong>Estado
+																					del proceso</strong></td>
+																		</tr>
+																		<tr class="txt">
+																			<td colspan="2" align="center" class="txt">
+																				<!-- comienzo de tabla -->
+
+																			</td>
+																		</tr>
+																		<tr>
+																			<td colspan="2" align="left" class="txg">&nbsp;</td>
+																		</tr>
+																	</table>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+
+											</ice:panelGroup>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+			</tr>
+			
+			<!-- Cuerpo de la pantalla -->
+			
+		</table>
+	</h:form>
+</h:body>
+
+</html>

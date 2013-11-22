@@ -1,7 +1,9 @@
-/**
+/**;
  * 
  */
 package com.kallSonys.business.Serv;
+
+import java.util.Map;
 
 import javax.ejb.Remote;
 
@@ -20,5 +22,11 @@ public interface CustomerServiceLocal {
 	public boolean createCustomer(CustomerDTO customer);
 	
 	public CustomerDTO getCustomers();
+
+	public CustomerDTO getCustomerByIdentificador(Map<String,Object> identificacion);
+	
+	public CustomerDTO getCustomerByIdProduct(Map<String,Object> idProducto);
+	
+	public CustomerDTO getCustomerByIdFacturacion(Map<String,Object> facturacion);
 
 }

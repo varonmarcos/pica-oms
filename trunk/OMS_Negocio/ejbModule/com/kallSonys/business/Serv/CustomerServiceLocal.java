@@ -23,10 +23,10 @@ public interface CustomerServiceLocal {
 	
 	public CustomerDTO getCustomers();
 
-	public CustomerDTO getCustomerByIdentificador(Map<String,Object> identificacion);
+	public CustomerDTO getCustomerByIdentificador(Map<String,Object> parameters);
 	
-	public CustomerDTO getCustomerByIdProduct(Map<String,Object> idProducto);
+	public CustomerDTO getCustomerByIdProduct(Map<String,Object> parameters);
 	
-	public CustomerDTO getCustomerByIdFacturacion(Map<String,Object> facturacion);
+	public CustomerDTO getCustomerByIdFacturacion(Map<String,Object> parameters);
 
 }

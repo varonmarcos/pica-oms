@@ -15,7 +15,9 @@ import com.kallSonys.business.dto.CustomerDTO;
 @Remote
 public interface CustomerServiceLocal {
 	
-	public Boolean createCustomer(CustomerDTO customer);
+	public String createAndReturnID(CustomerDTO customer);
+	
+	public boolean createCustomer(CustomerDTO customer);
 	
 	public CustomerDTO getCustomers();
 

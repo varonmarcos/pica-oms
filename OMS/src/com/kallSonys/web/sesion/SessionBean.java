@@ -1,6 +1,8 @@
 package com.kallSonys.web.sesion;
 
+import java.io.FileInputStream;
 import java.io.Serializable;
+import java.util.Properties;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -14,6 +16,9 @@ public class SessionBean {
 
 	private static final long serialVersionUID = 2356312790334503309L;
 	
+	private static SessionBean sessionInstance;
+	
+	private static String SESSION_PATH_PROPERTIES = "com/kallSonys/web/properties/config.properties";
 	private boolean showFormCrearProducto;
 	private boolean showFormConsultarProducto;
 	private boolean showFormCrearCliente;
@@ -21,11 +26,33 @@ public class SessionBean {
 	private boolean showFormCrearCampana;
 	private boolean showFormConsultaCampana;
 	private UserDTO userInSession;
+	private String msgCustomerCreatedOk;
+	private Properties properties;
 	
-	public SessionBean(){
+	
+	public static synchronized SessionBean getInstance()
+	{
+		if (sessionInstance == null){
+			sessionInstance = new SessionBean();
+			sessionInstance.loadPropertiesFile();
+		}
+		
+		return sessionInstance;
+		
+		
 		
 	}
-
+	
+	public void loadPropertiesFile(){
+		
+		try{
+			this.properties.load(new FileInputStream("config.properties"));
+		}catch (Exception e){
+			
+		}
+		
+	}
+	
 	public boolean isShowFormCrearProducto() {
 		return showFormCrearProducto;
 	}
@@ -81,6 +108,38 @@ public class SessionBean {
 	public void setUserInSession(UserDTO userInSession) {
 		this.userInSession = userInSession;
 	}
+
+
+	public static SessionBean getSessionInstance() {
+		return sessionInstance;
+	}
+
+
+	public static void setSessionInstance(SessionBean sessionInstance) {
+		SessionBean.sessionInstance = sessionInstance;
+	}
+
+
+	public static String getSESSION_PATH_PROPERTIES() {
+		return SESSION_PATH_PROPERTIES;
+	}
+
+
+	public static void setSESSION_PATH_PROPERTIES(String sESSION_PATH_PROPERTIES) {
+		SESSION_PATH_PROPERTIES = sESSION_PATH_PROPERTIES;
+	}
+
+
+	public String getMsgCustomerCreatedOk() {
+		this.properties.get("CREACION_CLIENTE_OK");
+		return msgCustomerCreatedOk;
+	}
+
+
+	public void setMsgCustomerCreatedOk(String msgCustomerCreatedOk) {
+		this.msgCustomerCreatedOk = msgCustomerCreatedOk;
+	}
+	
 	
 	
 

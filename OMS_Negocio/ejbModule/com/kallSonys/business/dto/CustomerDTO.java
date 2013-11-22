@@ -21,7 +21,7 @@ public class CustomerDTO implements Serializable {
 	private String numeroTelefonico;
 	private String email;
 	private String password;
-	private TipoTarjetaCreditoDTO tipoTarjetaCredito;
+	private String tipoTarjetaCredito;
 	private String numeroTarjetaCredito;
 	
 	
@@ -95,12 +95,12 @@ public class CustomerDTO implements Serializable {
 	}
 
 
-	public TipoTarjetaCreditoDTO getTipoTarjetaCredito() {
+	public String getTipoTarjetaCredito() {
 		return tipoTarjetaCredito;
 	}
 
 
-	public void setTipoTarjetaCredito(TipoTarjetaCreditoDTO tipoTarjetaCredito) {
+	public void setTipoTarjetaCredito(String tipoTarjetaCredito) {
 		this.tipoTarjetaCredito = tipoTarjetaCredito;
 	}
 

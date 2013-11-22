@@ -4,11 +4,18 @@
  */
 package com.kallSonys.common.dal.jpa.facade;
 
+import java.util.List;
+
+import com.kallSonys.common.dal.jpa.entitys.Address;
 import com.kallSonys.common.dal.jpa.entitys.Customer;
+import com.kallSonys.common.dal.jpa.entitys.Orders;
+
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,17 +34,23 @@ public class CustomerFacade extends AbstractFacade<Customer> implements Customer
 
     public CustomerFacade() {
         super(Customer.class);
-    }
+    }   
 
-    @Override
-    public boolean createAndConfirm(Customer entity) 
+    public  String createAndReturnID(Customer customer)
     {
-          try
-        {
-            getEntityManager().persist(entity);            
-        }catch(Exception e){return false;}
-        
-        return true;
-    }
-    
+    	
+    	 try
+         {
+             getEntityManager().persist(customer);  
+             getEntityManager().flush(); 
+             String id = customer.getCustid(); 
+             System.out.println("ID CUSTOMER CREADO: "+id);
+             return id;
+         }
+         catch(Exception e)
+         {
+         	System.out.println("ERROR:CustomerFacade:createAndReturnID: "+e.getMessage());
+         	return null;
+         }
+    }    
 }

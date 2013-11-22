@@ -13,9 +13,8 @@ import java.util.Set;
 @Table(name="APP_ROL")
 public class AppRol implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String code;
 
 	private String descripcion;

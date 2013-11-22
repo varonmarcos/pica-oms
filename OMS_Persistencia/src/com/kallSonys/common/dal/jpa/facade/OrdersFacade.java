@@ -29,15 +29,22 @@ public class OrdersFacade extends AbstractFacade<Orders> implements OrdersFacade
         super(Orders.class);
     }
 
-    @Override
-    public boolean createAndConfirm(Orders entity) 
+    public  String createAndReturnID(Orders orders)
     {
-          try
-        {
-            getEntityManager().persist(entity);            
-        }catch(Exception e){return false;}
-        
-        return true;
+    	
+    	 try
+         {
+             getEntityManager().persist(orders);  
+             getEntityManager().flush(); 
+             String id = orders.getOrderid();
+             System.out.println("ID DE ORDEN CREADO: "+id);
+             return id;
+         }
+         catch(Exception e)
+         {
+         	System.out.println("ERROR:OrdersFacade:createAndReturnID: "+e.getMessage());
+         	return "-1";
+         }
     }
     
 }

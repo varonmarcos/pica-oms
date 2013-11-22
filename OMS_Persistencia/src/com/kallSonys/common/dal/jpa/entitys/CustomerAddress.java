@@ -10,20 +10,21 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="CUSTOMER_ADDRESS")
+@SequenceGenerator(name = "SEQ_CUSTOMER_ADDRESS_NAME", sequenceName = "SEQ_CUSTOMER_ADDRESS")
 public class CustomerAddress implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "SEQ_CUSTOMER_ADDRESS_NAME")
 	private String custaddid;
 
 	//bi-directional many-to-one association to Address
-    @ManyToOne
+    @ManyToOne//(cascade=CascadeType.PERSIST,targetEntity=Address.class)
 	@JoinColumn(name="ADDRESSID")
 	private Address address;
 
 	//bi-directional many-to-one association to Customer
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST, targetEntity=Customer.class)
 	@JoinColumn(name="CUSTID")
 	private Customer customer;
 

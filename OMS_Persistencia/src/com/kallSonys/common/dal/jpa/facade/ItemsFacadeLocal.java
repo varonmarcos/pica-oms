@@ -18,6 +18,8 @@ import com.kallSonys.common.dal.jpa.entitys.Item;
 public interface ItemsFacadeLocal {
 
     void create(Item items);
+    
+    boolean createAndConfirm(Item items) ;
 
     void edit(Item items);
 

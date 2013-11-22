@@ -4,9 +4,11 @@
  */
 package com.kallSonys.common.dal.jpa.facade;
 
-import com.kallSonys.common.dal.jpa.entitys.Customer;
 import java.util.List;
+
 import javax.ejb.Remote;
+
+import com.kallSonys.common.dal.jpa.entitys.Customer;
 
 /**
  *
@@ -18,6 +20,8 @@ public interface CustomerFacadeLocal {
     void create(Customer customer);
 
     boolean createAndConfirm(Customer customer);
+    
+    String createAndReturnID(Customer customer);
     
     void edit(Customer customer);
 

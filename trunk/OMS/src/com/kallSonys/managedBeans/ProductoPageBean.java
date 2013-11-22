@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.SelectItem;
 
+import com.kallSonys.business.Serv.ProductServiceLocal;
 import com.kallSonys.business.dto.CategoriaProductoDTO;
 import com.kallSonys.business.dto.ProductoDTO;
 import com.kallSonys.business.dto.TipoTarjetaCreditoDTO;
@@ -27,6 +29,9 @@ public class ProductoPageBean implements Serializable {
 	private List<SelectItem> listProductCategory;
 	private String categoriaSelected;
 	private ProductoDTO productoDTO;
+	
+	@EJB
+	private ProductServiceLocal productService;
 	
 	
 	public ProductoPageBean(){
@@ -49,6 +54,10 @@ public class ProductoPageBean implements Serializable {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void addProduct(ProductoDTO product){
+		productService.createPrduct(product);		
 	}
 	
 	public ProductoDTO getProductoDTO() {

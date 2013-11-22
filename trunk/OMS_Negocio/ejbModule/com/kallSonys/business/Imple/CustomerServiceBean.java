@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.ejb.EJB;
@@ -169,5 +170,44 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 		}
 		return false;
 		
+	}
+
+	@Override
+	public CustomerDTO getCustomerByIdentificador(Map<String,Object> parameters){
+		CustomerDTO cusDTO = null;
+		Customer customer;
+		try {
+			
+			//Buscamos por Identificador de Cliente
+			customer=this.customerBean.find(parameters.get(CustomerConsts.IDENTIFICACION_FILTER));
+			cusDTO=this.convertCustomerBusinessToWeb(customer);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cusDTO;
+	}
+
+	@Override
+	public CustomerDTO getCustomerByIdProduct(Map<String, Object> parameters) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CustomerDTO getCustomerByIdFacturacion(Map<String, Object> parameters) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	private CustomerDTO convertCustomerBusinessToWeb(Customer cus){
+		CustomerDTO cusDTO=new CustomerDTO();
+		cusDTO.setIdCliente(cus.getCustid());
+		cusDTO.setNombreCliente(cus.getFname());
+		cusDTO.setApellidoCliente(cus.getLname());
+		cusDTO.setEmail(cus.getEmail());
+		cusDTO.setTipoTarjetaCredito(cus.getCreditcardtype());
+		cusDTO.setNumeroTarjetaCredito(cus.getCreditcardnumer());
+		return cusDTO;
 	}
 }

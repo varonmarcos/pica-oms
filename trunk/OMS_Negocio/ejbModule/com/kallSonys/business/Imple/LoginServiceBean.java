@@ -83,6 +83,8 @@ public class LoginServiceBean implements LoginServiceLocal {
 		UserDTO user=new UserDTO();
 		user.setNombre(userAut.getNombre());
 		user.setApellido(userAut.getApellido());
+		user.setAutenticado(userAut.isAutenticado());
+		user.setListadoRecursos(userAut.getListadoRecursos());
 		
 		return user;
 		

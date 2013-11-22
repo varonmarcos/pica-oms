@@ -1,6 +1,8 @@
 package com.kallSonys.business.dto;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 
@@ -21,6 +23,11 @@ public class CustomerDTO implements Serializable {
 	private String password;
 	private TipoTarjetaCreditoDTO tipoTarjetaCredito;
 	private String numeroTarjetaCredito;
+	
+	
+	//Objetos relacionados			    
+    private List<CustomerAddressDTO> listadoCustomerAddressDTO; //DTO intermedio
+    private List<AddressDTO> listadoAddressDTO; //Tabla referenciada a traves de CustomerAddress
 	
 	
 	public CustomerDTO(){
@@ -105,6 +112,26 @@ public class CustomerDTO implements Serializable {
 
 	public void setNumeroTarjetaCredito(String numeroTarjetaCredito) {
 		this.numeroTarjetaCredito = numeroTarjetaCredito;
+	}
+
+	public List<CustomerAddressDTO> getListadoCustomerAddressDTO() {
+		return listadoCustomerAddressDTO;
+	}
+
+
+	public void setListadoCustomerAddressDTO(
+			List<CustomerAddressDTO> listadoCustomerAddressDTO) {
+		this.listadoCustomerAddressDTO = listadoCustomerAddressDTO;
+	}
+
+
+	public List<AddressDTO> getListadoAddressDTO() {
+		return listadoAddressDTO;
+	}
+
+
+	public void setListadoAddressDTO(List<AddressDTO> listadoAddressDTO) {
+		this.listadoAddressDTO = listadoAddressDTO;
 	}
 	
 	

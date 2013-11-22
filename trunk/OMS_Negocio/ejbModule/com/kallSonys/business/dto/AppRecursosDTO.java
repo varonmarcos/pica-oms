@@ -3,11 +3,13 @@
  */
 package com.kallSonys.business.dto;
 
+import java.io.Serializable;
+
 /**
  * @author Juan Pablo Aranda 
  *
  */
-public class AppRecursosDTO {
+public class AppRecursosDTO implements Serializable{
 	
 	private long idrecursos;
 	private String nombre;

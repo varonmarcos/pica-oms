@@ -53,7 +53,7 @@ public class PersistenceConverter {
 		customer.setEmail(customerDTO.getEmail());
 		if(customerDTO.getTipoTarjetaCredito()!=null)
 		{
-			customer.setCreditcardtype(customerDTO.getTipoTarjetaCredito().getIdTipoTarjeta());
+			customer.setCreditcardtype(customerDTO.getTipoTarjetaCredito());
 		}						
 		customer.setCreditcardnumer(customerDTO.getNumeroTarjetaCredito());
 		customer.setStatus("NA");//No existe en el objeto DTO

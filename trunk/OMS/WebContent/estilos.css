@@ -1,5 +1,5 @@
 body {		 margin:0px; padding:0px; font-family: verdana, arial, sans-serif; 
-background-image: url(images/fondo.gif); overflow:auto;
+background-image: url(/OMS/images/fondo.gif); overflow:auto;
 
 scrollbar-face-color: #F0F0F0;
 scrollbar-arrow-color: #000000;
@@ -99,7 +99,7 @@ LI.mn { list-style-image: url(images/bullet.gif); text-align:left; margin-left: 
 /*  cuadro    */
 
 DIV.ei {
-width: 20px; height: 21px; background-image: url("images/ei.gif"); background-repeat: no-repeat; 
+width: 20px; height: 21px; background-image: url("/OMS/images/ei.gif"); background-repeat: no-repeat; 
 background-position: bottom left; 
 }
 	
@@ -110,7 +110,7 @@ margin-right: 10px;
 margin-left: 0px;
 margin-top: 5px;
 
-background:  url(images/pxg.gif) repeat-x scroll center;
+background:  url(/OMS/images/pxg.gif) repeat-x scroll center;
 background-position: top;
 }
 

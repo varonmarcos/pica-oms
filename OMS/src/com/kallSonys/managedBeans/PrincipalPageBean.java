@@ -76,6 +76,20 @@ public class PrincipalPageBean{
 		
 	}
 	
+	@SuppressWarnings("unused")
+	public void formBuscarClienteListener(ActionEvent event){
+		
+		String action= (String)event.getComponent().getAttributes().get("actionBuscarCliente");
+		if(action.equals("1")){
+			this.sessionBean.setShowFormCrearCampana(Boolean.TRUE);
+			this.sessionBean.setShowFormConsultaCampana(Boolean.FALSE);
+		}else{
+			this.sessionBean.setShowFormCrearCampana(Boolean.FALSE);
+			this.sessionBean.setShowFormConsultaCampana(Boolean.TRUE);
+		}
+		
+	}
+	
 	public String gotoCamapanaPage(){
 		return "goToCampana";
 	}
@@ -86,6 +100,10 @@ public class PrincipalPageBean{
 	
 	public String gotoClientePage(){
 		return "goToCliente";
+	}
+	
+	public String gotoBuscarClientePage(){
+		return "goToBuscarCliente";
 	}
 
 	public SessionBean getSessionBean() {

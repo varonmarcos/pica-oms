@@ -67,5 +67,28 @@
 			<to-view-id>/pages/ProductoPage.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/pages/BuscarClientePage.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goToProducto</from-outcome>
+			<to-view-id>/pages/ProductoPage.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/pages/BuscarClientePage.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goToCliente</from-outcome>
+			<to-view-id>/pages/ClientePage.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
+	<navigation-rule>
+		<from-view-id>/pages/PrincipalPage.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>goToBuscarCliente</from-outcome>
+			<to-view-id>/pages/BuscarClientePage.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

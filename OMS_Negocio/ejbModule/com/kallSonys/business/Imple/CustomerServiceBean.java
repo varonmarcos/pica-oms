@@ -13,10 +13,10 @@ import javax.ejb.Stateless;
 
 import com.kallSonys.business.Serv.CustomerServiceLocal;
 import com.kallSonys.business.consts.CustomerConsts;
-import com.kallSonys.business.consts.enumeEstadoCliente;
 import com.kallSonys.business.dto.AddressDTO;
 import com.kallSonys.business.dto.CustomerAddressDTO;
 import com.kallSonys.business.dto.CustomerDTO;
+import com.kallSonys.business.enums.enumeEstadoCliente;
 import com.kallSonys.business.transformation.PersistenceConverter;
 import com.kallSonys.common.dal.jpa.entitys.Address;
 import com.kallSonys.common.dal.jpa.entitys.Customer;
@@ -182,6 +182,7 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 			customer=this.customerBean.find(parameters.get(CustomerConsts.IDENTIFICACION_FILTER));
 			if(customer!=null)
 			{
+				//String aa=customer.getCustomerAddresses().get(0).getAddress().getStreet();;
 				cusDTO=this.convertCustomerBusinessToWeb(customer);
 			}
 		}catch (Exception e) {
@@ -217,6 +218,7 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 		}else{
 			cusDTO.setEstadoCliente("Inactivo");
 		}
+		
 		return cusDTO;
 	}
 }

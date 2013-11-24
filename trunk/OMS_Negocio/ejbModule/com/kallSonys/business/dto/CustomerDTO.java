@@ -23,8 +23,21 @@ public class CustomerDTO implements Serializable {
 	private String password;
 	private String tipoTarjetaCredito;
 	private String numeroTarjetaCredito;
+	private String tipoCliente;
+	private String estadoCliente;
+	private CustomerDTO selected;
 	
 	
+	public CustomerDTO getSelected() {
+		return selected;
+	}
+
+
+	public void setSelected(CustomerDTO selected) {
+		this.selected = selected;
+	}
+
+
 	//Objetos relacionados			    
     private List<CustomerAddressDTO> listadoCustomerAddressDTO; //DTO intermedio
     private List<AddressDTO> listadoAddressDTO; //Tabla referenciada a traves de CustomerAddress
@@ -132,6 +145,26 @@ public class CustomerDTO implements Serializable {
 
 	public void setListadoAddressDTO(List<AddressDTO> listadoAddressDTO) {
 		this.listadoAddressDTO = listadoAddressDTO;
+	}
+
+
+	public String getTipoCliente() {
+		return tipoCliente;
+	}
+
+
+	public void setTipoCliente(String tipoCliente) {
+		this.tipoCliente = tipoCliente;
+	}
+
+
+	public String getEstadoCliente() {
+		return estadoCliente;
+	}
+
+
+	public void setEstadoCliente(String estadoCliente) {
+		this.estadoCliente = estadoCliente;
 	}
 	
 	

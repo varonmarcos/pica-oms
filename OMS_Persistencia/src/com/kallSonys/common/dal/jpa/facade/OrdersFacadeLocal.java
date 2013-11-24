@@ -35,4 +35,5 @@ public interface OrdersFacadeLocal {
 
     int count();
     
+    List<Orders> getOrderByCustomer (String customerID);
 }

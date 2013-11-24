@@ -4,6 +4,7 @@
 package com.kallSonys.business.Imple;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -12,7 +13,12 @@ import javax.ejb.Stateless;
 
 import com.kallSonys.business.Serv.CustomerServiceLocal;
 import com.kallSonys.business.Serv.OrderServiceLocal;
+import com.kallSonys.business.consts.CustomerConsts;
+import com.kallSonys.business.consts.OrderConst;
 import com.kallSonys.business.dto.OrdenDTO;
+import com.kallSonys.business.dto.OrderDTO;
+import com.kallSonys.business.transformation.PersistenceConverter;
+import com.kallSonys.common.dal.jpa.entitys.Orders;
 import com.kallSonys.common.dal.jpa.facade.OrdersFacadeLocal;
 
 /**
@@ -25,8 +31,10 @@ import com.kallSonys.common.dal.jpa.facade.OrdersFacadeLocal;
 public class OrderServiceBean implements OrderServiceLocal {
 
 	
-	@EJB
-	private OrdersFacadeLocal orderFacade;
+	@EJB(mappedName="OrdersFacadeBean")
+	private OrdersFacadeLocal orderBean;	
+	
+	
 	/* (non-Javadoc)
 	 * @see com.kallSonys.business.Serv.OrderServiceLocal#searchOrders()
 	 */
@@ -55,6 +63,24 @@ public class OrderServiceBean implements OrderServiceLocal {
 	public boolean cancelledOrder(OrdenDTO order) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	
+	@Override
+	public String crearOrden(OrderDTO orderDTO) 
+	{
+		System.out.println("OrderServiceBean crearOrden 1");		
+		orderDTO.setORDERDATE(Calendar.getInstance().getTime());		
+		orderDTO.setSTATUS(OrderConst.ORDER_STATUS_ACTIVO);						
+		return orderBean.createAndReturnID(PersistenceConverter.order_DtoToEntityBD(orderDTO));	    
+	}
+
+
+	@Override
+	public List<Orders> getOrderByCustomer(String customerID) 
+	{
+		System.out.println("OrderServiceBean getOrderByCustomer 1");
+		return orderBean.getOrderByCustomer(customerID);
 	}
 
 }

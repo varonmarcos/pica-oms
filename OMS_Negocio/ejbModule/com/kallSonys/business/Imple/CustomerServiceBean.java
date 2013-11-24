@@ -165,7 +165,7 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 	{	
 		if(customerBean.find(idCliente) != null) 
 		{
-			System.out.println("CustomerServiceBean:validarSiClienteExiste ");
+			System.out.println("CustomerServiceBean:validarSiClienteExiste");
 			return true;			
 		}
 		return false;
@@ -177,7 +177,6 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 		CustomerDTO cusDTO = null;
 		Customer customer;
 		try {
-			
 			//Buscamos por Identificador de Cliente
 			customer=this.customerBean.find(parameters.get(CustomerConsts.IDENTIFICACION_FILTER));
 			cusDTO=this.convertCustomerBusinessToWeb(customer);

@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 
 import com.kallSonys.business.Serv.CustomerServiceLocal;
 import com.kallSonys.business.consts.CustomerConsts;
+import com.kallSonys.business.consts.enumeEstadoCliente;
 import com.kallSonys.business.dto.AddressDTO;
 import com.kallSonys.business.dto.CustomerAddressDTO;
 import com.kallSonys.business.dto.CustomerDTO;
@@ -179,8 +180,10 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 		try {
 			//Buscamos por Identificador de Cliente
 			customer=this.customerBean.find(parameters.get(CustomerConsts.IDENTIFICACION_FILTER));
-			cusDTO=this.convertCustomerBusinessToWeb(customer);
-			
+			if(customer!=null)
+			{
+				cusDTO=this.convertCustomerBusinessToWeb(customer);
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -207,6 +210,13 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 		cusDTO.setEmail(cus.getEmail());
 		cusDTO.setTipoTarjetaCredito(cus.getCreditcardtype());
 		cusDTO.setNumeroTarjetaCredito(cus.getCreditcardnumer());
+		cusDTO.setTipoCliente(cus.getCustomertype().getDescription());
+		cusDTO.setNumeroTelefonico(cus.getPhonenumber());
+		if(enumeEstadoCliente.ACTIVE.getStatusCode().equals(cus.getStatus())){
+			cusDTO.setEstadoCliente("Activo");
+		}else{
+			cusDTO.setEstadoCliente("Inactivo");
+		}
 		return cusDTO;
 	}
 }

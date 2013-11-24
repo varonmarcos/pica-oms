@@ -11,9 +11,7 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
-import com.kallSonys.business.Serv.CustomerServiceLocal;
 import com.kallSonys.business.Serv.OrderServiceLocal;
-import com.kallSonys.business.consts.CustomerConsts;
 import com.kallSonys.business.consts.OrderConst;
 import com.kallSonys.business.dto.OrdenDTO;
 import com.kallSonys.business.dto.OrderDTO;
@@ -81,6 +79,13 @@ public class OrderServiceBean implements OrderServiceLocal {
 	{
 		System.out.println("OrderServiceBean getOrderByCustomer 1");
 		return orderBean.getOrderByCustomer(customerID);
+	}
+
+	@Override
+	public String cambiarEstadoOrden(OrderDTO orderDTO) 
+	{
+		System.out.println("OrderServiceBean cambiarEstadoOrden: 1");
+		return orderBean.actualizarEstadoOrden(orderDTO.getORDERID(), orderDTO.getSTATUS());
 	}
 
 }

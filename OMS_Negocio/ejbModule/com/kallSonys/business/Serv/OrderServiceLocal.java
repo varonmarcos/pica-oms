@@ -27,4 +27,7 @@ public interface OrderServiceLocal {
 	public String crearOrden(OrderDTO orderDTO);
 	
 	public List<Orders> getOrderByCustomer (String customerID);
+	
+	public String cambiarEstadoOrden(OrderDTO orderDTO) ;
+	
 }

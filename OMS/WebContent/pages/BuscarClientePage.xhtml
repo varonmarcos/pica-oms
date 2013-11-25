@@ -94,9 +94,9 @@
 																		<tr>
 																			<td colspan="2" align="center" class="txt">
 																				<form name="theForm">
-																					<table width="40%" border="0" cellspacing="0"
-																						cellpadding="1">
-																						<tr>
+																					<table>
+																					<ice:panelGrid width="40%" border="0" cellspacing="0" cellpadding="1">
+																						
 																							<ice:panelGrid cellpadding="0" cellspacing="0" >
 																								<ice:selectOneRadio 
 																									value="#{buscarClientePageBean.selectedFilter}"
@@ -110,7 +110,7 @@
 																										itemLabel="Facturacion" />
 																								</ice:selectOneRadio>
 																							</ice:panelGrid>
-																						</tr>
+																						
 																						<ice:panelGrid cellpadding="0" cellspacing="0" style="text-align: center;">
 																						<ice:panelGroup>
 																							<tr align="right">
@@ -122,8 +122,7 @@
 																						</ice:panelGroup>
 																						<ice:panelGroup>
 																							<tr>
-																								<td align="right" class="txt"><strong>Por
-																										producto:</strong></td>
+																								<td align="right" class="txt"><strong>Por producto:</strong></td>
 																								<td align="left" class="txt"><ice:inputText
 																										name="producto" id="inputProd" value="#{buscarClientePageBean.idProducto}"
 																										size="10" maxlength="5" disabled="#{buscarClientePageBean.renderProducto}"/></td>
@@ -165,6 +164,161 @@
 																									image="/images/buscar.gif"></ice:commandButton>
 																							</td>
 																						</tr>
+																						
+																						<ice:panelGrid>
+																							<ice:panelGroup style="height: 20px;">
+                                        														<ice:outputText 
+                                        																styleClass="tableTitle" 
+                                        																value="No existe clientes con los criterios de busqueda" 
+                                        																rendered="#{!buscarClientePageBean.renderTableCustomer}"/>
+                                    														</ice:panelGroup>
+																						</ice:panelGrid>
+																						<ice:panelGrid rendered="#{buscarClientePageBean.renderTableCustomer}">
+																						<!-- Table Customer -->
+																							<ice:dataTable value="#{buscarClientePageBean.listCustomers}" var="cus">
+																								<f:facet name="header">
+         																                           <ice:panelGroup style="height: 20px;">
+                                        																<ice:outputText styleClass="tableTitle" value="Detalle de Cliente"/>
+                                    																</ice:panelGroup>
+                                																</f:facet>
+                                																<!-- Columna nombre -->
+                                																<ice:column style="width:20%" id="tableColumn1">
+                                																	<f:facet name="header">
+                                        																<ice:panelGroup style="text-align: center;" >
+                                            																<ice:outputText styleClass="columnHeader" value="Nombre"/>
+                                        																</ice:panelGroup>
+                                    																</f:facet>
+                                    																<ice:panelGroup style="text-align: center;" >
+                                        																<ice:outputText id="txtCliente" value="#{cus.nombreCliente}"/>
+                                    																</ice:panelGroup>
+                                																</ice:column>
+                                																<!--Columna email -->
+																								<ice:column style="width:20%" id="tableColumn2">
+                                    																<f:facet name="header">
+                                        																<ice:panelGroup style="text-align: center;" >
+                                            																<ice:outputText styleClass="columnHeader" value="Email"/>
+                                        																</ice:panelGroup>
+                                    																</f:facet>
+                                    																<ice:panelGroup style="text-align: center;" >
+                                        																<ice:outputText id="txtMail" value="#{cus.email}"/>
+                                    																</ice:panelGroup>
+                                																</ice:column>
+                                																<!--Columna numero telefonico -->
+																								<ice:column style="width:30%" id="tableColumn3">
+                                    																<f:facet name="header">
+                                        																<ice:panelGroup style="text-align: center;" >
+                                            																<ice:outputText styleClass="columnHeader" value="Numero Telefonico"/>
+                                        																</ice:panelGroup>
+                                    																</f:facet>
+                                    																<ice:panelGroup style="text-align: center;" >
+                                        																<ice:outputText id="ttNumTelefono" value="#{cus.numeroTelefonico}"/>
+                                    																</ice:panelGroup>
+                                																</ice:column>
+                                																<!--Columna numero de tarjeta -->
+																								<ice:column style="width:30%" id="tableColumn4">
+                                    																<f:facet name="header">
+                                        																<ice:panelGroup style="text-align: center;" >
+                                            																<ice:outputText styleClass="columnHeader" value="Numero Tarjeta de Credito"/>
+                                        																</ice:panelGroup>
+                                    																</f:facet>
+                                    																<ice:panelGroup style="text-align: center;" >
+                                        																<ice:outputText id="txtNumTC" value="#{cus.numeroTarjetaCredito}"/>
+                                    																</ice:panelGroup>
+                                																</ice:column>
+                                																<!--Columna Tipo Cliente -->
+																								<ice:column style="width:30%" id="tableColumn5">
+                                    																<f:facet name="header">
+                                        																<ice:panelGroup style="text-align: center;" >
+                                            																<ice:outputText styleClass="columnHeader" value="Tipo de Cliente"/>
+                                        																</ice:panelGroup>
+                                    																</f:facet>
+                                    																<ice:panelGroup style="text-align: center;" >
+                                        																<ice:outputText id="txtTipoCliente" value="#{cus.tipoCliente}"/>
+                                    																</ice:panelGroup>
+                                																</ice:column>
+                                																<!--Columna Estado cliente -->
+																								<ice:column style="width:30%" id="tableColumn6">
+                                    																<f:facet name="header">
+                                        																<ice:panelGroup style="text-align: center;" >
+                                            																<ice:outputText styleClass="columnHeader" value="Tipo de Cliente"/>
+                                        																</ice:panelGroup>
+                                    																</f:facet>
+                                    																<ice:panelGroup style="text-align: center;" >
+                                        																<ice:outputText id="txtEstadoCliente" value="#{cus.estadoCliente}"/>
+                                    																</ice:panelGroup>
+                                																</ice:column>
+                                																<!--Columna Seleccion -->
+																								<ice:column style="width:30%" id="tableColumn7">
+                                    																<f:facet name="header">
+                                        																<ice:panelGroup style="text-align: center;" >
+                                            																<ice:outputText styleClass="columnHeader" value="Seleccionar"/>
+                                        																</ice:panelGroup>
+                                    																</f:facet>
+                                    																<ice:panelGroup style="text-align: center;" >
+                                        																<h:commandLink value="Modificar cliente" partialSubmit="true"
+                                        																	action="#{buscarClientePageBean.customerSelectionListener}">
+                   																							<f:setPropertyActionListener target="#{buscarClientePageBean.customerSelected}" value="#{cus}" />
+              																							</h:commandLink>  
+                                    																</ice:panelGroup>
+                                																</ice:column>
+																							</ice:dataTable>
+																						</ice:panelGrid>
+																						<!-- Formulario para Modificar datos de cliente -->
+																						<ice:panelGrid id="panelTitle">
+                                    														<ice:outputLabel id="accountLbl2" value="Modificacion de datos de cliente"/>
+                                														</ice:panelGrid>
+																						<ice:panelGrid columns="2" rendered="#{buscarClientePageBean.renderFormModifiedCustomer}">
+																							
+																							<!--Muestras el id del clente-->
+																							<ice:panelGrid id="panelId">
+                                    															<ice:outputLabel id="accountLb1" value="Id Cliente"/>
+                                															</ice:panelGrid>
+                                															<ice:panelGrid cellpadding="0" cellspacing="0" width="100%" >
+                                    															<ice:outputText id="txtIdCliente" style="width:214px" value="#{buscarClientePageBean.customerSelected.idCliente}"/>
+                                															</ice:panelGrid>
+																							<!--Muestra el nombre-->
+																							<ice:panelGrid id="panelName">
+                                    															<ice:outputLabel id="accountLb2" value="Nombre"/>
+                                															</ice:panelGrid>
+                                															<ice:panelGrid cellpadding="0" cellspacing="0" width="100%" >
+                                    															<ice:inputText id="txtName" style="width:214px" value="#{buscarClientePageBean.customerSelected.nombreCliente}"/>
+                                															</ice:panelGrid>
+                                															<!--Correo Electronico-->
+																							<ice:panelGrid id="panelEmail">
+                                    															<ice:outputLabel id="accountLb3" value="Email"/>
+                                															</ice:panelGrid>
+                                															<ice:panelGrid cellpadding="0" cellspacing="0" width="100%" >
+                                    															<ice:inputText id="txtEmail" style="width:214px" value="#{buscarClientePageBean.customerSelected.email}"/>
+                                															</ice:panelGrid>
+                                															<!--Numero Telefonico-->
+																							<ice:panelGrid id="panelPhone">
+                                    															<ice:outputLabel id="accountLb4" value="Telefono"/>
+                                															</ice:panelGrid>
+                                															<ice:panelGrid cellpadding="0" cellspacing="0" width="100%" >
+                                    															<ice:inputText id="txtPhone" style="width:214px" value="#{buscarClientePageBean.customerSelected.numeroTelefonico}"/>
+                                															</ice:panelGrid>
+                                															<!--Estado Cliente-->
+																							<ice:panelGrid id="panelStatusEstado">
+                                    															<ice:outputLabel id="accountLb5" value="Estado"/>
+                                															</ice:panelGrid>
+                                															<ice:panelGrid cellpadding="0" cellspacing="0" width="100%" >
+                                    															 <ice:selectOneMenu value="#{buscarClientePageBean.statusSelected}" >
+                                       																 <f:selectItems value="#{buscarClientePageBean.listStatusCustomer}"/>
+                                    														</ice:selectOneMenu>
+                                															</ice:panelGrid>
+                                															<!--Numero Tarejta Cliente-->
+																							<ice:panelGrid id="panelStatusCliente">
+                                    															<ice:outputLabel id="accountLb6" value="Numero Tajeta Credito"/>
+                                															</ice:panelGrid>
+                                															<ice:panelGrid cellpadding="0" cellspacing="0" width="100%" >
+                                    															 <ice:inputText id="txtTarjetaCredito" style="width:214px" value="#{buscarClientePageBean.customerSelected.numeroTarjetaCredito}"/>
+                                															</ice:panelGrid>
+                                														</ice:panelGrid>
+                                														<ice:panelGrid>
+                                															<ice:commandButton id="btnActualizarCustmer" value="Modifcar Cliente" action="#{buscarClientePageBean.doModificarCliente}"></ice:commandButton>
+                                														</ice:panelGrid>
+																						<!-- Fin Formularion para modificar datos de cliente -->
+																					</ice:panelGrid>
 																					</table>
 																				</form>
 																			</td>

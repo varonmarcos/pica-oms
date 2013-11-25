@@ -6,6 +6,7 @@ package com.kallSonys.business.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kallSonys.business.enums.enumCustomerType;
 import com.kallSonys.business.enums.enumeEstadoCliente;
 
 /**
@@ -43,10 +44,12 @@ public class StatusCustomerDTO {
 	
 	public static List<StatusCustomerDTO> preloadData(){
 		List<StatusCustomerDTO> listadoTarjetas=new ArrayList<StatusCustomerDTO>();
-		StatusCustomerDTO s1=new StatusCustomerDTO(enumeEstadoCliente.ACTIVE.getStatusCode(),enumeEstadoCliente.ACTIVE.name());
-		StatusCustomerDTO s2=new StatusCustomerDTO(enumeEstadoCliente.INACTIVE.getStatusCode(),enumeEstadoCliente.INACTIVE.name());
+		StatusCustomerDTO s1=new StatusCustomerDTO(enumCustomerType.Plateado.name(),enumCustomerType.Plateado.name());
+		StatusCustomerDTO s2=new StatusCustomerDTO(enumCustomerType.Platino.name(),enumCustomerType.Platino.name());
+		StatusCustomerDTO s3=new StatusCustomerDTO(enumCustomerType.Dorado.name(),enumCustomerType.Dorado.name());
 		listadoTarjetas.add(s1);
-		listadoTarjetas.add(s2);		
+		listadoTarjetas.add(s2);
+		listadoTarjetas.add(s3);
 		return listadoTarjetas;
 		
 	}

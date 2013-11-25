@@ -105,4 +105,20 @@
     <servlet-name>Resource Servlet</servlet-name>
     <url-pattern>/xmlhttp/*</url-pattern>
   </servlet-mapping>
-</web-app>
+ 
+  <servlet-mapping>
+    <servlet-name>InitAppServlet</servlet-name>
+    <url-pattern>/InitAppServlet</url-pattern>
+  </servlet-mapping>
+ 
+   
+  
+   <servlet>
+    <description>Inicia automaticamente al levantar la aplicacion.</description>
+    <display-name>InitAppServlet</display-name>
+    <servlet-name>InitAppServlet</servlet-name>
+    <servlet-class>com.kallSonys.web.util.InitAppServlet</servlet-class>
+     <load-on-startup>1</load-on-startup> 
+  </servlet>
+  
+ </web-app>

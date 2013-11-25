@@ -5,6 +5,7 @@ package com.kallSonys.managedBeans;
 
 import java.io.Serializable;
 
+import javax.faces.bean.CustomScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -17,7 +18,7 @@ import com.kallSonys.web.sesion.SessionBean;
  *
  */
 @ManagedBean(name="principalPageBean")
-@RequestScoped
+@CustomScoped(value = "#{window}")
 public class PrincipalPageBean{
 
 	private static final long serialVersionUID = 1L;

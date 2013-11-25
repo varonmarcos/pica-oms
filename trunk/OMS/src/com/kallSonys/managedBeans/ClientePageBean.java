@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.CustomScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -24,7 +25,7 @@ import com.kallSonys.business.dto.TipoTarjetaCreditoDTO;
  *
  */
 @ManagedBean(name="clientePageBean")
-@RequestScoped
+@CustomScoped(value = "#{window}")
 public class ClientePageBean{
 
 	@EJB(mappedName="CustomerServiceBean")

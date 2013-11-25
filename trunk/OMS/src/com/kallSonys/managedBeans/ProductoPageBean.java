@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.bean.CustomScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.SelectItem;
@@ -21,7 +22,7 @@ import com.kallSonys.web.util.SelectItemUtils;
  *
  */
 @ManagedBean(name="productoPageBean")
-@RequestScoped
+@CustomScoped(value = "#{window}")
 public class ProductoPageBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

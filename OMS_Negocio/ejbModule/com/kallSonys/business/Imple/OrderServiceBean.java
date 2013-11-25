@@ -85,7 +85,7 @@ public class OrderServiceBean implements OrderServiceLocal {
 	public String cambiarEstadoOrden(OrderDTO orderDTO) 
 	{
 		System.out.println("OrderServiceBean cambiarEstadoOrden: 1");
-		return orderBean.actualizarEstadoOrden(orderDTO.getORDERID(), orderDTO.getSTATUS());
+		return""; //orderBean.actualizarEstadoOrden(orderDTO.getORDERID(), orderDTO.getSTATUS());
 	}
 
 }

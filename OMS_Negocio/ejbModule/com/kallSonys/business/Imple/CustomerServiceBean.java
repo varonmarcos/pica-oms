@@ -1,11 +1,7 @@
 package com.kallSonys.business.Imple;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -13,10 +9,8 @@ import javax.ejb.Stateless;
 
 import com.kallSonys.business.Serv.CustomerServiceLocal;
 import com.kallSonys.business.consts.CustomerConsts;
-import com.kallSonys.business.dto.AddressDTO;
-import com.kallSonys.business.dto.CustomerAddressDTO;
 import com.kallSonys.business.dto.CustomerDTO;
-import com.kallSonys.business.enums.enumeEstadoCliente;
+import com.kallSonys.business.enums.enumCustomerType;
 import com.kallSonys.business.transformation.PersistenceConverter;
 import com.kallSonys.common.dal.jpa.entitys.Address;
 import com.kallSonys.common.dal.jpa.entitys.Customer;
@@ -166,8 +160,6 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 			customer = this.customerBean.find(parameters
 					.get(CustomerConsts.IDENTIFICACION_FILTER));
 			if (customer != null) {
-				// String
-				// aa=customer.getCustomerAddresses().get(0).getAddress().getStreet();;
 				cusDTO = this.convertCustomerBusinessToWeb(customer);
 			}
 		} catch (Exception e) {
@@ -201,5 +193,35 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 		cusDTO.setEstadoCliente(cus.getStatus());
 
 		return cusDTO;
+	}
+	
+	private Customer convertCustomeWebToBusiness(CustomerDTO cusDTO){
+		Customer cus=new Customer();
+		cus.setCustid(cusDTO.getIdCliente());
+		cus.setFname(cusDTO.getNombreCliente());
+		cus.setEmail(cusDTO.getEmail());
+		cus.setCreditcardtype(cusDTO.getTipoTarjetaCredito());
+		cus.setCreditcardtype(cusDTO.getNumeroTarjetaCredito());
+		cus.setPhonenumber(cusDTO.getNumeroTelefonico());
+		if(enumCustomerType.Dorado.equals(cusDTO.getEstadoCliente())){
+			cus.setStatus(enumCustomerType.Dorado.name());
+		}else if(enumCustomerType.Platino.equals(cusDTO.getEstadoCliente())){
+			cus.setStatus(enumCustomerType.Platino.name());
+		}else{
+			cus.setStatus(enumCustomerType.Plateado.name());
+		}
+		
+		return cus;
+	}
+	
+	@Override
+	public boolean doUpdateCustomer(CustomerDTO customer) {
+		try{
+			this.customerBean.edit(this.convertCustomeWebToBusiness(customer));
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 }

@@ -83,80 +83,30 @@
 												style="color:blue;margin:12px;" /></td>
 									</tr>
 									<!--formulario Creacion de Usuario  -->
-									<ice:panelGroup id="formCreacionUsuario"
-										rendered="#{sessionBean.showFormCrearCliente}">
-										<tr>
-											<td valign="middle" width="140" class="txt"><B>ID.
-													del Cliente:</B></td>
-											<td width="227"><ice:inputText maxlength="80" size="40"
-													value="#{clientePageBean.customerDTO.idCliente}" /></td>
-											<td width="75"></td>
-										</tr>
-										<tr>
-											<td valign="middle" width="140" class="txt"><b>Nombre
-													del Cliente:</b></td>
-											<td width="227"><ice:inputText name="txt_nombre"
-													maxlength="80" size="40"
-													value="#{clientePageBean.customerDTO.nombreCliente}" /></td>
-											<td width="75"></td>
-										</tr>
-										<tr>
-											<td valign="middle" width="140" class="txt"><B>Apellido
-													del Cliente:</B></td>
-											<td width="227"><ice:inputText name="txt_apellido"
-													maxlength="80" size="40"
-													value="#{clientePageBean.customerDTO.apellidoCliente}" /></td>
-											<td width="75"></td>
-										</tr>
-										<tr>
-											<td valign="middle" width="140" class="txt"><B>Numero
-													Telefonico:</B></td>
-											<td width="227"><ice:inputText name="txt_numeroTel"
-													maxlength="80" size="40"
-													value="#{clientePageBean.customerDTO.numeroTelefonico}" /></td>
-											<td width="75"></td>
-										</tr>
-										<tr>
-											<td valign="middle" width="140" class="txt"><B>E-mail:</B></td>
-											<td width="227"><ice:inputText name="txt_email"
-													maxlength="80" size="40"
-													value="#{clientePageBean.customerDTO.email}" /></td>
-											<td width="75"></td>
-										</tr>
-										<tr>
-											<td valign="middle" width="140" class="txt"><B>Password:</B></td>
-											<td width="227"><ice:inputText name="txt_passwrd"
-													maxlength="80" size="40"
-													value="#{clientePageBean.customerDTO.password}" /></td>
-											<td width="75"></td>
-										</tr>
-										<tr>
-											<td valign="middle" width="140" class="txt"><B>Tipo
-													Tarjeta Credito:</B></td>
-											<td width="227"><ice:selectOneMenu
-													value="#{clientePageBean.customerDTO.tipoTarjetaCredito}">
-													<f:selectItems value="#{clientePageBean.listTipoTarjetas}" />
-												</ice:selectOneMenu></td>
-											<td width="75"></td>
-										</tr>
-										<tr>
-											<td valign="middle" width="140" class="txt"><B>Numero
-													Tarjeta Credito:</B></td>
-											<td width="227"><ice:inputText name="txt_passwrd"
-													maxlength="80" size="40"
-													value="#{clientePageBean.customerDTO.numeroTarjetaCredito}" /></td>
-											<td width="75"></td>
-										</tr>
-										<tr>
-											<td valign="middle" width="140" class="txt"></td>
-											<td width="227"><ice:commandButton
-													value="Agregar cliente"
-													action="#{clientePageBean.doAgregarCliente}" /></td>
-											<td width="75"></td>
-										</tr>
+									<tr>
+									<td>
+									<ice:panelGroup id="formCreacionUsuario" rendered="#{sessionBean.showFormCrearCliente}">
+										
+										<ice:panelGrid id="panelIdCliente">
+                                    		<ice:outputLabel id="accountLb1" value="ID del Cliente:"/>
+                                		</ice:panelGrid>
+                                		<ice:panelGrid cellpadding="0" cellspacing="0" width="100%" >
+                                    		<ice:inputText id="txtIdCliente" style="width:214px" value="#{clientePageBean.customerDTO.idCliente}"/>
+                                		</ice:panelGrid>
+                                		<ice:panelGrid id="panelName">
+                                    		<ice:outputLabel id="accountLb2" value="Nombre del Cliente:"/>
+                                		</ice:panelGrid>
+                                		<ice:panelGrid cellpadding="0" cellspacing="0" width="100%" >
+                                    		<ice:inputText id="txtNombreCliente" style="width:214px" value="#{clientePageBean.customerDTO.nombreCliente}"/>
+                                		</ice:panelGrid>
+										
+										
+										
 										<!--fin formulario Creacion de Usuario  -->
 
 									</ice:panelGroup>
+									</td>
+									</tr>
 								</table>
 							</td>
 						</tr>

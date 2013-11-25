@@ -1,27 +1,23 @@
 package com.kallSonys.managedBeans;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
+import javax.faces.bean.CustomScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
-import weblogic.jms.extensions.ConsumerInfo;
-import weblogic.xml.xpath.stream.axes.EverythingAxis;
-
-
 import com.kallSonys.business.Serv.CustomerServiceLocal;
+import com.kallSonys.business.dto.CustomerDTO;
+import com.kallSonys.business.dto.StatusCustomerDTO;
 import com.kallSonys.web.consts.Constantes;
 import com.kallSonys.web.util.SelectItemUtils;
-import com.kallSonys.business.dto.CustomerDTO;
-import com.kallSonys.business.dto.TipoTarjetaCreditoDTO;
 
 /**
  * 
@@ -29,7 +25,7 @@ import com.kallSonys.business.dto.TipoTarjetaCreditoDTO;
  *
  */
 @ManagedBean(name="buscarClientePageBean")
-@RequestScoped
+@CustomScoped(value = "#{window}")
 public class BuscarClientePageBean{
 
 	@EJB(mappedName="CustomerServiceBean")
@@ -37,12 +33,40 @@ public class BuscarClientePageBean{
 	
 	FacesContext context = FacesContext.getCurrentInstance();
 	
-	private CustomerDTO customerDTO=new CustomerDTO();
+	private CustomerDTO customerDTO;
+	private List<CustomerDTO> listCustomers;
 	private String selectedFilter=Constantes.IDENTIFICACION_FILTER;
 	private String patternDate=Constantes.DATE_FORMAT_PATTERN;
 	private boolean renderIdentificacion=Boolean.FALSE;
 	private boolean renderProducto=Boolean.TRUE;
 	private boolean renderFacturacion=Boolean.TRUE;
+	private boolean renderTableCustomer=Boolean.FALSE;
+	private boolean renderFormModifiedCustomer=Boolean.FALSE;
+	private CustomerDTO customerSelected;
+	private List<SelectItem> listStatusCustomer;
+	private List<SelectItem> listCustomerType;
+	private String statusSelected;
+	private String customerTypeSelected;
+	public String getStatusSelected() {
+		return statusSelected;
+	}
+
+
+	public void setStatusSelected(String statusSelected) {
+		this.statusSelected = statusSelected;
+	}
+
+
+	public String getCustomerTypeSelected() {
+		return customerTypeSelected;
+	}
+
+
+	public void setCustomerTypeSelected(String customerTypeSelected) {
+		this.customerTypeSelected = customerTypeSelected;
+	}
+
+
 	//Atributos por filters
 	private String identificacion;
 	private String idProducto;
@@ -85,6 +109,8 @@ public class BuscarClientePageBean{
 	 * Minimal Constructor
 	 */
 	public BuscarClientePageBean(){
+		this.customerDTO=new CustomerDTO();
+		this.listCustomers=new ArrayList<CustomerDTO>();
            
    	}
 	
@@ -102,7 +128,17 @@ public class BuscarClientePageBean{
 			paramters.put(Constantes.FECHA_FIN,this.fechaFin);
 		}
 		paramters.put(Constantes.FILTER,this.selectedFilter);
-		this.customerServiceFacade.getCustomerByIdentificador(paramters);
+		this.customerDTO=this.customerServiceFacade.getCustomerByIdentificador(paramters);
+		if(this.customerDTO.getIdCliente()!=null)
+		{
+			this.listCustomers.add(this.customerDTO);
+		}
+		if(this.listCustomers.size()>0){
+			this.renderTableCustomer=Boolean.TRUE;
+		}else{
+			this.renderTableCustomer=Boolean.FALSE;
+		}
+			
 	}
 	
 	/**
@@ -126,6 +162,40 @@ public class BuscarClientePageBean{
 		
 	}
 	
+	public void customerSelectionListener() {
+
+	    this.customerSelected=this.getCustomerSelected();
+	    this.statusSelected=this.customerSelected.getEstadoCliente();
+	    this.customerTypeSelected=this.customerSelected.getTipoCliente();
+	    this.renderFormModifiedCustomer=Boolean.TRUE;
+	    this.loadSelectItemStatusCustomer();
+	       
+	}
+	/**
+	 * Este metodo construye el listado de status cliente
+	 */
+	private void loadSelectItemStatusCustomer(){
+		List<StatusCustomerDTO> tiposStatus=StatusCustomerDTO.preloadData();
+		try {
+			this.listStatusCustomer=SelectItemUtils.buildSelectItems(tiposStatus, "codigo", "descripcion", false);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void doModificarCliente(){
+		try{
+			Boolean response=this.customerServiceFacade.doUpdateCustomer(this.customerSelected);
+			if(response){
+				System.out.println("El usuario fue actualizado con exito");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	public CustomerDTO getCustomerDTO() {
 		return customerDTO;
@@ -210,6 +280,64 @@ public class BuscarClientePageBean{
 		this.patternDate = patternDate;
 	}
 
-	
+
+	public boolean isRenderTableCustomer() {
+		return renderTableCustomer;
+	}
+
+
+	public void setRenderTableCustomer(boolean renderTableCustomer) {
+		this.renderTableCustomer = renderTableCustomer;
+	}
+
+
+	public List<CustomerDTO> getListCustomers() {
+		return listCustomers;
+	}
+
+
+	public void setListCustomers(List<CustomerDTO> listCustomers) {
+		this.listCustomers = listCustomers;
+	}
+
+
+	public CustomerDTO getCustomerSelected() {
+		return customerSelected;
+	}
+
+
+	public void setCustomerSelected(CustomerDTO customerSelected) {
+		this.customerSelected = customerSelected;
+	}
+
+
+	public boolean isRenderFormModifiedCustomer() {
+		return renderFormModifiedCustomer;
+	}
+
+
+	public void setRenderFormModifiedCustomer(boolean renderFormModifiedCustomer) {
+		this.renderFormModifiedCustomer = renderFormModifiedCustomer;
+	}
+
+
+	public List<SelectItem> getListStatusCustomer() {
+		return listStatusCustomer;
+	}
+
+
+	public void setListStatusCustomer(List<SelectItem> listStatusCustomer) {
+		this.listStatusCustomer = listStatusCustomer;
+	}
+
+	public List<SelectItem> getListCustomerType() {
+		return listCustomerType;
+	}
+
+
+	public void setListCustomerType(List<SelectItem> listCustomerType) {
+		this.listCustomerType = listCustomerType;
+	}
+
 
 }

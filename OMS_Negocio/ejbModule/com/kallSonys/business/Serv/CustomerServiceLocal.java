@@ -21,6 +21,8 @@ public interface CustomerServiceLocal {
 	
 	public boolean createCustomer(CustomerDTO customer);
 	
+	public boolean doUpdateCustomer(CustomerDTO customer);
+	
 	public CustomerDTO getCustomers();
 
 	public CustomerDTO getCustomerByIdentificador(Map<String,Object> parameters);
@@ -28,5 +30,6 @@ public interface CustomerServiceLocal {
 	public CustomerDTO getCustomerByIdProduct(Map<String,Object> parameters);
 	
 	public CustomerDTO getCustomerByIdFacturacion(Map<String,Object> parameters);
+	
 
 }

@@ -3,6 +3,7 @@
  */
 package com.kallSonys.business.Serv;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Remote;
@@ -25,11 +26,11 @@ public interface CustomerServiceLocal {
 	
 	public CustomerDTO getCustomers();
 
-	public CustomerDTO getCustomerByIdentificador(Map<String,Object> parameters);
+	public List<CustomerDTO> getCustomerByIdentificador(Map<String,Object> parameters);
 	
-	public CustomerDTO getCustomerByIdProduct(Map<String,Object> parameters);
+	public List<CustomerDTO> getCustomerByIdProduct(Map<String,Object> parameters);
 	
-	public CustomerDTO getCustomerByIdFacturacion(Map<String,Object> parameters);
+	public List<CustomerDTO> getCustomerByIdFacturacion(Map<String,Object> parameters);
 	
 
 }

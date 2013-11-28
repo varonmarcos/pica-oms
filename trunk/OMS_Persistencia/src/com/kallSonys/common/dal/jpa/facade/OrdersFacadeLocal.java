@@ -36,4 +36,8 @@ public interface OrdersFacadeLocal {
     int count();
     
     List<Orders> getOrderByCustomer (String customerID);
+    
+    String actualizarEstadoOrden(String idOrden, String nuevoEstado);
+    
+    List<Orders> getDetallesOrder (String orderID);
 }

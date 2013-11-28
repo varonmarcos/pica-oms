@@ -92,11 +92,15 @@ public class ClientePageBean{
 		
 	}
 	public void doAgregarCliente(){
-	
-		if(customerServiceFacade.createCustomer(this.customerDTO)){
+		try{
+			if(customerServiceFacade.createCustomer(this.customerDTO))
+			{
+				context.addMessage("",new FacesMessage(FacesMessage.FACES_MESSAGES,"Cliente creado con exito"));
+			}
 			
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
-		
 	}
 	
 	public void viewFilterFields(ValueChangeEvent event){

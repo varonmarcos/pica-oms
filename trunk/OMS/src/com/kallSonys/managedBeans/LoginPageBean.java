@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import com.kallSonys.business.Serv.LoginServiceLocal;
 import com.kallSonys.business.dto.UserDTO;
@@ -23,6 +25,7 @@ public class LoginPageBean implements Serializable {
 	LoginServiceLocal loginService;
 	@ManagedProperty(value="#{sessionBean}")
 	private SessionBean sessionBean;
+	FacesContext context = FacesContext.getCurrentInstance();
 	private String user;
 	private String password;
 	
@@ -38,23 +41,29 @@ public class LoginPageBean implements Serializable {
 	 */
 	public String loginAction()
 	{ 
-			 		
-		//Informacion usuario en session		
-		UserDTO user = new UserDTO();				
-		user.setUser(this.getUser());		
-		user.setPassword(this.getPassword());	
-				
-		System.out.println("El ben es: "+loginService);
-		
-		user = loginService.login(user);
-		if(user.isAutenticado())		
-		{			
-			//Se coloca en sesion los recursos a los que tiene acceso el personaje 
-			//logeado contra LDAP y según los roles del mismo
-			CommonUtilities.ponerAtributoSesion("usuarioAutenticadoDTO", user);			
-			this.sessionBean.setUserInSession(user);
-			return "exito";
+		try{
+			//Informacion usuario en session		
+			UserDTO user = new UserDTO();				
+			user.setUser(this.getUser());		
+			user.setPassword(this.getPassword());	
+					
+			System.out.println("El ben es: "+loginService);
+			
+			user = loginService.login(user);
+			if(user.isAutenticado())		
+			{			
+				//Se coloca en sesion los recursos a los que tiene acceso el personaje 
+				//logeado contra LDAP y según los roles del mismo
+				CommonUtilities.ponerAtributoSesion("usuarioAutenticadoDTO", user);			
+				this.sessionBean.setUserInSession(user);
+				return "exito";
+			}
+		}catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Ocurrio un error al realizar login")); 
+			e.printStackTrace();
+					
 		}
+		
 					
 		return "";
 	}

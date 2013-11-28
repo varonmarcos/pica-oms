@@ -38,7 +38,7 @@ public class InitAppServlet extends HttpServlet {
 	{
 		
 		System.out.println("Inicia llamado al cron desde el servelt: "+new Date());
-		//cronbean.startUpTimer();
+		cronbean.startUpTimer();
 		System.out.println("llamado al cron desde el servelt finalizado: "+new Date());
 	}
 

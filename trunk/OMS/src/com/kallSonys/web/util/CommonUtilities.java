@@ -1,6 +1,8 @@
 package com.kallSonys.web.util;
 
 import java.util.Map;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletRequest;
@@ -100,5 +102,37 @@ public abstract class CommonUtilities {
 	}
 
 
-
+	/*
+	 * Agrega un mensaje de informacion asociado a un UIComponent.
+	 * 
+	 * @param id: Identificador del componente al que se asocia el mensaje.
+	 * @param detail: Mensaje que se debe asociar.
+	 *  @param severidadMsg: Indica le tipo de mensaje a mostrar
+	 */
+	public static void agregarMensajeContexto(String id, String detail, String severidadMsg)
+	{
+	
+		FacesMessage facesMessage = null;
+		facesMessage = new FacesMessage();
+		if(FacesMessage.SEVERITY_ERROR.equals(severidadMsg))
+		{
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		}
+		else if(FacesMessage.SEVERITY_INFO.equals(severidadMsg))
+		{
+			facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+		}
+		else if (FacesMessage.SEVERITY_WARN.equals(severidadMsg))
+		{
+			facesMessage.setSeverity(FacesMessage.SEVERITY_WARN);
+		}
+		else
+		{
+			facesMessage.setSeverity(FacesMessage.SEVERITY_WARN);
+		}									
+		facesMessage.setDetail(detail);
+		FacesContext.getCurrentInstance().addMessage(id, facesMessage);			
+	}
+	
+	
 }

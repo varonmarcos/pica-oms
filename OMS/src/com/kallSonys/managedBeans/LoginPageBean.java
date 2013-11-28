@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import com.kallSonys.business.Serv.LoginServiceLocal;
 import com.kallSonys.business.dto.UserDTO;
@@ -68,7 +69,15 @@ public class LoginPageBean implements Serializable {
 		return "";
 	}
 	
-		
+	
+	public String logout ( )
+	{
+		((HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false)).invalidate();
+		System.out.println("LLamado a ejecutar la accion: logout():Salir");
+		return "salir";
+	}
+
+	
 	public String getUser() {
 		return user;
 	}

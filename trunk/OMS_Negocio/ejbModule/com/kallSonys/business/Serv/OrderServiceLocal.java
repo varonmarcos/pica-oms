@@ -30,4 +30,6 @@ public interface OrderServiceLocal {
 	
 	public String cambiarEstadoOrden(OrderDTO orderDTO) ;
 	
+	public List<Orders> getDetallesOrder (String orderID);
+	
 }

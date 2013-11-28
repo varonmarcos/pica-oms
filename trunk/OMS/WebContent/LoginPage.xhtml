@@ -23,11 +23,19 @@
 				<tr class="bl">
 				<td width="489" height="188"></td>
 				<td width="35%">
-					<h:form name="theForm">
+				
+					<h:form name="theForm" id="formLogin">
 						<table width="90%" border="0" align="center" cellpadding="0" cellspacing="3">
 							<tr>
 								<td width="37%" class="ac">&nbsp;</td>
 								<td width="63%" class="ac"><div align="right">Acceso a usuarios registrados</div></td>
+							</tr>
+							<tr>
+								<td width="37%" class="ac">&nbsp;</td>
+								<td width="63%">
+								<h:messages globalOnly="true" gloClass="errorMessage"  errorStyle="color:red"  style="color:red"
+								fatalClass="fatalMessage" id="messages1" infoClass="infoMessage" warnClass="warnMessage"/>
+								</td>
 							</tr>
 							<tr>
 								<td height="3" colspan="2" background="images/sd.gif">

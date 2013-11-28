@@ -263,8 +263,12 @@
                                 																</ice:column>
 																							</ice:dataTable>
 																						</ice:panelGrid>
+																						<ice:panelGrid>
+																							<h:messages globalOnly="true" gloClass="errorMessage" 
+																							fatalClass="fatalMessage" id="messages1" infoClass="infoMessage" warnClass="warnMessage"/>
+																						</ice:panelGrid>
 																						<!-- Formulario para Modificar datos de cliente -->
-																						<ice:panelGrid id="panelTitle">
+																						<ice:panelGrid id="panelTitle" rendered="#{buscarClientePageBean.renderFormModifiedCustomer}">
                                     														<ice:outputLabel id="accountLbl2" value="Modificacion de datos de cliente"/>
                                 														</ice:panelGrid>
 																						<ice:panelGrid columns="2" rendered="#{buscarClientePageBean.renderFormModifiedCustomer}">
@@ -314,7 +318,7 @@
                                     															 <ice:inputText id="txtTarjetaCredito" style="width:214px" value="#{buscarClientePageBean.customerSelected.numeroTarjetaCredito}"/>
                                 															</ice:panelGrid>
                                 														</ice:panelGrid>
-                                														<ice:panelGrid>
+                                														<ice:panelGrid rendered="#{buscarClientePageBean.renderFormModifiedCustomer}">
                                 															<ice:commandButton id="btnActualizarCustmer" value="Modifcar Cliente" action="#{buscarClientePageBean.doModificarCliente}"></ice:commandButton>
                                 														</ice:panelGrid>
 																						<!-- Fin Formularion para modificar datos de cliente -->

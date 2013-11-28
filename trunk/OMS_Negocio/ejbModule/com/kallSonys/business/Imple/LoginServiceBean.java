@@ -11,6 +11,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import com.kallSonys.business.Serv.LoginServiceLocal;
+import com.kallSonys.business.dto.AppRecursosDTO;
 import com.kallSonys.business.dto.UserDTO;
 import com.kallSonys.common.dal.jpa.entitys.AppRecurso;
 import com.kallSonys.common.dal.jpa.facade.appSeg.AppRecursosFacadeRemote;
@@ -84,10 +85,23 @@ public class LoginServiceBean implements LoginServiceLocal {
 		user.setNombre(userAut.getNombre());
 		user.setApellido(userAut.getApellido());
 		user.setAutenticado(userAut.isAutenticado());
-		user.setListadoRecursos(userAut.getListadoRecursos());
-		
+		user.setListadoRecursos(this.convertRecursosDTO(userAut.getListadoRecursos()));		
 		return user;
 		
+	}
+	
+	private List<AppRecursosDTO> convertRecursosDTO(List<AppRecursosDto> listadoRecuersos)
+	{
+		List<AppRecursosDTO> listadoRecursosReturn = new  ArrayList<AppRecursosDTO>();		
+		for(AppRecursosDto recursoItem : listadoRecuersos)
+		{
+			AppRecursosDTO itemRetrun = new AppRecursosDTO();
+			itemRetrun.setIdrecursos(recursoItem.getIdrecursos());
+			itemRetrun.setNombre(recursoItem.getNombre());
+			listadoRecursosReturn.add(itemRetrun);
+		}
+		
+		return listadoRecursosReturn;			
 	}
 
 }

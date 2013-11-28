@@ -1,5 +1,6 @@
 package com.kallSonys.business.Imple;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,10 +8,13 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+import weblogic.jdbc.wrapper.Array;
+
 import com.kallSonys.business.Serv.CustomerServiceLocal;
 import com.kallSonys.business.consts.CustomerConsts;
 import com.kallSonys.business.dto.CustomerDTO;
 import com.kallSonys.business.enums.enumCustomerType;
+import com.kallSonys.business.test.ReturnEntitiesTest;
 import com.kallSonys.business.transformation.PersistenceConverter;
 import com.kallSonys.common.dal.jpa.entitys.Address;
 import com.kallSonys.common.dal.jpa.entitys.Customer;
@@ -152,30 +156,40 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 	}
 
 	@Override
-	public CustomerDTO getCustomerByIdentificador(Map<String, Object> parameters) {
-		CustomerDTO cusDTO = null;
+	public List<CustomerDTO> getCustomerByIdentificador(Map<String, Object> parameters) {
+		List<CustomerDTO> listCusDTO =new ArrayList<CustomerDTO>();
+		CustomerDTO cusDTO=null;
 		Customer customer;
 		try {
 			// Buscamos por Identificador de Cliente
-			customer = this.customerBean.find(parameters
-					.get(CustomerConsts.IDENTIFICACION_FILTER));
+			customer = this.customerBean.find(parameters.get(CustomerConsts.IDENTIFICACION_FILTER));
 			if (customer != null) {
 				cusDTO = this.convertCustomerBusinessToWeb(customer);
+				listCusDTO.add(cusDTO);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return cusDTO;
+		return listCusDTO;
 	}
 
 	@Override
-	public CustomerDTO getCustomerByIdProduct(Map<String, Object> parameters) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CustomerDTO> getCustomerByIdProduct(Map<String, Object> parameters) {
+		List<CustomerDTO> listCustomersDto=new ArrayList<CustomerDTO>();;
+		try{
+			List<Customer> listCustomers=ReturnEntitiesTest.returnCustomerByProductId();
+			if(listCustomers.size()>0){
+				listCustomersDto=convertCustomerBusinessToWeb(listCustomers);
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listCustomersDto;
 	}
 
 	@Override
-	public CustomerDTO getCustomerByIdFacturacion(Map<String, Object> parameters) {
+	public List<CustomerDTO> getCustomerByIdFacturacion(Map<String, Object> parameters) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -188,11 +202,31 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 		cusDTO.setEmail(cus.getEmail());
 		cusDTO.setTipoTarjetaCredito(cus.getCreditcardtype());
 		cusDTO.setNumeroTarjetaCredito(cus.getCreditcardnumer());
-		cusDTO.setTipoCliente(cus.getCustomertype().getDescription());
+		//cusDTO.setTipoCliente(cus.getCustomertype().getDescription);
 		cusDTO.setNumeroTelefonico(cus.getPhonenumber());
 		cusDTO.setEstadoCliente(cus.getStatus());
 
 		return cusDTO;
+	}
+	
+	private List<CustomerDTO> convertCustomerBusinessToWeb(List<Customer> customer) {
+		CustomerDTO cusDTO = new CustomerDTO();
+		List<CustomerDTO> listCustomerDto=new ArrayList<CustomerDTO>();
+		for (Customer cus:customer){
+			cusDTO.setIdCliente(cus.getCustid());
+			cusDTO.setNombreCliente(cus.getFname());
+			cusDTO.setApellidoCliente(cus.getLname());
+			cusDTO.setEmail(cus.getEmail());
+			cusDTO.setTipoTarjetaCredito(cus.getCreditcardtype());
+			cusDTO.setNumeroTarjetaCredito(cus.getCreditcardnumer());
+			//cusDTO.setTipoCliente(cus.getCustomertype().getDescription());
+			cusDTO.setNumeroTelefonico(cus.getPhonenumber());
+			cusDTO.setEstadoCliente(cus.getStatus());
+			listCustomerDto.add(cusDTO);
+		}
+		
+		
+		return listCustomerDto;
 	}
 	
 	private Customer convertCustomeWebToBusiness(CustomerDTO cusDTO){

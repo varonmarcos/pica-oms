@@ -30,7 +30,7 @@ public class ProductServiceBean implements ProductServiceLocal {
 	
 	@Override
 	public ProductoDTO getProductByCode(String producId) {
-		// TODO Auto-generated method stub
+		//Aca debemos conectarnos al WS de B2C
 		return null;
 	}
 

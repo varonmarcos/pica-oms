@@ -17,7 +17,7 @@ public class UserDTO implements Serializable {
     private String nombre;
     private String apellido;
     private String email;
-    private List<AppRecursosDto> listadoRecursos;
+    private List<AppRecursosDTO> listadoRecursos;
     private boolean autenticado=false;
 	
 	public UserDTO(){
@@ -72,11 +72,11 @@ public class UserDTO implements Serializable {
 		this.email = email;
 	}
 
-	public List<AppRecursosDto> getListadoRecursos() {
+	public List<AppRecursosDTO> getListadoRecursos() {
 		return listadoRecursos;
 	}
 
-	public void setListadoRecursos(List<AppRecursosDto> listadoRecursos) {
+	public void setListadoRecursos(List<AppRecursosDTO> listadoRecursos) {
 		this.listadoRecursos = listadoRecursos;
 	}
 

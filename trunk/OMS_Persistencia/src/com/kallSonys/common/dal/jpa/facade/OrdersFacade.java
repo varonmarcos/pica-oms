@@ -8,11 +8,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.kallSonys.common.dal.jpa.entitys.AppRecurso;
 import com.kallSonys.common.dal.jpa.entitys.Customer;
+import com.kallSonys.common.dal.jpa.entitys.Item;
 import com.kallSonys.common.dal.jpa.entitys.Orders;
 import com.kallSonys.common.dal.util.Utils;
 
@@ -71,7 +74,7 @@ public class OrdersFacade extends AbstractFacade<Orders> implements OrdersFacade
 	        List<Orders> setListOrders = new ArrayList<Orders>();
 	         
 	        String sqlNativo = "SELECT CUSTID,ORDERID,ORDERDATE,PRICE,STATUS,COMMENTS "+
-	        					" FROM orders WHERE custid = "+customerID;
+	        					" FROM orders WHERE custid = '"+customerID+"'";
 	                	        
 	        Query query = em.createNativeQuery(sqlNativo);
 	        
@@ -106,6 +109,104 @@ public class OrdersFacade extends AbstractFacade<Orders> implements OrdersFacade
 	        return setListOrders;
 		 }		 	
     	return null;
+    }
+    
+    
+    public String actualizarEstadoOrden(String idOrden, String nuevoEstado)
+    {
+    	String result="ERROR";
+    	System.out.println("OrderFacede actualizarEstadoOrden 1: "+idOrden+"-"+nuevoEstado);
+    	   String sqlNativo = "UPDATE orders "+
+					" SET status = '"+ nuevoEstado +"' "+
+					" WHERE orderid = '"+ idOrden +"' ";       	        
+    	   try
+    	   {
+    			Query query = em.createNativeQuery(sqlNativo);
+    			int resultUpdate = query.executeUpdate();
+    			System.out.println("OrderFacede actualizarEstadoOrden 2: "+resultUpdate);
+        	   	if(resultUpdate>0)
+        	   	{
+        	   		result = "OK";
+        	   	}        	           	   
+    	   }catch (Exception e)
+    	   {
+    		   System.out.println("Se presentó un error al actualizar el estado de la orden: "+e.getMessage());
+    	   }
+    	   System.out.println("OrderFacede actualizarEstadoOrden 3: "+result);
+    	   return result;                                                   	
+    	
+    }
+    
+    
+    public List<Orders> getDetallesOrder (String orderID)
+    {
+    
+    	//Objeto a devolver
+        List<Orders> setListOrders = new ArrayList<Orders>();
+        Set<Item> setListProductos = new HashSet<Item>();;
+        boolean loadOrder=false;
+        
+    	String SQLnativo = "SELECT "+ 
+							"	ORD.ORDERID, "+
+							"	ORD.ORDERDATE, "+
+							"	ORD.PRICE AS VALOR_TOTAL, "+
+							"	ORD.STATUS AS ESTADO, "+
+							"	ORD.COMMENTS, "+
+							"	ITS.PRODID, "+
+							"	ITS.PRODUCTNAME AS PRODUCTO, "+
+							"	ITS.QUANTITY AS CANTIDAD, "+
+							"	ITS.PRICE VALORUND, "+
+							"	ITS.PRICE*ITS.QUANTITY AS SUBTOTAL "+
+							"	FROM ORDERS ORD "+
+							"	INNER JOIN ITEMS ITS ON ORD.ORDERID = ITS.ORDERID "+
+							"	WHERE ORD.ORDERID = "+orderID;
+    	    	
+		    	try
+		    	{
+		    		Query query = em.createNativeQuery(SQLnativo);
+		    		@SuppressWarnings("unchecked")
+					List<Object[]> listado = query.getResultList();         
+			        if(listado !=null && !listado.isEmpty())
+			        {
+			            for (Iterator<Object[]> it = listado.iterator(); it.hasNext();) 
+			            {
+			                Object[] resultElement = it.next();
+			                //cargando encabezado de la orden
+			                if(!loadOrder)
+			                {
+			                	Orders order = new  Orders();	                
+				                order.setOrderid(resultElement[0].toString().trim());	              
+				                order.setOrderdate(Utils.getStringToCalendar(resultElement[1].toString().trim(), "yyyy-MM-dd").getTime());	                	               
+				                order.setPrice(new BigDecimal(resultElement[2].toString().trim()));	                	               
+				                order.setStatus(resultElement[3].toString().trim());	                
+				                if(resultElement[4]!=null)
+				                {
+				                	order.setComments(resultElement[4].toString().trim());	
+				                }
+				                else
+				                {
+				                	order.setComments("");
+				                }	   	                
+				                setListOrders.add(order);
+				                loadOrder=true;
+			                }
+			                //cargarndo productos de la orden
+			                Item producto = new Item();
+			                producto.setProdid(new BigDecimal (resultElement[5].toString().trim()));
+			                producto.setProductname(resultElement[6].toString().trim());
+			                producto.setQuantity(new BigDecimal(resultElement[7].toString().trim()));
+			                producto.setPrice(new BigDecimal(resultElement[8].toString().trim()));	                
+			                setListProductos.add(producto);
+			            }   
+			            setListOrders.get(0).setItems(setListProductos);
+			        }
+		    	}
+		    	catch(Exception e)
+		    	{
+		    		System.out.println("Se presentó un error en OdersFacade:getDetallesOrder: "+e.getMessage());
+		    		return null;
+		    	}    			                       
+	        return setListOrders;	    	    	
     }
     
 }

@@ -6,9 +6,11 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
     version="2.0">
     
+    <!-- 
      <lifecycle>
 		<phase-listener>com.kallSonys.web.util.AAListener</phase-listener>
 	</lifecycle>
+	-->
     
     <application>
 	  <resource-bundle>
@@ -16,6 +18,31 @@
 		<var>msg</var>
 	   </resource-bundle>
      </application>
+     
+     
+       <!-- pagina para mensajes de error --> 
+     <navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>mensajesError
+			</from-outcome>
+			<to-view-id>/pages/messagesJSF.jsp
+			</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	     
+      <!-- Regla para hacer el logout de la aplicacon -->
+    <navigation-rule>
+		<from-view-id>/pages/PrincipalPage.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>salir</from-outcome>
+			<to-view-id>/LoginPage.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+     
+     
     <!-- Regla para nevegar desde la pagina de login a la pagina principal -->
     <navigation-rule>
 		<from-view-id>/LoginPage.xhtml</from-view-id>

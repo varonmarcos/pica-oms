@@ -39,7 +39,7 @@ public class Customer implements Serializable {
 	private Customertype customertype;
 
 	//bi-directional many-to-one association to CustomerAddress	
-	@OneToMany(mappedBy="customer",cascade = CascadeType.ALL,targetEntity = CustomerAddress.class)
+	@OneToMany(mappedBy="customer",cascade = CascadeType.ALL,targetEntity = CustomerAddress.class, fetch=FetchType.EAGER)
 	private Set<CustomerAddress> customerAddresses;
 
 	//bi-directional many-to-one association to Order

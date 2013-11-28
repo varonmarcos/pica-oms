@@ -53,15 +53,15 @@ public abstract class CommonUtilities {
 		return ((ServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRemoteAddr();
 	}			
 		
-	public void sessionReset()
+	public static void sessionReset()
     {
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 		for ( String key:sessionMap.keySet() )
 		{
-			if (!key.contains("LoginPageBean")&&!key.contains("datosUsuarioAutenticado"))
-            {
+			//if (!key.contains("LoginPageBean")&&!key.contains("datosUsuarioAutenticado"))
+            //{
 				sessionMap.remove(key);
-			}
+			//}
 		}			
 	}
 	

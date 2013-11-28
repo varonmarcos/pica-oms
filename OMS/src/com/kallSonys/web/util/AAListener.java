@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
@@ -12,6 +13,9 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.kallSonys.business.dto.AppRecursosDTO;
+import com.kallSonys.business.dto.UserDTO;
 
 //import com.kallSonys.seg.biz.transfer.user.UsersAuthenticatedDTO;
 
@@ -50,31 +54,61 @@ public class AAListener implements PhaseListener {
 		       this.cargarUrlsNoRestringidas();
 		}
 		
-		
-		
-		if (  phaseid == PhaseId.RESTORE_VIEW )
-        {
-			System.out.println("PhaseId.RESTORE_VIEW");
-			navigationHandler = facescontext.getApplication().getNavigationHandler();
-			
-			//verificamos si el usuario está logeado, si nó, lo envía al login
-			/*
-			if(usersAuthenticatedDTO==null)
-			{
-				//navigationHandler.handleNavigation(facescontext, null, "logout");	
+		//validamos que se allan cargado las urls no restringuidas
+		if(this.urlsNoRestringidas != null && this.urlsNoRestringidas.size() > 0)
+		{			
+			if (  phaseid == PhaseId.RESTORE_VIEW )
+	        {				
+				navigationHandler = facescontext.getApplication().getNavigationHandler();
+				String pagianDeLogin = "/OMS/faces/LoginPage.xhtml";
+				String targetURL = uri; 
+				
+				System.out.println("AALISTENER: DESTINO: "+targetURL);
+				//Permitir acceder al uri que muestra la pagina de login
+		        if (( targetURL != null ) && targetURL.equals( pagianDeLogin )) 		        
+		        {	
+		        	//Permitimos pasar a la página de login
+		        }
+		        else
+		        {
+		        	System.out.println("-------------RESTORE_VIEW---------------");	
+		        	
+					//----------------Verificando si el usuario está en login
+					UserDTO usersAuthenticatedDTO = (UserDTO)CommonUtilities.obtenerAtributoSesion("usuarioAutenticadoDTO");	
+					System.out.println("AALISTENER: Verificamos si el usuario està en session es decir hizo login: "+usersAuthenticatedDTO);								
+					if(usersAuthenticatedDTO==null)
+					{
+						System.out.println("AALISTENER: navigationHandler Goto SALIR");									
+						navigationHandler.handleNavigation(facescontext, null, "Salir");	
+					}
+					else
+					{
+						System.out.println("AALISTENER: El usuario está logeado");
+						System.out.println("AALISTENER: Verificar acceso a url destino");
+						facescontext = phaseEvent.getFacesContext();
+						request = (HttpServletRequest)facescontext.getExternalContext().getRequest();								
+						uri = request.getRequestURI();	
+						targetURL = uri;
+						//---------------Verificamos si el usuario tiene permiso al recurso que intenta acceder											
+						if ( urlsNoRestringidas.contains(targetURL) )//targetURL  //"/OMS/faces/pages/ProductoPage.xhtml"
+						{
+							System.out.println("Recurso dentro de el conjunto de urls no restringidas en el properties "+PATH_PROPERTIES);
+							navigationHandler.handleNavigation(facescontext, null, targetURL);	
+			        	}
+						else if ( !urlAutorizada( usersAuthenticatedDTO.getListadoRecursos(), targetURL ))
+						{
+							System.out.println("AALISTENER: El usuario no tiene autorizacion, no permitir ir al recurso[" + uri + "]" );					        			        	
+			        		navigationHandler.handleNavigation(facescontext, null, "mensajesError");			        						        					        
+				        }
+						else 
+						{
+							
+						}																													
+					}	
+		        }																	                                    				  
 			}
-			*/
-			            
-                        
-			facescontext = phaseEvent.getFacesContext();
-			request = (HttpServletRequest)facescontext.getExternalContext().getRequest();
-			showLoginAction = "LoginPage.xhtml";			
-			uri = request.getRequestURI();
-			navigationHandler = facescontext.getApplication().getNavigationHandler();			 
-			int firstSlash = uri.indexOf("/jsp", 1);
-	        
 		}
-                System.out.println("afterPhase FIN");
+        System.out.println("afterPhase FIN");
 	}
 	
 	
@@ -87,14 +121,18 @@ public class AAListener implements PhaseListener {
 	 * @return              true si se permite acceder a la URL, false en caso contrario.
 	 */
 	@SuppressWarnings("unused")
-	private boolean urlAutorizada() {
-		boolean perimitirAcceso = true;		
-				
-		
-		
+	private boolean urlAutorizada(List<AppRecursosDTO> listadoRecursosUsuario, String targetURL) {
+		boolean perimitirAcceso = false;		
+		for ( AppRecursosDTO recursoItem : listadoRecursosUsuario ) 
+		{			
+			if ( targetURL.trim().toLowerCase().equals( recursoItem.getNombre().toLowerCase().trim()) ) 
+			{
+				perimitirAcceso = true;
+				break;
+			}
+	    }					
 		return perimitirAcceso; 
 	}
-	
 	
 	@SuppressWarnings("unused")
 	private void cargarUrlsNoRestringidas ( )

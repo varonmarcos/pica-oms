@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.CustomScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -31,7 +32,6 @@ public class BuscarClientePageBean{
 	@EJB(mappedName="CustomerServiceBean")
 	private CustomerServiceLocal customerServiceFacade;
 	
-	FacesContext context = FacesContext.getCurrentInstance();
 	
 	private CustomerDTO customerDTO;
 	private List<CustomerDTO> listCustomers;
@@ -118,26 +118,34 @@ public class BuscarClientePageBean{
 	 * Este metodo realiza la busqueda de clientes
 	 */
 	public void doBuscarCliente(){
-		Map<String,Object> paramters = new HashMap<String, Object>();
-		if(Constantes.IDENTIFICACION_FILTER.equals(this.selectedFilter)){
-			paramters.put(Constantes.IDENTIFICACION_FILTER,this.identificacion);
-		}else if(Constantes.PRODUCTO_FILTER.equals(this.selectedFilter)){
-			paramters.put(Constantes.PRODUCTO_FILTER,this.identificacion);
-		}else{
-			paramters.put(Constantes.FECHA_INICIAL,this.fechaInicio);
-			paramters.put(Constantes.FECHA_FIN,this.fechaFin);
+		try{
+			Map<String,Object> paramters = new HashMap<String, Object>();
+			if(Constantes.IDENTIFICACION_FILTER.equals(this.selectedFilter))
+			{
+				paramters.put(Constantes.IDENTIFICACION_FILTER,this.identificacion);
+				this.listCustomers=this.customerServiceFacade.getCustomerByIdentificador(paramters);
+			
+			}
+			else if(Constantes.PRODUCTO_FILTER.equals(this.selectedFilter))
+			{
+				paramters.put(Constantes.PRODUCTO_FILTER,this.idProducto);
+				this.listCustomers=this.customerServiceFacade.getCustomerByIdProduct(paramters);
+			}else
+			{
+				paramters.put(Constantes.FECHA_INICIAL,this.fechaInicio);
+				paramters.put(Constantes.FECHA_FIN,this.fechaFin);
+				this.listCustomers=this.customerServiceFacade.getCustomerByIdFacturacion(paramters);
+			}
+						
+			if(this.listCustomers.size()>0){
+				this.renderTableCustomer=Boolean.TRUE;
+			}else{
+				this.renderTableCustomer=Boolean.FALSE;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
-		paramters.put(Constantes.FILTER,this.selectedFilter);
-		this.customerDTO=this.customerServiceFacade.getCustomerByIdentificador(paramters);
-		if(this.customerDTO.getIdCliente()!=null)
-		{
-			this.listCustomers.add(this.customerDTO);
-		}
-		if(this.listCustomers.size()>0){
-			this.renderTableCustomer=Boolean.TRUE;
-		}else{
-			this.renderTableCustomer=Boolean.FALSE;
-		}
+		
 			
 	}
 	
@@ -146,19 +154,24 @@ public class BuscarClientePageBean{
 	 * @param event
 	 */
 	public void viewFilterFields(ValueChangeEvent event){
-		if(Constantes.IDENTIFICACION_FILTER.equals(event.getNewValue())){
-			this.setRenderProducto(Boolean.TRUE);
-			this.setRenderFacturacion(Boolean.TRUE);
-			this.setRenderIdentificacion(Boolean.FALSE);
-		}else if(Constantes.FACTURACION_FILTER.equals(event.getNewValue())){
-			this.setRenderProducto(Boolean.TRUE);
-			this.setRenderFacturacion(Boolean.FALSE);
-			this.setRenderIdentificacion(Boolean.TRUE);
-		}else if(Constantes.PRODUCTO_FILTER.equals(event.getNewValue())){
-			this.setRenderProducto(Boolean.FALSE);
-			this.setRenderFacturacion(Boolean.TRUE);
-			this.setRenderIdentificacion(Boolean.TRUE);
+		try{
+			if(Constantes.IDENTIFICACION_FILTER.equals(event.getNewValue())){
+				this.setRenderProducto(Boolean.TRUE);
+				this.setRenderFacturacion(Boolean.TRUE);
+				this.setRenderIdentificacion(Boolean.FALSE);
+			}else if(Constantes.FACTURACION_FILTER.equals(event.getNewValue())){
+				this.setRenderProducto(Boolean.TRUE);
+				this.setRenderFacturacion(Boolean.FALSE);
+				this.setRenderIdentificacion(Boolean.TRUE);
+			}else if(Constantes.PRODUCTO_FILTER.equals(event.getNewValue())){
+				this.setRenderProducto(Boolean.FALSE);
+				this.setRenderFacturacion(Boolean.TRUE);
+				this.setRenderIdentificacion(Boolean.TRUE);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
+		
 		
 	}
 	
@@ -189,12 +202,19 @@ public class BuscarClientePageBean{
 		try{
 			Boolean response=this.customerServiceFacade.doUpdateCustomer(this.customerSelected);
 			if(response){
-				System.out.println("El usuario fue actualizado con exito");
-			}
-		}catch (Exception e) {
+				this.renderFormModifiedCustomer=Boolean.FALSE;
+				this.addMessageToView();
+		}
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private void addMessageToView(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null,new FacesMessage("Cliente modificado exitosamente"));
 	}
 	
 	public CustomerDTO getCustomerDTO() {

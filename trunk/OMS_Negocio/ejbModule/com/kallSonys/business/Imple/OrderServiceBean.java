@@ -84,8 +84,15 @@ public class OrderServiceBean implements OrderServiceLocal {
 	@Override
 	public String cambiarEstadoOrden(OrderDTO orderDTO) 
 	{
-		System.out.println("OrderServiceBean cambiarEstadoOrden: 1");
-		return""; //orderBean.actualizarEstadoOrden(orderDTO.getORDERID(), orderDTO.getSTATUS());
+		System.out.println("OrderServiceBean cambiarEstadoOrden: 1: "+orderDTO.getORDERID()+"-"+orderDTO.getSTATUS());
+		return orderBean.actualizarEstadoOrden(orderDTO.getORDERID(), orderDTO.getSTATUS());
+	}
+
+	@Override
+	public List<Orders> getDetallesOrder(String orderID) 
+	{
+		System.out.println("OrderServiceBean getDetallesOrder: ORDERID: "+orderID);
+		return orderBean.getDetallesOrder(orderID);
 	}
 
 }

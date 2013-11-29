@@ -20,8 +20,11 @@
               			</ice:menuItem>
              			<!-- Menu de Campanas -->
              			<ice:menuItem id="adminCampanas" value="Administracion de Campanas" >
-                 			<ice:menuItem id="consulCampanas"  value="Consultar Campanas"/>
-                 			<ice:menuItem id="crearCampanas"  value="Crear Campanas"/>
+                 			<ice:menuItem id="consulCampanas"  value="Consultar Campanas"
+                 			 	action="#{principalPageBean.gotoBuscarCampanaPage}"/>
+                 			<ice:menuItem id="crearCampanas"  value="Crear Campanas" 
+                 			action="#{principalPageBean.gotoCampanaPage}"/>
+                 			
              			</ice:menuItem>
              			
              			<!-- Menu de Clientes -->

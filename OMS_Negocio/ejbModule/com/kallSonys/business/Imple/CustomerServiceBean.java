@@ -1,5 +1,6 @@
 package com.kallSonys.business.Imple;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -7,8 +8,6 @@ import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-
-import weblogic.jdbc.wrapper.Array;
 
 import com.kallSonys.business.Serv.CustomerServiceLocal;
 import com.kallSonys.business.consts.CustomerConsts;
@@ -177,7 +176,9 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 	public List<CustomerDTO> getCustomerByIdProduct(Map<String, Object> parameters) {
 		List<CustomerDTO> listCustomersDto=new ArrayList<CustomerDTO>();;
 		try{
-			List<Customer> listCustomers=ReturnEntitiesTest.returnCustomerByProductId();
+			//List<Customer> listCustomers=ReturnEntitiesTest.returnCustomerByProductId();
+			String idProduct=parameters.get(CustomerConsts.PRODUCTO_FILTER).toString();
+			List<Customer> listCustomers=customerBean.getCustomersByProduct(idProduct);
 			if(listCustomers.size()>0){
 				listCustomersDto=convertCustomerBusinessToWeb(listCustomers);
 			}
@@ -190,8 +191,21 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 
 	@Override
 	public List<CustomerDTO> getCustomerByIdFacturacion(Map<String, Object> parameters) {
-		// TODO Auto-generated method stub
-		return null;
+		List<CustomerDTO> listCustomersDto=new ArrayList<CustomerDTO>();;
+		try{
+			//List<Customer> listCustomers=ReturnEntitiesTest.returnCustomerByProductId();
+			Date dateIn=(java.sql.Date)parameters.get(CustomerConsts.FECHA_INICIAL);
+			Date dataFin=(java.sql.Date)parameters.get(CustomerConsts.FECHA_FIN);
+			List<Customer> listCustomers=customerBean.getCustomersByFechas(dateIn, dataFin);
+			if(listCustomers.size()>0){
+				listCustomersDto=convertCustomerBusinessToWeb(listCustomers);
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listCustomersDto;
+		
 	}
 
 	private CustomerDTO convertCustomerBusinessToWeb(Customer cus) {
@@ -210,16 +224,16 @@ public class CustomerServiceBean implements CustomerServiceLocal {
 	}
 	
 	private List<CustomerDTO> convertCustomerBusinessToWeb(List<Customer> customer) {
-		CustomerDTO cusDTO = new CustomerDTO();
+		CustomerDTO cusDTO; 
 		List<CustomerDTO> listCustomerDto=new ArrayList<CustomerDTO>();
 		for (Customer cus:customer){
+			cusDTO=new CustomerDTO();
 			cusDTO.setIdCliente(cus.getCustid());
 			cusDTO.setNombreCliente(cus.getFname());
 			cusDTO.setApellidoCliente(cus.getLname());
 			cusDTO.setEmail(cus.getEmail());
 			cusDTO.setTipoTarjetaCredito(cus.getCreditcardtype());
 			cusDTO.setNumeroTarjetaCredito(cus.getCreditcardnumer());
-			//cusDTO.setTipoCliente(cus.getCustomertype().getDescription());
 			cusDTO.setNumeroTelefonico(cus.getPhonenumber());
 			cusDTO.setEstadoCliente(cus.getStatus());
 			listCustomerDto.add(cusDTO);

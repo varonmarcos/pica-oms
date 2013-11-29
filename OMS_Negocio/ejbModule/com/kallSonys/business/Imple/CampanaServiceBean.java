@@ -27,9 +27,9 @@ import com.kallSonys.common.dal.jpa.facade.CustomertypeFacadeLocal;
  * @author Juan Pablo Aranda Galvis
  * 
  */
-@Stateless(name = "CampanaServiceBean", mappedName = "CamapanaServiceBean")
+@Stateless(name = "CampanaServiceBean", mappedName = "CampanaServiceBean")
 @Remote(CampanaServiceLocal.class)
-public class CamapanaServiceBean implements CampanaServiceLocal {
+public class CampanaServiceBean implements CampanaServiceLocal {
 
 	
 	

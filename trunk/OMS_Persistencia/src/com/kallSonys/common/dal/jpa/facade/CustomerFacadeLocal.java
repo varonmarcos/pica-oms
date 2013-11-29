@@ -4,7 +4,9 @@
  */
 package com.kallSonys.common.dal.jpa.facade;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Remote;
 
@@ -32,7 +34,11 @@ public interface CustomerFacadeLocal {
     List<Customer> findAll();
 
     List<Customer> findRange(int[] range);
-
+    
+    List<Customer> getCustomersByProduct(String idProduct);
+    
+    List<Customer> getCustomersByFechas(java.sql.Date dataIn,java.sql.Date dataFin);
+    
     int count();
     
 }

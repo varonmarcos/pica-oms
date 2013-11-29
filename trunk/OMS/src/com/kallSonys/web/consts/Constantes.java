@@ -15,5 +15,5 @@ public class Constantes {
 	public static final String FACTURACION_FILTER="FAC";
 	public static final String FECHA_INICIAL="FECHA_INI";
 	public static final String FECHA_FIN="FECHA_FIN";
-	public static final String DATE_FORMAT_PATTERN="MM/dd/yyyy";
+	public static final String DATE_FORMAT_PATTERN="/dd/MM/YYYY hh24:mi:ss";
 }

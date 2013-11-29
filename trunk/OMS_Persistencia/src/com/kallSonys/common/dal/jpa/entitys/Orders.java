@@ -4,6 +4,11 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.eclipse.persistence.annotations.Direction;
+import org.eclipse.persistence.annotations.NamedStoredProcedureQueries;
+import org.eclipse.persistence.annotations.NamedStoredProcedureQuery;
+import org.eclipse.persistence.annotations.StoredProcedureParameter;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
@@ -33,7 +38,7 @@ public class Orders implements Serializable {
 	private String status;
 
 	//bi-directional many-to-one association to Item
-	@OneToMany(mappedBy="order",cascade = CascadeType.ALL,targetEntity = Item.class)
+	@OneToMany (mappedBy="order",cascade = CascadeType.ALL,targetEntity = Item.class)
 	private Set<Item> items;
 
 	//bi-directional many-to-one association to Customer

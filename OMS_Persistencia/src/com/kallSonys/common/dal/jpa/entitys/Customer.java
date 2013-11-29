@@ -1,15 +1,29 @@
 package com.kallSonys.common.dal.jpa.entitys;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.eclipse.persistence.annotations.Direction;
+import org.eclipse.persistence.annotations.NamedStoredProcedureQuery;
+import org.eclipse.persistence.annotations.NamedStoredProcedureQueries;
+import org.eclipse.persistence.annotations.StoredProcedureParameter;
 
 
 /**
  * The persistent class for the CUSTOMER database table.
  * 
  */
+@NamedStoredProcedureQuery(name="GETCUSTOMERS_BY_IDPRODUCT",procedureName="GETCUSTOMERS_BY_IDPRODUCT",
+     parameters={@StoredProcedureParameter(direction= Direction.IN,name="IDPRODUCT",queryParameter="IDPRODUCT"),
+               @StoredProcedureParameter(direction= Direction.OUT_CURSOR,name="customers",queryParameter="customers")})
 @Entity
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -32,6 +46,9 @@ public class Customer implements Serializable {
 	private String phonenumber;
 
 	private String status;
+	
+	@Transient
+	private String price;
 
 	//bi-directional many-to-one association to Customertype
     @ManyToOne
@@ -144,5 +161,15 @@ public class Customer implements Serializable {
 	public void setOrders(Set<Orders> orders) {
 		this.orders = orders;
 	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	
+	
 	
 }

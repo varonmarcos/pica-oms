@@ -200,6 +200,7 @@ public class BuscarClientePageBean{
 	
 	public void doModificarCliente(){
 		try{
+			this.customerSelected=this.getSpecifiedCustomer(customerSelected);
 			Boolean response=this.customerServiceFacade.doUpdateCustomer(this.customerSelected);
 			if(response){
 				this.renderFormModifiedCustomer=Boolean.FALSE;
@@ -211,6 +212,18 @@ public class BuscarClientePageBean{
 		}
 		
 	}
+	
+	private CustomerDTO getSpecifiedCustomer(CustomerDTO cus){
+		for(CustomerDTO c:this.listCustomers)
+		{
+			if(c.getIdCliente().equals(cus.getIdCliente()))
+			{
+				return c;
+			}
+		}
+		return null;
+	}
+	
 	
 	private void addMessageToView(){
 		FacesContext context = FacesContext.getCurrentInstance();

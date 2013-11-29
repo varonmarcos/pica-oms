@@ -1,4 +1,4 @@
- <?xml version='1.0' encoding='UTF-8' ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -62,47 +62,113 @@
 			</tr>
 
 			<tr class="bl">
-				<td width="100%" valign="top">
+			<td width="100%" valign="top">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td><ice:outputLabel id="pageTitleLbl"
 									style="font-size:12px;font-weight:bold;color:#676767;"
-									value="Administracion de Clientes / " /> <ice:outputLabel
+									value="Administracion de Camapanas / " /> <ice:outputLabel
 									id="pageTitleLbl_"
 									style="font-size:12px;font-weight:bold;color:#155ae1;"
-									value="Crear Cliente /" /></td>
-						</tr>
-						<tr>
-							<td>
-							<ice:form>
-								<table align="center">
-										<ice:panelGrid>
-											<ice:panelGrid>
-												<ice:outputLabel id="accountLb1" value="Buscar Producto"/>
-											</ice:panelGrid>
-										<!--formulario Creacion de Campanas  -->
-										<ice:panelGrid columns="3" style="border-style: inset; border-width: 2px;" width="60%">
-											<!--Ingresa el id producto-->
-											<ice:panelGrid id="panelId">
-                                    			<ice:outputLabel id="accountLb1" value="Id Producto"/>
-                                			</ice:panelGrid>
-                                			<ice:panelGrid cellpadding="0" cellspacing="0" width="100%" >
-                                    			<ice:outputText id="txtIdProducto" style="width:214px" value="#{campanasPageBean.idProducto}"/>
-                                			</ice:panelGrid>
-                                			<ice:panelGrid cellpadding="0" cellspacing="0" width="100%" >
-                                    			<ice:commandButton id="btnBuscarProducto"/>
-                                			</ice:panelGrid>
-										</ice:panelGrid>
-									</ice:panelGrid>
-										<!--fin formulario Creacion de Campañas  -->
-
-									</ice:panelGroup>
-								</table>
-								</ice:form>
+									value="Crear Campana /" />
 							</td>
 						</tr>
+						<tr>
+						<td align="center">
+							<form name="formCampanas">
+							<ice:panelGrid style="vertical-align : top;">
+								<ice:panelGrid>
+									<ice:outputLabel id="accountLb1" value="Buscar Producto"/>
+								</ice:panelGrid>
+								<!--formulario Creacion de Campanas  -->
+								<ice:panelGrid columns="3" style="border-style: inset; border-width: 1px;" width="60%">
+									<!--Ingresa el id producto-->
+									<ice:panelGrid id="panelId">
+	                          			<ice:outputLabel id="accountLb10" value="Id Producto"/>
+	                      			</ice:panelGrid>
+	                 				<ice:panelGrid cellpadding="0" cellspacing="0" width="100%" >
+	                     				<ice:inputText id="txtIdProducto" style="width:80px" value="#{campanasPageBean.idProducto}"/>
+	                 				</ice:panelGrid>
+	                 				<ice:panelGrid cellpadding="0" cellspacing="0" width="100%" >
+	                       				<ice:commandButton id="btnBuscarProducto" value="Buscar Producto" action="#{campanasPageBean.doBuscarProduct}"/>
+	                 				</ice:panelGrid>
+								</ice:panelGrid>
+							</ice:panelGrid>
+							<!--fin formulario Creacion de Campañas  -->
+							<!-- inicio tabla que nuestras producto -->
+								<ice:panelGrid rendered="#{campanasPageBean.renderedTablaProducto}">
+								<!-- Table Producto -->
+								<ice:dataTable value="#{campanasPageBean.listProductos}" var="pro">
+									<f:facet name="header">
+         						      <ice:panelGroup style="height: 20px;">
+                                		<ice:outputText styleClass="tableTitle" value="Detalle de Producto"/>
+                                	 </ice:panelGroup>
+                                	</f:facet>
+                                <!-- Columna Identificador -->
+                                <ice:column style="width:20%" id="tableColumn1">
+                                	<f:facet name="header">
+                                		<ice:panelGroup style="text-align: center;" >
+                                			<ice:outputText styleClass="columnHeader" value="Identificador"/>
+                                		</ice:panelGroup>
+                                	</f:facet>
+                                	<ice:panelGroup style="text-align: center;" >
+                                 		<ice:outputText id="txtCliente" value="#{pro.productoId}"/>
+                                 	</ice:panelGroup>
+                                </ice:column>
+                                <!--Columna Nombre -->
+								<ice:column style="width:20%" id="tableColumn2">
+                                	<f:facet name="header">
+                                		<ice:panelGroup style="text-align: center;" >
+                                			<ice:outputText styleClass="columnHeader" value="Nombre"/>
+                                		</ice:panelGroup>
+                                	</f:facet>
+                                	<ice:panelGroup style="text-align: center;" >
+                                		<ice:outputText id="txtMail" value="#{pro.name}"/>
+                                	</ice:panelGroup>
+                                </ice:column>
+                                <!--Columna Precio -->
+								<ice:column style="width:30%" id="tableColumn3">
+                               	 	<f:facet name="header">
+                                		<ice:panelGroup style="text-align: center;" >
+                                			<ice:outputText styleClass="columnHeader" value="Precio"/>
+                                		</ice:panelGroup>
+                                	</f:facet>
+                                  	<ice:panelGroup style="text-align: center;" >
+                                  		<ice:outputText id="ttNumTelefono" value="#{pro.listaPrecio}"/>
+                                  	</ice:panelGroup>
+                                </ice:column>
+                                </ice:dataTable>
+								</ice:panelGrid>
+								<!--fin tabla que nuestras el producto  -->
+								
+								<!-- Formulario de Creacion de Campana -->
+								<ice:panelGrid columns="2" 
+								style="border-style: inset; border-width: 1px;" width="20%"
+								rendered="#{campanasPageBean.renderedTablaProducto}">
+								<!--Ingresa Nombre Campana-->
+									<ice:panelGrid id="panelCampana">
+										<ice:outputLabel id="accountLb2" value="Nombre campana:"/>
+									</ice:panelGrid>
+									<ice:panelGrid cellpadding="0" cellspacing="0">
+										<ice:inputText id="txtNameCampana" style="width:80px" value="#{campanasPageBean.nombreCampana}"/>
+									</ice:panelGrid>
+									<ice:panelGrid id="panelImgCampana">
+										<ice:outputLabel id="accountLb3" value="Imagen campana:"/>
+									</ice:panelGrid>
+									<ice:panelGrid cellpadding="0" cellspacing="0">
+										<ace:fileEntry fileEntryListener="#{fileEntry.sampleListener}" maxFileSize="6291456" 
+										maxTotalSize="18874368" useOriginalFilename="true"/>
+									</ice:panelGrid>
+								</ice:panelGrid>
+								<ice:panelGrid>
+									<ice:commandButton value="Crear Campana" action="#{campanasPageBean.doCrearCampaña}"/>
+								</ice:panelGrid>
+								<!-- Fin formulario Campana -->
+							</form>
+						</td>
+						</tr>
 					</table>
-				</td>
+			</td>
 			</tr>
 		</table>
 	</h:form>

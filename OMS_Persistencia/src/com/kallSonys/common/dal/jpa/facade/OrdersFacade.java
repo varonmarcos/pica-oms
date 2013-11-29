@@ -5,6 +5,7 @@
 package com.kallSonys.common.dal.jpa.facade;
 
 import java.math.BigDecimal;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +23,7 @@ import com.kallSonys.common.dal.util.Utils;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -48,25 +50,98 @@ public class OrdersFacade extends AbstractFacade<Orders> implements OrdersFacade
     /*Crea una orden y devuelve el ID generado para la misma*/
     public  String createAndReturnID(Orders orders)
     {
-    	
-    	 try
-         {
-             getEntityManager().persist(orders);  
-             getEntityManager().flush(); 
-             String id = orders.getOrderid();
-             System.out.println("ID DE ORDEN CREADO: "+id);
-             return id;
+    	 //Manejamos una sola transaccion
+		 //EntityTransaction tx = getEntityManager().getTransaction();
+		 //tx.begin();
+		 boolean txOK = true;
+    	 
+		 try
+         {    		
+    		 //Se crea la orden 
+    		 String nextIdOrden = this.getNextOrderID();
+    		 String sqlNativo ="Insert into ORDERS (CUSTID,ORDERID,ORDERDATE,PRICE,STATUS,COMMENTS) "+
+    		                   " values (?1,?2,SYSDATE,?3,?4,?5)";
+    		 
+    		System.out.println("sqlNativo ORDENES: "+sqlNativo);
+    		Query query = em.createNativeQuery(sqlNativo);
+    		query.setParameter(1, orders.getCustomer().getCustid());
+    		query.setParameter(2,nextIdOrden);    		
+    		query.setParameter(3, orders.getPrice());    		
+    		query.setParameter(4, orders.getStatus());
+    		
+    		if(orders.getComments()!=null)
+    		{
+    			query.setParameter(5, orders.getComments());
+    		}
+    		else
+    		{
+    			query.setParameter(5, null);
+    		}
+    		
+ 		    if(query.executeUpdate()>0)
+ 		    { 		    	 		    	 		    	 		  
+ 		    	//Creamos los items de la orden
+ 		    	String nextIdItem; 
+ 		    	Set<Item> setProductos = orders.getItems(); 	            
+ 	            ItemsFacade itemFacade = new  ItemsFacade();
+ 	            for(Item producto : setProductos)
+ 	            {
+ 	            	 nextIdItem = this.getNextItemID();
+ 	            	 System.out.println("NEXT ID ITEM: "+nextIdItem);
+ 	              	 sqlNativo ="Insert into ITEMS (ITEMID,PRODID,PRODUCTNAME,PARTNUM,PRICE,QUANTITY,ORDERID) "+
+		 	              			" values (SEQ_ITEMS.NEXTVAL,?1,?2,?3,?4,?5,?6)";		
+		 	              			               			 		                          		    	 	               
+ 	              	System.out.println("sqlNativo ITEMS: "+sqlNativo);
+ 	              	query = em.createNativeQuery(sqlNativo);
+ 	              	//query.setParameter(1, nextIdItem);
+	 	       		query.setParameter(1, producto.getProdid());    		
+	 	       		query.setParameter(2, producto.getProductname());
+	 	       		query.setParameter(3, producto.getPartnum());
+	 	       		query.setParameter(4, producto.getPrice());
+	 	       		query.setParameter(5, producto.getQuantity());
+	 	       		query.setParameter(6, nextIdOrden);
+ 	              		 	       		
+ 	              	if(query.executeUpdate() <= 0)
+ 	    		    { 
+ 	              		txOK = false;
+ 	              		break;
+ 	    		    }
+ 	             }
+ 		    }
+ 		    else
+ 		    {
+ 		    	txOK = false;
+ 		    }
+ 		    
+ 		    //verificamos que la TX es OK para hacer commit
+ 		    if(txOK)
+ 		    {
+ 		    	//tx.commit(); 		    	
+ 		    	return nextIdOrden;
+ 		    }
+    		     		
+             return "-1";
          }
          catch(Exception e)
          {
-         	System.out.println("ERROR:OrdersFacade:createAndReturnID: "+e.getMessage());
+         	System.out.println("====== ERROR EN:OrdersFacade.createAndReturnID: "+e.getMessage());
+         	System.out.println("====== TRAZA DEL ERROR: ");
+         	e.printStackTrace();
+         	System.out.println("========================");
+         	/*
+         	if(tx.isActive())
+         	{
+         		tx.rollback();
+         		tx = null;
+         	}
+         	*/
          	return "-1";
          }
     }
     
     public List<Orders> getOrderByCustomer (String customerID)
     {
-    
+        	     	
     	 if(customerID != null && customerID.length()>0)
 		 {
 			 		 		
@@ -74,7 +149,7 @@ public class OrdersFacade extends AbstractFacade<Orders> implements OrdersFacade
 	        List<Orders> setListOrders = new ArrayList<Orders>();
 	         
 	        String sqlNativo = "SELECT CUSTID,ORDERID,ORDERDATE,PRICE,STATUS,COMMENTS "+
-	        					" FROM orders WHERE custid = '"+customerID+"'";
+	        					" FROM orders WHERE custid = '"+customerID+"' ORDER BY ORDERID ASC";
 	                	        
 	        Query query = em.createNativeQuery(sqlNativo);
 	        
@@ -117,7 +192,7 @@ public class OrdersFacade extends AbstractFacade<Orders> implements OrdersFacade
     	String result="ERROR";
     	System.out.println("OrderFacede actualizarEstadoOrden 1: "+idOrden+"-"+nuevoEstado);
     	   String sqlNativo = "UPDATE orders "+
-					" SET status = '"+ nuevoEstado +"' "+
+					" SET status = '"+ nuevoEstado.toUpperCase() +"' "+
 					" WHERE orderid = '"+ idOrden +"' ";       	        
     	   try
     	   {
@@ -128,9 +203,13 @@ public class OrdersFacade extends AbstractFacade<Orders> implements OrdersFacade
         	   	{
         	   		result = "OK";
         	   	}        	           	   
-    	   }catch (Exception e)
-    	   {
-    		   System.out.println("Se presentó un error al actualizar el estado de la orden: "+e.getMessage());
+    	   }
+    	   catch (Exception e)
+    	   {    		 
+    		   System.out.println("====== ERROR EN:OrdersFacade.actualizarEstadoOrden: "+e.getMessage());
+               System.out.println("====== TRAZA DEL ERROR: ");
+               e.printStackTrace();
+               System.out.println("========================");    		   
     	   }
     	   System.out.println("OrderFacede actualizarEstadoOrden 3: "+result);
     	   return result;                                                   	
@@ -203,10 +282,29 @@ public class OrdersFacade extends AbstractFacade<Orders> implements OrdersFacade
 		    	}
 		    	catch(Exception e)
 		    	{
-		    		System.out.println("Se presentó un error en OdersFacade:getDetallesOrder: "+e.getMessage());
+	    		   System.out.println("====== ERROR EN:OrdersFacade.getDetallesOrder: "+e.getMessage());
+	               System.out.println("====== TRAZA DEL ERROR: ");
+	               e.printStackTrace();
+	               System.out.println("========================");
 		    		return null;
 		    	}    			                       
 	        return setListOrders;	    	    	
     }
     
+    //retorna el proximo ID para una orden
+    private String getNextOrderID()
+    {
+    	String sqlNextID = "SELECT SEQ_ORDERS.NEXTVAL FROM DUAL";
+    	Query query = em.createNativeQuery(sqlNextID);
+    	BigDecimal value = new BigDecimal(query.getSingleResult().toString());    	
+    	 return value.toString();
+    }
+  //retorna el proximo ID para insertar un item
+    private String getNextItemID()
+    {
+    	String sqlNextID = "SELECT SEQ_ITEMS.NEXTVAL FROM DUAL";
+    	Query query = em.createNativeQuery(sqlNextID);
+    	BigDecimal value = new BigDecimal(query.getSingleResult().toString());    	
+   	    return value.toString();    	    	    	  
+    }
 }

@@ -3,6 +3,8 @@
  */
 package com.kallSonys.business.Imple;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,9 +31,14 @@ public class ProductServiceBean implements ProductServiceLocal {
 	
 	
 	@Override
-	public ProductoDTO getProductByCode(String producId) {
-		//Aca debemos conectarnos al WS de B2C
-		return null;
+	public List<ProductoDTO> getProductByCode(String producId) {
+		List<ProductoDTO> listProducts=new ArrayList<ProductoDTO>();
+		ProductoDTO productoDto=new ProductoDTO();
+		productoDto.setProductoId(2L);
+		productoDto.setName("Televisor LG");
+		productoDto.setListaPrecio(new BigDecimal(150.000));
+		listProducts.add(productoDto);
+		return listProducts;
 	}
 
 	@Override

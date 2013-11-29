@@ -11,7 +11,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
-import weblogic.xml.xpath.stream.axes.EverythingAxis;
 
 
 import com.kallSonys.business.Serv.CustomerServiceLocal;

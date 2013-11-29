@@ -3,12 +3,9 @@
  */
 package com.kallSonys.managedBeans;
 
-import java.io.Serializable;
-
 import javax.faces.bean.CustomScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 
 import com.kallSonys.web.sesion.SessionBean;
@@ -63,19 +60,7 @@ public class PrincipalPageBean{
 		
 	}
 	
-	@SuppressWarnings("unused")
-	public void formCreaCampanaListener(ActionEvent event){
-		
-		String action= (String)event.getComponent().getAttributes().get("actionCreaCampaña");
-		if(action.equals("1")){
-			this.sessionBean.setShowFormCrearCampana(Boolean.TRUE);
-			this.sessionBean.setShowFormConsultaCampana(Boolean.FALSE);
-		}else{
-			this.sessionBean.setShowFormCrearCampana(Boolean.FALSE);
-			this.sessionBean.setShowFormConsultaCampana(Boolean.TRUE);
-		}
-		
-	}
+	
 	
 	@SuppressWarnings("unused")
 	public void formBuscarClienteListener(ActionEvent event){
@@ -91,8 +76,12 @@ public class PrincipalPageBean{
 		
 	}
 	
-	public String gotoCamapanaPage(){
-		return "goToCampana";
+	public String gotoCampanaPage(){
+		 return "goToCampana";
+	}
+	
+	public String gotoBuscarCampanaPage(){
+		return "goToBuscarCampana";
 	}
 	
 	public String gotoOrdenePage(){

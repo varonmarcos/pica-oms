@@ -23,7 +23,7 @@ public interface ProductServiceLocal {
 	 * @param producId
 	 * @return
 	 */
-	public ProductoDTO getProductByCode(String producId);
+	public List<ProductoDTO> getProductByCode(String producId);
 	
 	/**
 	 * 

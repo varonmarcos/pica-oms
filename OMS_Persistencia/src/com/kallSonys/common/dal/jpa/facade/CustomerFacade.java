@@ -4,18 +4,21 @@
  */
 package com.kallSonys.common.dal.jpa.facade;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
-
-import com.kallSonys.common.dal.jpa.entitys.Address;
-import com.kallSonys.common.dal.jpa.entitys.Customer;
-import com.kallSonys.common.dal.jpa.entitys.Orders;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+
+import oracle.jdbc.OracleTypes;
+
+import com.kallSonys.common.dal.conectionjdbc.JBDConnection;
+import com.kallSonys.common.dal.jpa.entitys.Customer;
 
 /**
  *
@@ -52,5 +55,82 @@ public class CustomerFacade extends AbstractFacade<Customer> implements Customer
          	System.out.println("ERROR:CustomerFacade:createAndReturnID: "+e.getMessage());
          	return null;
          }
-    }    
+    }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Customer> getCustomersByProduct(String idProduct) {
+		
+		 List<Customer> listCustomers=new ArrayList<Customer>();
+		 Connection dbConnection = null;
+		 try{
+			
+			 CallableStatement callableStatement = null;
+			 String returnCustomer = "{call GETCUSTOMERS_BY_IDPRODUCT(?,?)}";
+			 dbConnection = JBDConnection.getDBConnection();
+			 callableStatement = dbConnection.prepareCall(returnCustomer);
+			 callableStatement.setString(1, idProduct);
+			 callableStatement.registerOutParameter(2,OracleTypes.CURSOR);
+			 callableStatement.executeUpdate();
+			 ResultSet rs = (ResultSet) callableStatement.getObject(2);
+			 System.out.println(rs);
+			 while (rs.next()) {
+				 	Customer cus=new Customer();
+				 	cus.setCustid(rs.getString("CUSTID"));
+				 	cus.setFname(rs.getString("FNAME"));
+				 	cus.setPhonenumber(rs.getString("PHONENUMBER"));
+				 	cus.setEmail(rs.getString("EMAIL"));
+				 	cus.setCreditcardtype(rs.getString("CREDITCARDTYPE"));
+				 	cus.setCreditcardnumer(rs.getString("CREDITCARDNUMER"));
+				 	cus.setStatus(rs.getString("STATUS"));
+					listCustomers.add(cus); 
+					
+				}
+		 }catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			JBDConnection.closeDBConnection(dbConnection);
+		}
+			
+		return listCustomers;
+	}
+
+	@Override
+	public List<Customer> getCustomersByFechas(java.sql.Date dateIn,java.sql.Date dateFin) {
+		List<Customer> listCustomers=new ArrayList<Customer>();
+		 Connection dbConnection = null;
+		 try{
+			
+			 CallableStatement callableStatement = null;
+			 String returnCustomer = "{call GET_CUSTOMER_BY_PRICE(?,?,?)}";
+			 dbConnection = JBDConnection.getDBConnection();
+			 callableStatement = dbConnection.prepareCall(returnCustomer);
+			 callableStatement.setDate(1,dateIn);
+			 callableStatement.setDate(2,dateFin);
+			 callableStatement.registerOutParameter(3, OracleTypes.CURSOR);
+			 callableStatement.executeUpdate();
+			 ResultSet rs = (ResultSet) callableStatement.getObject(3);
+			 System.out.println(rs);
+			 while (rs.next()) {
+				 	Customer cus=new Customer();
+				 	cus.setCustid(rs.getString("CUSTID"));
+				 	cus.setFname(rs.getString("FNAME"));
+				 	cus.setPhonenumber(rs.getString("PHONENUMBER"));
+				 	cus.setEmail(rs.getString("EMAIL"));
+				 	cus.setCreditcardtype(rs.getString("CREDITCARDTYPE"));
+				 	cus.setCreditcardnumer(rs.getString("CREDITCARDNUMER"));
+				 	cus.setPrice(rs.getString("PRICE"));
+				 	cus.setStatus(rs.getString("STATUS"));
+					listCustomers.add(cus); 
+					
+				}
+		 }catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			JBDConnection.closeDBConnection(dbConnection);
+		}
+			
+		return listCustomers;
+	}
+	   
 }
